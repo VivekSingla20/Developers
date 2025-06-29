@@ -13,6 +13,7 @@ import DepartmentCSE from "@/pages/DepartmentCSE";
 import DepartmentIT from "@/pages/DepartmentIT";
 import DepartmentECE from "@/pages/DepartmentECE";
 import DepartmentEEE from "@/pages/DepartmentEEE";
+import DepartmentME from "./pages/DepartmentME";
 import DepartmentBT from "./pages/DepartmentBT";
 import NotFound from "@/pages/NotFound";
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/departments/ece" element={<DepartmentECE />} />
           <Route path="/departments/eee" element={<DepartmentEEE />} />
           <Route path="/departments/bt" element={<DepartmentBT />} />
+          <Route path="/departments/me" element={<DepartmentME />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
