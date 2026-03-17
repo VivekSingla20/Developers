@@ -1,186 +1,106 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
-  GraduationCap,
-  Users,
-  Award,
-  Building2,
-  BookOpen,
-  Microscope,
-  Trophy,
-  Heart,
-  Calendar,
   Mail,
   Phone,
   MapPin,
   ArrowRight,
-  Code,
-  Cog,
-  Zap,
-  FlaskConical,
-  Wrench,
-  Dna,
-  Calculator,
+  CheckCircle2,
+  Eye,
+  Lightbulb,
+  Target,
   ExternalLink,
 } from "lucide-react";
+import {
+  accreditationHighlights,
+  campusLife,
+  companies,
+  coreValues,
+  departments,
+  missionItems,
+  placementStats,
+  resourceAndAccessItems,
+  visionFocusAreas,
+} from "@/constants/constantsHomePageContent";
 
 const HomepageContent = () => {
-  const features = [
-    {
-      icon: GraduationCap,
-      title: "Quality Education",
-      description:
-        "Excellence in engineering education with industry-relevant curriculum",
-      link: "/academics",
-    },
-    {
-      icon: Users,
-      title: "Expert Faculty",
-      description: "Highly qualified and experienced faculty members",
-      link: "/faculty",
-    },
-    {
-      icon: Award,
-      title: "NAAC A+ Accredited",
-      description: "Recognized for academic excellence and quality standards",
-      link: "/about",
-    },
-    {
-      icon: Building2,
-      title: "Modern Infrastructure",
-      description: "State-of-the-art facilities and well-equipped laboratories",
-      link: "/about#infrastructure",
-    },
-    {
-      icon: BookOpen,
-      title: "Research Focus",
-      description: "Strong emphasis on research and innovation",
-      link: "/research",
-    },
-    {
-      icon: Microscope,
-      title: "Industry Connect",
-      description: "Strong industry partnerships and placement record",
-      link: "/placements",
-    },
-  ];
+  const placementSectionRef = useRef<HTMLDivElement | null>(null);
+  const [animateStats, setAnimateStats] = useState(false);
+  const [statValues, setStatValues] = useState(placementStats.map(() => 0));
 
-  const departments = [
-    {
-      name: "Computer Science & Engineering",
-      icon: Code,
-      students: 480,
-      faculty: 25,
-      link: "/departments/cse",
-    },
-    {
-      name: "Electronics & Communication",
-      icon: Cog,
-      students: 360,
-      faculty: 20,
-      link: "/departments/ece",
-    },
-    {
-      name: "Electrical & Electronics",
-      icon: Zap,
-      students: 240,
-      faculty: 15,
-      link: "/departments/eee",
-    },
-    {
-      name: "Information Technology",
-      icon: Code,
-      students: 360,
-      faculty: 18,
-      link: "/departments/it",
-    },
-    {
-      name: "Mechanical Engineering",
-      icon: Wrench,
-      students: 240,
-      faculty: 16,
-      link: "/departments/me",
-    },
-    {
-      name: "Biotechnology",
-      icon: Dna,
-      students: 120,
-      faculty: 12,
-      link: "/departments/bt",
-    },
-    {
-      name: "Applied Sciences",
-      icon: Calculator,
-      students: 60,
-      faculty: 10,
-      link: "/departments/as",
-    },
-  ];
+  useEffect(() => {
+    const section = placementSectionRef.current;
+    if (!section) return;
 
-  const achievements = [
-    {
-      title: "100% Placement Record",
-      description: "All eligible students placed in top companies",
-      icon: Trophy,
-      link: "/placements",
-    },
-    {
-      title: "50+ Research Papers",
-      description: "Published in international journals annually",
-      icon: BookOpen,
-      link: "/research",
-    },
-    {
-      title: "25+ Industry Partners",
-      description: "Strong collaboration with leading companies",
-      icon: Building2,
-      link: "/placements#recruiters",
-    },
-    {
-      title: "NAAC A+ Rating",
-      description: "Highest accreditation for quality education",
-      icon: Award,
-      link: "/about",
-    },
-  ];
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimateStats(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
 
-  const campusLife = [
-    {
-      title: "Student Clubs & Societies",
-      description: "Technical and cultural clubs for holistic development",
-      image:
-        "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=300&h=200&fit=crop",
-      link: "/students#clubs",
-    },
-    {
-      title: "Annual Tech Fest - UTechnos",
-      description: "Premier technical festival with competitions and workshops",
-      image:
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300&h=200&fit=crop",
-      link: "/students#events",
-    },
-    {
-      title: "Sports & Recreation",
-      description: "Sports facilities and inter-college tournaments",
-      image:
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop",
-      link: "/students#sports",
-    },
-    {
-      title: "Research Projects",
-      description: "Student involvement in cutting-edge research",
-      image:
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&h=200&fit=crop",
-      link: "/research",
-    },
-  ];
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!animateStats) return;
+
+    const duration = 1400;
+    let startTime: number | null = null;
+    let frameId = 0;
+
+    const update = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      setStatValues(
+        placementStats.map((stat) => Math.floor(stat.value * progress))
+      );
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(update);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(update);
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [animateStats]);
 
   return (
-    <div className="space-y-16 py-12">
+    <div className="space-y-6 sm:space-y-8 py-4 sm:py-6">
+      {/* Accreditation Bar */}
+      <section className="bg-gray-100 border-y border-gray-200 overflow-hidden">
+        <div className="container-modern py-3 sm:py-4">
+          <div className="relative overflow-hidden">
+            <div className="marquee-track hover:[animation-play-state:paused]">
+              {[...accreditationHighlights, ...accreditationHighlights].map(
+                (item, index) => (
+                  <div
+                    key={`${item}-${index}`}
+                    className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-white border border-gray-200 text-xs sm:text-sm text-gray-700 font-medium whitespace-nowrap"
+                  >
+                    <CheckCircle2 className="h-4 w-4 text-[#118DC4]" />
+                    <span>{item}</span>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section className="container-modern">
+      {/* <section className="container-modern">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Why Choose UIET?
@@ -220,16 +140,16 @@ const HomepageContent = () => {
             </Card>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Departments Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-[#118DC4]/5 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-[#118DC4]/5 py-10 sm:py-14">
         <div className="container-modern">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               Our Departments
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
               Explore our diverse range of engineering programs designed to
               shape tomorrow's innovators
             </p>
@@ -242,7 +162,7 @@ const HomepageContent = () => {
                 className="hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:shadow-[#118DC4]/20 hover:-translate-y-2"
               >
                 <Link to={dept.link}>
-                  <CardContent className="p-6">
+                  <CardContent className="p-5 sm:p-6">
                     <div className="flex items-center justify-between mb-6">
                       <div className="w-12 h-12 bg-[#118DC4]/10 rounded-lg flex items-center justify-center group-hover:bg-[#118DC4] group-hover:scale-110 transition-all duration-300">
                         <dept.icon className="h-6 w-6 text-[#118DC4] group-hover:text-white transition-colors" />
@@ -272,9 +192,9 @@ const HomepageContent = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 sm:mt-12">
             <Link to="/departments">
-              <Button className="bg-gradient-to-r from-[#118DC4] to-[#0d75a8] hover:from-[#0f7db0] hover:to-[#0a5d87] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <Button className="w-full sm:w-auto bg-gradient-to-r from-[#118DC4] to-[#0d75a8] hover:from-[#0f7db0] hover:to-[#0a5d87] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 View All Departments
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -283,50 +203,109 @@ const HomepageContent = () => {
         </div>
       </section>
 
-      {/* Achievements Section */}
+      {/* Resources & Quick Access Section */}
       <section className="container-modern py-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Our Achievements
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+            Resources & Quick Access
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Milestones that define our excellence and commitment to quality
-            education
+          <p className="text-base sm:text-lg text-gray-600">
+            Find important links and downloadable resources in one place
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {achievements.map((achievement, index) => (
-            <Card
-              key={index}
-              className="text-center hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:shadow-[#118DC4]/20 hover:-translate-y-2"
-            >
-              <Link to={achievement.link}>
-                <CardContent className="p-8">
-                  <div className="w-20 h-20 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-amber-200 group-hover:to-amber-300 group-hover:scale-110 transition-all duration-300">
-                    <achievement.icon className="h-10 w-10 text-amber-600" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {resourceAndAccessItems.map((item) => (
+            <Link key={item.title} to={item.href} className="h-full">
+              <Card
+                className={`h-full hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:-translate-y-2 ${item.shadowColor}`}
+              >
+                <CardContent className="p-6 sm:p-8 text-center">
+                  <div
+                    className={`w-14 h-14 sm:w-16 sm:h-16 ${item.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-300`}
+                  >
+                    <item.icon
+                      className={`h-7 w-7 sm:h-8 sm:w-8 ${item.iconColor} transition-colors`}
+                    />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#118DC4] transition-colors">
-                    {achievement.title}
+                  <h3
+                    className={`text-sm sm:text-base font-semibold text-gray-900 ${item.titleColor} transition-colors mb-2`}
+                  >
+                    {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {achievement.description}
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {item.description}
                   </p>
                 </CardContent>
-              </Link>
-            </Card>
+              </Card>
+            </Link>
           ))}
         </div>
       </section>
-
-      {/* Campus Life Section */}
-      <section className="bg-gradient-to-br from-[#118DC4]/8 via-[#118DC4]/5 to-transparent py-20">
+      {/* Recruiters Marquee */}
+      <section className="bg-gray-50 border-y border-gray-200 py-8 overflow-hidden">
         <div className="container-modern">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h3 className="text-center text-base sm:text-lg font-semibold text-gray-800 mb-4 sm:mb-5">
+            Our Students Work At
+          </h3>
+          <div className="relative overflow-hidden">
+            <div className="marquee-track hover:[animation-play-state:paused]">
+              {[...companies, ...companies].map((company, index) => (
+                <div
+                  key={`${company}-${index}`}
+                  className="px-4 sm:px-5 py-2 rounded-full bg-white border border-gray-200 text-xs sm:text-sm text-gray-700 font-medium whitespace-nowrap shadow-sm"
+                >
+                  {company}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Placement Stats Section */}
+      <section ref={placementSectionRef} className="container-modern py-4">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+            Placements at UIET
+          </h2>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {placementStats.map((stat, index) => (
+            <Card
+              key={stat.label}
+              className="border border-[#118DC4]/20 bg-gradient-to-br from-white to-[#118DC4]/5 shadow-md"
+            >
+              <CardContent className="p-6 sm:p-8 text-center">
+                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#118DC4] mb-2">
+                  {stat.prefix}
+                  {statValues[index]}
+                  {stat.suffix}
+                </p>
+                <p className="text-sm md:text-base text-gray-700 font-medium">
+                  {stat.label}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="text-center mt-8 sm:mt-10">
+          <Link to="/placements#statistics">
+            <Button className="w-full sm:w-auto bg-gradient-to-r from-[#118DC4] to-[#0d75a8] hover:from-[#0f7db0] hover:to-[#0a5d87] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              View Placement Report
+            </Button>
+          </Link>
+        </div>
+      </section>
+      {/* Campus Life Section */}
+      <section className="bg-gradient-to-br from-[#118DC4]/8 via-[#118DC4]/5 to-transparent py-10 sm:py-14">
+        <div className="container-modern">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
               Campus Life
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
               Experience vibrant student life at UIET with diverse opportunities
               for growth and engagement
             </p>
@@ -347,7 +326,7 @@ const HomepageContent = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <CardContent className="p-6">
+                  <CardContent className="p-5 sm:p-6">
                     <h3 className="font-semibold text-gray-900 mb-3 group-hover:text-[#118DC4] transition-colors">
                       {item.title}
                     </h3>
@@ -360,9 +339,9 @@ const HomepageContent = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 sm:mt-12">
             <Link to="/students">
-              <Button className="bg-gradient-to-r from-[#118DC4] to-[#0d75a8] hover:from-[#0f7db0] hover:to-[#0a5d87] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <Button className="w-full sm:w-auto bg-gradient-to-r from-[#118DC4] to-[#0d75a8] hover:from-[#0f7db0] hover:to-[#0a5d87] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 Explore Student Life
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -371,113 +350,114 @@ const HomepageContent = () => {
         </div>
       </section>
 
-      {/* Quick Links Section */}
-      <section className="container-modern py-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Quick Access
+      {/* Vision & Mission Section */}
+      <section id="mission" className="container-modern py-4">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+            Vision & Mission
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Find what you need quickly with our streamlined access points
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-          <Link to="/admissions">
-            <Card className="hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:-translate-y-2 hover:shadow-green-500/20">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-green-500 group-hover:scale-110 transition-all duration-300">
-                  <GraduationCap className="h-8 w-8 text-green-600 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="font-semibold text-gray-900 group-hover:text-green-600 transition-colors mb-2">
-                  Admissions 2024
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Apply now for various programs
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Eye className="h-5 w-5 mr-2" />
+                Vision
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-700 mb-4">
+                To be the Front runner in Engineering Education and Research
+              </p>
+              <div className="p-4 rounded-lg bg-[#f0f9ff]">
+                <h4 className="font-semibold mb-2 text-[#118DC4]">
+                  Key Focus Areas
+                </h4>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  {visionFocusAreas.map((area) => (
+                    <li key={area}>• {area}</li>
+                  ))}
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
 
-          <Link to="/previous-papers">
-            <Card className="hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:-translate-y-2 hover:shadow-[#118DC4]/20">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-[#118DC4]/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-[#118DC4] group-hover:scale-110 transition-all duration-300">
-                  <BookOpen className="h-8 w-8 text-[#118DC4] group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="font-semibold text-gray-900 group-hover:text-[#118DC4] transition-colors mb-2">
-                  Previous Papers
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Access question papers
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
-
-          <Link to="/downloads">
-            <Card className="hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:-translate-y-2 hover:shadow-purple-500/20">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-purple-500 group-hover:scale-110 transition-all duration-300">
-                  <Award className="h-8 w-8 text-purple-600 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="font-semibold text-gray-900 group-hover:text-purple-600 transition-colors mb-2">
-                  Downloads
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Important documents & forms
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
-
-          <Link to="/placements">
-            <Card className="hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:-translate-y-2 hover:shadow-orange-500/20">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300">
-                  <Trophy className="h-8 w-8 text-orange-600 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors mb-2">
-                  Placements
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Career opportunities
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
-
-          <Link to="/news">
-            <Card className="hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:-translate-y-2 hover:shadow-red-500/20">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-red-500 group-hover:scale-110 transition-all duration-300">
-                  <Calendar className="h-8 w-8 text-red-600 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="font-semibold text-gray-900 group-hover:text-red-600 transition-colors mb-2">
-                  News & Updates
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Latest announcements & events
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Target className="h-5 w-5 mr-2" />
+                Mission
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="text-gray-700 space-y-3">
+                {missionItems.map((item) => (
+                  <li key={item} className="flex items-start">
+                    <Lightbulb className="h-5 w-5 mr-2 mt-0.5 text-[#118DC4]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
         </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Core Values</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {coreValues.map((value) => (
+                <div
+                  key={value.title}
+                  className="text-center p-4 rounded-lg bg-[#e6f3fb]"
+                >
+                  <h4 className="font-semibold mb-2 text-[#118DC4]">
+                    {value.title}
+                  </h4>
+                  <p className="text-sm text-gray-600">{value.description}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </section>
 
+      <style>
+        {`
+          @keyframes companyMarquee {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(-50%);
+            }
+          }
+
+          .marquee-track {
+            display: flex;
+            gap: 1rem;
+            width: max-content;
+            animation: companyMarquee 28s linear infinite;
+          }
+        `}
+      </style>
+
       {/* Contact Section */}
-      <section className="py-20 relative overflow-hidden bg-transparent">
+      <section className="py-10 sm:py-14 relative overflow-hidden bg-transparent">
         {/* Background decoration */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-black/5 rounded-full -translate-y-32 translate-x-32"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/5 rounded-full translate-y-24 -translate-x-24"></div>
+        <div className="hidden sm:block absolute top-0 right-0 w-64 h-64 bg-black/5 rounded-full -translate-y-32 translate-x-32"></div>
+        <div className="hidden sm:block absolute bottom-0 left-0 w-48 h-48 bg-black/5 rounded-full translate-y-24 -translate-x-24"></div>
 
         <div className="container-modern relative">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-6 text-gray-900">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 text-gray-900">
                 Get In Touch
               </h2>
-              <p className="text-lg mb-10 leading-relaxed text-gray-700">
+              <p className="text-base sm:text-lg mb-8 sm:mb-10 leading-relaxed text-gray-700">
                 Have questions about admissions, academics, or campus life?
                 We're here to help you every step of the way.
               </p>
@@ -525,8 +505,8 @@ const HomepageContent = () => {
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-3xl p-10 border border-gray-200 shadow-xl">
-              <h3 className="text-2xl font-semibold mb-8 text-gray-800 tracking-tight">
+            <div className="bg-gray-50 rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-200 shadow-xl">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8 text-gray-800 tracking-tight">
                 Quick Inquiry
               </h3>
               <form className="space-y-6">

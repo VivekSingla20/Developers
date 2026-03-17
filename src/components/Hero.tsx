@@ -70,7 +70,7 @@ const Hero = () => {
             </div>
 
             {/* Key Features */}
-            <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm justify-center lg:justify-start">
+            {/* <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm justify-center lg:justify-start">
               <span className="px-3 sm:px-4 py-1 sm:py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 text-white">
                 NAAC A+ Accredited
               </span>
@@ -80,7 +80,7 @@ const Hero = () => {
               <span className="px-3 sm:px-4 py-1 sm:py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 text-white">
                 Industry Partnerships
               </span>
-            </div>
+            </div> */}
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 justify-center lg:justify-start">
@@ -146,7 +146,7 @@ const Hero = () => {
             </div>
 
             {/* Additional Info Card */}
-            <div className="mt-6 sm:mt-8 modern-card glass-effect p-4 sm:p-6">
+            {/* <div className="mt-6 sm:mt-8 modern-card glass-effect p-4 sm:p-6">
               <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">
                 Why Choose UIET?
               </h3>
@@ -176,7 +176,7 @@ const Hero = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

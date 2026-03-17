@@ -189,7 +189,11 @@ const Header = () => {
   const [showNotifications, setShowNotifications] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [topOffset, setTopOffset] = useState(0);
+  const [navHeight, setNavHeight] = useState(0);
   const navRef = useRef(null);
+  const topBarsRef = useRef<HTMLDivElement | null>(null);
+  const mainNavRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
 
   // Handle keyboard navigation for news banner
@@ -213,10 +217,36 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      const topBarsHeight = topBarsRef.current?.offsetHeight ?? 0;
+      setTopOffset(Math.max(0, topBarsHeight - window.scrollY));
     };
+
+    const handleResize = () => {
+      const topBarsHeight = topBarsRef.current?.offsetHeight ?? 0;
+      const currentNavHeight = mainNavRef.current?.offsetHeight ?? 0;
+
+      setTopOffset(Math.max(0, topBarsHeight - window.scrollY));
+      setNavHeight(currentNavHeight);
+    };
+
+    handleResize();
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
+
+  useEffect(() => {
+    const topBarsHeight = topBarsRef.current?.offsetHeight ?? 0;
+    const currentNavHeight = mainNavRef.current?.offsetHeight ?? 0;
+
+    setTopOffset(Math.max(0, topBarsHeight - window.scrollY));
+    setNavHeight(currentNavHeight);
+  }, [showNotifications, isMenuOpen]);
 
   // Auto-rotate trending news with progress tracking
   useEffect(() => {
@@ -300,11 +330,8 @@ const Header = () => {
   const hiddenNavItems = navigationItems.slice(visibleItems);
 
   return (
-    <header
-      className={`bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? "shadow-lg" : ""
-      }`}
-    >
+    <>
+      <header ref={topBarsRef}>
       {/* Government Info Bar */}
       <div className="bg-gradient-to-r from-[#118DC4] to-[#0f7db0] text-white py-1 sm:py-2">
         <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6">
@@ -458,8 +485,16 @@ const Header = () => {
         </div>
       </div>
 
+      </header>
+
       {/* Main Header */}
-      <div className="w-full mx-auto px-1 sm:px-2 md:px-4 lg:px-6">
+      <div
+        ref={mainNavRef}
+        style={{ top: `${topOffset}px` }}
+        className={`fixed left-0 right-0 z-50 w-full mx-auto px-1 sm:px-2 md:px-4 lg:px-6 bg-white/95 backdrop-blur-md border-b border-gray-200/90 ${
+          isScrolled ? "shadow-sm" : ""
+        }`}
+      >
         <div className="flex justify-between items-center py-2 sm:py-3 md:py-4">
           {/* Logo and Institute Name */}
           <Link
@@ -627,10 +662,10 @@ const Header = () => {
 
           {/* CTA Button + Mobile Menu */}
           <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-3 flex-shrink-0">
-            <Link to="/admissions" className="hidden sm:block">
+            <Link to="/admissions" className="block">
               <Button className="bg-gradient-to-r from-[#118DC4] to-[#0f7db0] hover:from-[#0f7db0] hover:to-[#0d6a94] text-white font-medium text-xs sm:text-sm px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                <span className="hidden lg:inline">Apply Online</span>
-                <span className="lg:hidden">Apply</span>
+                <span className="hidden sm:inline">Apply Now</span>
+                <span className="sm:hidden">Apply</span>
               </Button>
             </Link>
             <Button
@@ -712,7 +747,7 @@ const Header = () => {
                     className="w-full bg-gradient-to-r from-[#118DC4] to-[#0f7db0] hover:from-[#0f7db0] hover:to-[#0d6a94] text-white font-medium text-sm shadow-lg py-2 sm:py-2.5"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Apply Online
+                    Apply Now
                   </Button>
                 </Link>
               </div>
@@ -720,6 +755,8 @@ const Header = () => {
           </div>
         )}
       </div>
+
+      <div style={{ height: `${navHeight}px` }} aria-hidden="true" />
 
       <style>
         {`
@@ -780,7 +817,7 @@ const Header = () => {
           }
         `}
       </style>
-    </header>
+    </>
   );
 };
 
