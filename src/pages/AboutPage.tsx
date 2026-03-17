@@ -91,7 +91,7 @@ const AboutPage = () => {
     {
       icon: AcademicCapIcon,
       name: "Academic Blocks",
-      count: "Two blocks + mechanical workshops",
+      count: "Three blocks",
     },
     {
       icon: ChipIcon,
@@ -256,12 +256,11 @@ const AboutPage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-gray-700">
-                    Established in 2002, University Institute of Engineering &
-                    Technology (UIET) is a premier constituent of Panjab
-                    University. Recognized as a Tier‑1 NIRF institute, it is
-                    known for its rigorous, industry-aligned curriculum,
-                    hands-on labs, and a focus on research and innovation.
+                  <p className="text-gray-700">  
+                  The University Institute of Engineering and Technology (UIET) is the engineering 
+                  institute of Panjab University, Chandigarh. It offers undergraduate (BE/B.Tech), 
+                  postgraduate (M.Tech), and doctoral programs. UIET is known for its strong focus on 
+                  academics, research, and industry interaction. It is recognized by the AICTE and accredited by the NBA.
                   </p>
                   <p className="text-gray-700">
                     UIET offers B.E., M.E. and Ph.D. programs across 7 core
@@ -455,9 +454,9 @@ const AboutPage = () => {
                   Chandigarh, the dream city of India's first Prime Minister Pt.
                   Jawahar Lal Nehru, was designed by the legendary architect
                   Le Corbusier. Located at the foothills of the Shivaliks, it
-                  derives its name from the nearby "Chandi Mandir" and is
-                  renowned globally as an exceptional example of 20th-century
-                  urban planning and architecture.
+                  derives its name from the nearby "Chandi Mandir", The deity ‘Chandi’, 
+                  the goddess of power and a fort of ‘garh’ laying beyond the temple gave 
+                  the city its name “Chandigarh-The City Beautiful”.
                 </p>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -542,7 +541,7 @@ const AboutPage = () => {
                     </h4>
                     <ul className="text-sm text-gray-600 space-y-1">
                       <li>
-                        • Population (2025 est.): ~1,158,040 | Density:
+                        • Population (2011 census): ~1,055,45 | Density:
                         ~9,258/sq km
                       </li>
                       <li>
@@ -612,7 +611,7 @@ const AboutPage = () => {
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Part of Panjab University's 550-acre campus</li>
                       <li>• UIET's dedicated 11-acre green academic zone</li>
-                      <li>• Two large academic blocks and departmental labs</li>
+                      <li>• Three large academic blocks and departmental labs</li>
                       <li>• Mechanical workshops and digital classrooms</li>
                       <li>• Central A.C. Joshi Library with 6.7 lakh+ books</li>
                       <li>
@@ -622,10 +621,6 @@ const AboutPage = () => {
                       <li>• Cafeteria and mess for residents and students</li>
                       <li>• Sports complex, playgrounds, and gym facilities</li>
                       <li>• ATM, health services, and 24×7 campus security</li>
-                      <li>
-                        • Construction underway: 4-storey Student Activity
-                        Centre
-                      </li>
                       <li>
                         • Upcoming: New academic blocks, auditorium, library
                         extension, hostel expansion
@@ -842,8 +837,8 @@ const AboutPage = () => {
                     </h4>
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li>
-                        • Two academic blocks (lecture halls, faculty offices),
-                        plus mechanical workshops
+                        • Three academic blocks (lecture halls, faculty offices),
+                        mechanical workshops
                       </li>
                       <li>
                         • Departmental labs equipped for advanced research and
@@ -858,8 +853,8 @@ const AboutPage = () => {
                         Wi‑Fi) via National Knowledge Network
                       </li>
                       <li>
-                        • Seminar rooms (120 seats), 500‑seat auditorium, and
-                        conference halls
+                        • Seminar room (120 seats) and
+                        conference hall
                       </li>
                       <li>• Smart classrooms with AC and AV systems</li>
                     </ul>

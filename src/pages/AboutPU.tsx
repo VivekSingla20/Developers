@@ -66,6 +66,8 @@ const AboutPU = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-gray-700">
+                Panjab University is located in Sector 14 and Sector 25 of Chandigarh, 
+                spreading across an area of almost 550 acres.
                 Panjab University, established in 1882, is one of the oldest
                 universities in India. Originally founded in Lahore, it was
                 re-established in India after the partition in 1947 and shifted
