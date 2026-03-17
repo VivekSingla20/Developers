@@ -40,9 +40,9 @@ const DepartmentCSE = () => {
 
   // Department statistics
   const stats = [
-    { label: "Students Enrolled", value: "400+", icon: Users },
-    { label: "Faculty", value: "28+", icon: GraduationCap },
-    { label: "Laboratories", value: "6", icon: Beaker },
+    { label: "Students Enrolled", value: "500+", icon: Users },
+    { label: "Faculty", value: "25+", icon: GraduationCap },
+    { label: "Laboratories", value: "13", icon: Beaker },
     { label: "Placement", value: "95%", icon: Trophy },
   ];
 
@@ -51,7 +51,7 @@ const DepartmentCSE = () => {
     {
       name: "B.E. Computer Science & Engineering",
       duration: "4 Years",
-      intake: "60 Students",
+      intake: "130 Students",
       eligibility: "10+2 with Physics, Chemistry, Mathematics",
       highlights: [
         "AICTE Approved",
@@ -61,6 +61,17 @@ const DepartmentCSE = () => {
     },
     {
       name: "M.E. Computer Science & Engineering",
+      duration: "2 Years",
+      intake: "18 Students",
+      eligibility: "B.E./B.Tech in CSE or related field",
+      highlights: [
+        "Research-Based Program",
+        "Thesis Work",
+        "Industry Collaboration",
+      ],
+    },
+    {
+      name: "M.E. Cyber Security",
       duration: "2 Years",
       intake: "18 Students",
       eligibility: "B.E./B.Tech in CSE or related field",
@@ -607,8 +618,8 @@ const DepartmentCSE = () => {
                     <li className="flex items-start">
                       <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
                       <div>
-                        <span className="font-medium">Development of 5G / 4G based UAV augmented intelligent monitoring & surveillance system (2022)</span>
-                        <p className="text-sm text-gray-600">Amount(in Rs): Rs 1.82 Crores</p>
+                        <span className="font-medium">Processing and Segmentation of Medical Ultrasound Images for Computer Aid Diagnosis</span>
+                        <p className="text-sm text-gray-600">DST(Fast Track Scheme), 11Lacs</p>
                       </div>
                     </li>
                     <li className="flex items-start">
