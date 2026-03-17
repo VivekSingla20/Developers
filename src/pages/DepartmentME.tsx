@@ -49,7 +49,7 @@ const DepartmentME = () => {
   // Academic programs
   const programs = [
     {
-      name: "B.E. Computer Science & Engineering",
+      name: "B.E. Mechanical Engineering",
       duration: "4 Years",
       intake: "60 Students",
       eligibility: "10+2 with Physics, Chemistry, Mathematics",
@@ -60,10 +60,10 @@ const DepartmentME = () => {
       ],
     },
     {
-      name: "M.E. Computer Science & Engineering",
+      name: "M.E. Mechanical Engineering",
       duration: "2 Years",
       intake: "18 Students",
-      eligibility: "B.E./B.Tech in CSE or related field",
+      eligibility: "B.E./B.Tech in Mechanical Engineering or related field",
       highlights: [
         "Research-Based Program",
         "Thesis Work",
@@ -71,7 +71,7 @@ const DepartmentME = () => {
       ],
     },
     {
-      name: "Ph.D Computer Science & Engineering",
+      name: "Ph.D Mechanical Engineering",
       duration: "3-5 Years",
       intake: "Variable",
       eligibility: "M.E./M.Tech with valid GATE/NET score",
