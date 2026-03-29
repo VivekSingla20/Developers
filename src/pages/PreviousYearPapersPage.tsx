@@ -5,674 +5,209 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Download,
-  FileText,
-  Calendar,
-  Book,
-  Search,
-  Filter,
-  X,
-} from "lucide-react";
+import { Download, FileText, Calendar, Book, Search, Filter, AlertCircle } from "lucide-react";
+import { usePreviousYearPapers } from "@/hooks/useStrapi";
+import { getStrapiImageUrl, StrapiPreviousYearPaper } from "@/lib/strapi";
 
-interface Paper {
-  year: string;
-  semester: string;
-  subject: string;
-  department: string;
-  file: string;
-  credits: number;
-}
+// Helpers
+const DEPARTMENTS = ["All", "CSE", "ECE", "EEE", "IT", "ME", "BT", "AS"] as const;
+const PROGRAMS = ["B.Tech", "M.Tech", "Ph.D"] as const;
 
-interface PapersData {
-  btech: Paper[];
-  mtech: Paper[];
-  phd: Paper[];
-}
+const deptColors: Record<string, string> = {
+  CSE: "bg-blue-100 text-blue-800",
+  ECE: "bg-purple-100 text-purple-800",
+  EEE: "bg-yellow-100 text-yellow-800",
+  IT:  "bg-green-100 text-green-800",
+  ME:  "bg-orange-100 text-orange-800",
+  BT:  "bg-pink-100 text-pink-800",
+  AS:  "bg-gray-100 text-gray-800",
+};
 
+// Paper card
+const PaperCard = ({ paper }: { paper: StrapiPreviousYearPaper }) => {
+  const fileUrl = getStrapiImageUrl(paper.file ?? null) ?? paper.fileUrl;
+
+  return (
+    <Card className="border hover:shadow-md transition-shadow bg-white">
+      <CardContent className="p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-start gap-3 flex-1 min-w-0">
+            <FileText className="h-8 w-8 text-red-500 flex-shrink-0 mt-0.5" />
+            <div className="min-w-0">
+              <h4 className="font-semibold text-gray-900 text-sm leading-tight mb-1">{paper.subject}</h4>
+              <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                <Badge className={`text-xs ${deptColors[paper.department] ?? 'bg-gray-100 text-gray-700'}`}>
+                  {paper.department}
+                </Badge>
+                <span className="text-gray-500 flex items-center gap-1">
+                  <Calendar className="h-3 w-3" />{paper.year}
+                </span>
+                <span className="text-gray-500">Sem {paper.semester}</span>
+                {paper.credits && (
+                  <span className="text-gray-400">{paper.credits} credits</span>
+                )}
+              </div>
+            </div>
+          </div>
+          {fileUrl ? (
+            <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+              <Button size="sm" className="bg-[#118DC4] hover:bg-[#0d7db0] flex-shrink-0">
+                <Download className="h-3.5 w-3.5 mr-1" />PDF
+              </Button>
+            </a>
+          ) : (
+            <Button size="sm" variant="outline" disabled className="flex-shrink-0 text-gray-400">
+              <Download className="h-3.5 w-3.5 mr-1" />PDF
+            </Button>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+// Skeleton
+const PapersSkeleton = () => (
+  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {[...Array(9)].map((_, i) => (
+      <Card key={i} className="animate-pulse">
+        <CardContent className="p-4">
+          <div className="flex gap-3">
+            <div className="h-8 w-8 bg-slate-200 rounded flex-shrink-0" />
+            <div className="flex-1 space-y-2">
+              <div className="h-4 bg-slate-200 rounded w-3/4" />
+              <div className="h-3 bg-slate-200 rounded w-1/2" />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+);
+
+// Main Page
 const PreviousYearPapersPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDepartment, setSelectedDepartment] = useState("All");
-  const [selectedYear, setSelectedYear] = useState("All");
-  const [selectedSemester, setSelectedSemester] = useState("All");
+  const [selectedDepartment, setSelectedDepartment] = useState<string>("All");
+  const [selectedYear, setSelectedYear] = useState<string>("All");
+  const { data: allPapers, isLoading, error } = usePreviousYearPapers();
 
-  const papers: PapersData = {
-    btech: [
-      {
-        year: "2023",
-        semester: "8th",
-        subject: "Software Engineering",
-        department: "CSE",
-        file: "se_2023_8th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2023",
-        semester: "7th",
-        subject: "Machine Learning",
-        department: "CSE",
-        file: "ml_2023_7th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2023",
-        semester: "6th",
-        subject: "Database Management Systems",
-        department: "CSE",
-        file: "dbms_2023_6th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2023",
-        semester: "5th",
-        subject: "Computer Networks",
-        department: "CSE",
-        file: "cn_2023_5th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "8th",
-        subject: "Digital Communication",
-        department: "ECE",
-        file: "dc_2022_8th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "7th",
-        subject: "Microprocessors",
-        department: "ECE",
-        file: "mp_2022_7th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "6th",
-        subject: "Signal Processing",
-        department: "ECE",
-        file: "sp_2022_6th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "7th",
-        subject: "Power Electronics",
-        department: "EEE",
-        file: "pe_2022_7th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "6th",
-        subject: "Control Systems",
-        department: "EEE",
-        file: "cs_2022_6th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "5th",
-        subject: "Electrical Machines",
-        department: "EEE",
-        file: "em_2022_5th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "6th",
-        subject: "Web Technologies",
-        department: "IT",
-        file: "wt_2022_6th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2021",
-        semester: "7th",
-        subject: "Cloud Computing",
-        department: "IT",
-        file: "cc_2021_7th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2021",
-        semester: "6th",
-        subject: "Mobile Computing",
-        department: "IT",
-        file: "mc_2021_6th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2021",
-        semester: "7th",
-        subject: "CAD/CAM",
-        department: "ME",
-        file: "cadcam_2021_7th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2021",
-        semester: "6th",
-        subject: "Heat Transfer",
-        department: "ME",
-        file: "ht_2021_6th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2020",
-        semester: "8th",
-        subject: "Bioinformatics",
-        department: "BT",
-        file: "bio_2020_8th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2020",
-        semester: "7th",
-        subject: "Genetic Engineering",
-        department: "BT",
-        file: "ge_2020_7th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2019",
-        semester: "2nd",
-        subject: "Engineering Mathematics",
-        department: "AS",
-        file: "em_2019_2nd.pdf",
-        credits: 4,
-      },
-      {
-        year: "2019",
-        semester: "1st",
-        subject: "Engineering Physics",
-        department: "AS",
-        file: "ep_2019_1st.pdf",
-        credits: 4,
-      },
-      {
-        year: "2018",
-        semester: "2nd",
-        subject: "Engineering Chemistry",
-        department: "AS",
-        file: "ec_2018_2nd.pdf",
-        credits: 4,
-      },
-      {
-        year: "2017",
-        semester: "1st",
-        subject: "Communication Skills",
-        department: "AS",
-        file: "cs_2017_1st.pdf",
-        credits: 2,
-      },
-    ],
-    mtech: [
-      {
-        year: "2023",
-        semester: "4th",
-        subject: "Advanced Algorithms",
-        department: "CSE",
-        file: "aa_2023_4th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2023",
-        semester: "3rd",
-        subject: "Machine Learning",
-        department: "CSE",
-        file: "ml_2023_3rd.pdf",
-        credits: 4,
-      },
-      {
-        year: "2023",
-        semester: "4th",
-        subject: "VLSI Design",
-        department: "ECE",
-        file: "vlsi_2023_4th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2023",
-        semester: "3rd",
-        subject: "Advanced Digital Signal Processing",
-        department: "ECE",
-        file: "adsp_2023_3rd.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "4th",
-        subject: "Distributed Systems",
-        department: "IT",
-        file: "ds_2022_4th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2022",
-        semester: "3rd",
-        subject: "Big Data Analytics",
-        department: "IT",
-        file: "bda_2022_3rd.pdf",
-        credits: 4,
-      },
-      {
-        year: "2021",
-        semester: "4th",
-        subject: "Advanced Power Systems",
-        department: "EEE",
-        file: "aps_2021_4th.pdf",
-        credits: 4,
-      },
-      {
-        year: "2021",
-        semester: "3rd",
-        subject: "Renewable Energy",
-        department: "EEE",
-        file: "re_2021_3rd.pdf",
-        credits: 4,
-      },
-    ],
-    phd: [
-      {
-        year: "2023",
-        semester: "Entrance",
-        subject: "Research Methodology",
-        department: "All",
-        file: "rm_2023_ent.pdf",
-        credits: 0,
-      },
-      {
-        year: "2022",
-        semester: "Entrance",
-        subject: "Computer Science",
-        department: "CSE",
-        file: "cs_2022_ent.pdf",
-        credits: 0,
-      },
-      {
-        year: "2022",
-        semester: "Entrance",
-        subject: "Electronics Engineering",
-        department: "ECE",
-        file: "ee_2022_ent.pdf",
-        credits: 0,
-      },
-      {
-        year: "2021",
-        semester: "Entrance",
-        subject: "Electrical Engineering",
-        department: "EEE",
-        file: "eee_2021_ent.pdf",
-        credits: 0,
-      },
-      {
-        year: "2020",
-        semester: "Entrance",
-        subject: "Information Technology",
-        department: "IT",
-        file: "it_2020_ent.pdf",
-        credits: 0,
-      },
-    ],
+  // Derive unique years from data
+  const years = useMemo(() => {
+    if (!allPapers) return ["All"];
+    const unique = [...new Set(allPapers.map(p => p.year))].sort((a, b) => b.localeCompare(a));
+    return ["All", ...unique];
+  }, [allPapers]);
+
+  // Filter papers
+  const filterPapers = (program: string) => {
+    let items = (allPapers ?? []).filter(p => p.program === program);
+    if (selectedDepartment !== "All") items = items.filter(p => p.department === selectedDepartment);
+    if (selectedYear !== "All")       items = items.filter(p => p.year === selectedYear);
+    if (searchTerm) {
+      const q = searchTerm.toLowerCase();
+      items = items.filter(p =>
+        p.subject.toLowerCase().includes(q) ||
+        p.department.toLowerCase().includes(q)
+      );
+    }
+    return items;
   };
 
-  const departments = ["All", "CSE", "ECE", "EEE", "IT", "ME", "BT", "AS"];
-  const years = ["All", "2023", "2022", "2021", "2020", "2019", "2018", "2017"];
-  const semesters = [
-    "All",
-    "1st",
-    "2nd",
-    "3rd",
-    "4th",
-    "5th",
-    "6th",
-    "7th",
-    "8th",
-    "Entrance",
-  ];
-
-  const filteredPapers: PapersData = useMemo(() => {
-    const result: PapersData = {
-      btech: [],
-      mtech: [],
-      phd: [],
-    };
-
-    Object.entries(papers).forEach(([program, paperList]) => {
-      const key = program as keyof PapersData;
-      result[key] = paperList.filter((paper) => {
-        const matchesSearch =
-          paper.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          paper.department.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesDepartment =
-          selectedDepartment === "All" ||
-          paper.department === selectedDepartment;
-        const matchesYear =
-          selectedYear === "All" || paper.year === selectedYear;
-        const matchesSemester =
-          selectedSemester === "All" || paper.semester === selectedSemester;
-
-        return (
-          matchesSearch && matchesDepartment && matchesYear && matchesSemester
-        );
-      });
-    });
-
-    return result;
-  }, [searchTerm, selectedDepartment, selectedYear, selectedSemester]);
-
-  const clearFilters = () => {
-    setSearchTerm("");
-    setSelectedDepartment("All");
-    setSelectedYear("All");
-    setSelectedSemester("All");
-  };
-
-  const getTotalPapers = (): number => {
-    return Object.values(filteredPapers).reduce(
-      (total, papers) => total + papers.length,
-      0
-    );
-  };
-
-  const handleDownload = (fileName: string) => {
-    console.log(`Downloading: ${fileName}`);
-    // In a real application, this would trigger the actual file download
-  };
-
- return (
-    <div className="min-h-screen">
+  return (
+    <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <section className="bg-gradient-to-r from-[#118DC4] to-[#0A6B9C] text-white py-16">
+      {/* Hero */}
+      <section className="bg-gradient-to-r from-[#118DC4] to-[#0d6fa3] text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <Book className="h-16 w-16 mx-auto mb-4 opacity-90" />
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Previous Year Papers</h1>
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            Access past examination papers to prepare effectively for your exams.
+          </p>
+        </div>
+      </section>
+
+      {/* Filters */}
+      <section className="py-6 bg-white border-b shadow-sm sticky top-0 z-10">
         <div className="container mx-auto px-4">
-          <div className="text-center">
-            <FileText className="h-16 w-16 mx-auto mb-4" />
-            <h1 className="text-4xl font-bold mb-4">Previous Year Papers</h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-              Access comprehensive collection of previous year question papers
-              for all programs and departments (2017-2023)
-            </p>
+          <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
+            {/* Search */}
+            <div className="relative flex-1 max-w-sm">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search by subject..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="w-full pl-9 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#118DC4] focus:border-[#118DC4]"
+              />
+            </div>
+
+            <div className="flex gap-2 flex-wrap items-center">
+              <Filter className="h-4 w-4 text-gray-500" />
+              {/* Department */}
+              <select
+                value={selectedDepartment}
+                onChange={e => setSelectedDepartment(e.target.value)}
+                className="text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#118DC4]"
+              >
+                {DEPARTMENTS.map(d => <option key={d} value={d}>{d === "All" ? "All Depts" : d}</option>)}
+              </select>
+              {/* Year */}
+              <select
+                value={selectedYear}
+                onChange={e => setSelectedYear(e.target.value)}
+                className="text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#118DC4]"
+              >
+                {years.map(y => <option key={y} value={y}>{y === "All" ? "All Years" : y}</option>)}
+              </select>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-12">
-        {/* Search and Filter Section */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <span className="flex items-center">
-                <Filter className="h-5 w-5 mr-2" />
-                Filter Papers
-              </span>
-              <Badge variant="secondary">{getTotalPapers()} papers found</Badge>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {/* Search Bar */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <input
-                type="text"
-                placeholder="Search by subject or department..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#118DC4]"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+      {/* Papers by program */}
+      <section className="py-10">
+        <div className="container mx-auto px-4">
+          {error && (
+            <div className="flex items-center gap-3 text-red-600 bg-red-50 rounded-xl p-5 mb-8">
+              <AlertCircle className="h-5 w-5 flex-shrink-0" />
+              <p>Could not load papers. Please check your connection.</p>
             </div>
+          )}
 
-            {/* Filter Dropdowns */}
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Department
-                </label>
-                <select
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#118DC4]"
-                  value={selectedDepartment}
-                  onChange={(e) => setSelectedDepartment(e.target.value)}
-                >
-                  {departments.map((dept) => (
-                    <option key={dept} value={dept}>
-                      {dept}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <Tabs defaultValue="B.Tech">
+            <TabsList className="mb-8 bg-white shadow-sm">
+              {PROGRAMS.map(p => (
+                <TabsTrigger key={p} value={p}
+                  className="data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">
+                  {p}
+                </TabsTrigger>
+              ))}
+            </TabsList>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Year
-                </label>
-                <select
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#118DC4]"
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(e.target.value)}
-                >
-                  {years.map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Semester
-                </label>
-                <select
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#118DC4]"
-                  value={selectedSemester}
-                  onChange={(e) => setSelectedSemester(e.target.value)}
-                >
-                  {semesters.map((semester) => (
-                    <option key={semester} value={semester}>
-                      {semester}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Active Filters and Clear Button */}
-            {(searchTerm ||
-              selectedDepartment !== "All" ||
-              selectedYear !== "All" ||
-              selectedSemester !== "All") && (
-              <div className="flex items-center justify-between pt-4 border-t">
-                <div className="flex flex-wrap gap-2">
-                  {searchTerm && (
-                    <Badge
-                      variant="outline"
-                      className="flex items-center gap-1"
-                    >
-                      Search: "{searchTerm}"
-                      <X
-                        className="h-3 w-3 cursor-pointer"
-                        onClick={() => setSearchTerm("")}
-                      />
-                    </Badge>
+            {PROGRAMS.map(program => {
+              const papers = filterPapers(program);
+              return (
+                <TabsContent key={program} value={program}>
+                  {isLoading ? <PapersSkeleton /> : papers.length === 0 ? (
+                    <div className="text-center py-16 text-gray-500">
+                      <FileText className="h-12 w-12 mx-auto mb-4 opacity-30" />
+                      <p>No papers found for the selected filters.</p>
+                    </div>
+                  ) : (
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {papers.map(paper => <PaperCard key={paper.id} paper={paper} />)}
+                    </div>
                   )}
-                  {selectedDepartment !== "All" && (
-                    <Badge
-                      variant="outline"
-                      className="flex items-center gap-1"
-                    >
-                      Dept: {selectedDepartment}
-                      <X
-                        className="h-3 w-3 cursor-pointer"
-                        onClick={() => setSelectedDepartment("All")}
-                      />
-                    </Badge>
-                  )}
-                  {selectedYear !== "All" && (
-                    <Badge
-                      variant="outline"
-                      className="flex items-center gap-1"
-                    >
-                      Year: {selectedYear}
-                      <X
-                        className="h-3 w-3 cursor-pointer"
-                        onClick={() => setSelectedYear("All")}
-                      />
-                    </Badge>
-                  )}
-                  {selectedSemester !== "All" && (
-                    <Badge
-                      variant="outline"
-                      className="flex items-center gap-1"
-                    >
-                      Sem: {selectedSemester}
-                      <X
-                        className="h-3 w-3 cursor-pointer"
-                        onClick={() => setSelectedSemester("All")}
-                      />
-                    </Badge>
-                  )}
-                </div>
-                <Button variant="outline" size="sm" onClick={clearFilters}>
-                  Clear All
-                </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        <Tabs defaultValue="btech" className="space-y-8">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="btech">
-              B.Tech Papers ({filteredPapers.btech.length})
-            </TabsTrigger>
-            <TabsTrigger value="mtech">
-              M.Tech Papers ({filteredPapers.mtech.length})
-            </TabsTrigger>
-            <TabsTrigger value="phd">
-              Ph.D Papers ({filteredPapers.phd.length})
-            </TabsTrigger>
-          </TabsList>
-
-          {Object.entries(filteredPapers).map(([program, paperList]) => (
-            <TabsContent key={program} value={program}>
-              {paperList.length > 0 ? (
-                <div className="grid gap-4">
-                  {paperList.map((paper, index) => (
-                    <Card
-                      key={index}
-                      className="hover:shadow-lg transition-shadow"
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-4">
-                            <div className="w-12 h-12 bg-[#118DC4]/10 rounded-lg flex items-center justify-center">
-                              <FileText className="h-6 w-6 text-[#118DC4]" />
-                            </div>
-                            <div className="flex-1">
-                              <h3 className="text-lg font-semibold text-gray-900">
-                                {paper.subject}
-                              </h3>
-                              <div className="flex items-center flex-wrap gap-4 text-sm text-gray-600 mt-1">
-                                <span className="flex items-center">
-                                  <Calendar className="h-4 w-4 mr-1" />
-                                  {paper.year}
-                                </span>
-                                <span className="flex items-center">
-                                  <Book className="h-4 w-4 mr-1" />
-                                  {paper.semester} Semester
-                                </span>
-                                <Badge variant="secondary" className="text-xs">
-                                  {paper.department}
-                                </Badge>
-                                {paper.credits > 0 && (
-                                  <span className="text-xs bg-[#118DC4]/10 text-[#118DC4] px-2 py-1 rounded">
-                                    {paper.credits} Credits
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                          <Button
-                            className="bg-[#118DC4] hover:bg-[#0A6B9C] text-white"
-                            onClick={() => handleDownload(paper.file)}
-                          >
-                            <Download className="h-4 w-4 mr-2" />
-                            Download
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              ) : (
-                <Card className="text-center py-12">
-                  <CardContent>
-                    <FileText className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      No papers found
-                    </h3>
-                    <p className="text-gray-600">
-                      Try adjusting your search or filter criteria
-                    </p>
-                    <Button
-                      variant="outline"
-                      className="mt-4"
-                      onClick={clearFilters}
-                    >
-                      Clear Filters
-                    </Button>
-                  </CardContent>
-                </Card>
-              )}
-            </TabsContent>
-          ))}
-        </Tabs>
-
-        {/* Guidelines */}
-        <Card className="mt-12 bg-[#118DC4]/5">
-          <CardHeader>
-            <CardTitle className="text-[#118DC4]">
-              Important Guidelines & Information
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-semibold mb-2 text-[#118DC4]">
-                  Usage Guidelines
-                </h4>
-                <ul className="space-y-2 text-[#0A6B9C] text-sm">
-                  <li>• Papers are for reference and study purposes only</li>
-                  <li>
-                    • Syllabus may have changed since these papers were set
-                  </li>
-                  <li>
-                    • Contact respective departments for latest syllabus
-                    information
-                  </li>
-                  <li>
-                    • Report any issues with downloads to admin@uiet.puchd.ac.in
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2 text-[#118DC4]">
-                  Paper Coverage
-                </h4>
-                <ul className="space-y-2 text-[#0A6B9C] text-sm">
-                  <li>• B.Tech: All semesters and departments (2017-2023)</li>
-                  <li>• M.Tech: Final semester papers and core subjects</li>
-                  <li>• Ph.D: Entrance examination papers</li>
-                  <li>
-                    • Applied Sciences: Foundation courses for all branches
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+                </TabsContent>
+              );
+            })}
+          </Tabs>
+        </div>
+      </section>
 
       <Footer />
     </div>
