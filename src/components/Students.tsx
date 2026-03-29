@@ -11,44 +11,44 @@ import { useScholarships, useStudentAchievements } from '@/hooks/useStrapi';
 
 // static data
 const studentStats = [
-  { icon: Users,        label: 'Total Students',  value: '750+' },
-  { icon: GraduationCap, label: 'Graduates (2023)', value: '450'  },
-  { icon: Trophy,       label: 'Awards Won',       value: '150+' },
-  { icon: Star,         label: 'Average CGPA',     value: '8.2'  },
+  { icon: Users, label: 'Total Students', value: '750+' },
+  { icon: GraduationCap, label: 'Graduates (2023)', value: '450' },
+  { icon: Trophy, label: 'Awards Won', value: '150+' },
+  { icon: Star, label: 'Average CGPA', value: '8.2' },
 ];
 
 const aicteScholarships = [
-  { name: 'AICTE-SWANATH Scholarship', amount: '₹50,000', eligibility: 'Orphan students',    details: 'For students who have lost both parents' },
-  { name: 'AICTE Pragati Scholarship', amount: '₹30,000', eligibility: 'Girl students',       details: 'For meritorious girl students in technical education' },
-  { name: 'AICTE Saksham Scholarship', amount: '₹30,000', eligibility: 'Disabled students',   details: 'For students with disabilities (>40%)' },
+  { name: 'AICTE-SWANATH Scholarship', amount: '₹50,000', eligibility: 'Orphan students', details: 'For students who have lost both parents' },
+  { name: 'AICTE Pragati Scholarship', amount: '₹30,000', eligibility: 'Girl students', details: 'For meritorious girl students in technical education' },
+  { name: 'AICTE Saksham Scholarship', amount: '₹30,000', eligibility: 'Disabled students', details: 'For students with disabilities (>40%)' },
 ];
 
 const notices = [
-  { date: '2024-01-15', title: 'Semester End Examination Schedule',  type: 'Academic',   urgent: true  },
-  { date: '2024-01-12', title: 'Workshop on AI and Machine Learning', type: 'Event',      urgent: false },
-  { date: '2024-01-10', title: 'Fee Submission Deadline Extension',   type: 'Important',  urgent: true  },
-  { date: '2024-01-08', title: 'Industrial Visit Registration Open',  type: 'Activity',   urgent: false },
-  { date: '2024-01-05', title: 'Placement Drive - TCS',               type: 'Placement',  urgent: false },
+  { date: '2024-01-15', title: 'Semester End Examination Schedule', type: 'Academic', urgent: true },
+  { date: '2024-01-12', title: 'Workshop on AI and Machine Learning', type: 'Event', urgent: false },
+  { date: '2024-01-10', title: 'Fee Submission Deadline Extension', type: 'Important', urgent: true },
+  { date: '2024-01-08', title: 'Industrial Visit Registration Open', type: 'Activity', urgent: false },
+  { date: '2024-01-05', title: 'Placement Drive - TCS', type: 'Placement', urgent: false },
 ];
 
 const categoryColors: Record<string, string> = {
-  Technical:  'bg-blue-100 text-blue-800',
-  Research:   'bg-purple-100 text-purple-800',
+  Technical: 'bg-blue-100 text-blue-800',
+  Research: 'bg-purple-100 text-purple-800',
   Innovation: 'bg-green-100 text-green-800',
   Leadership: 'bg-orange-100 text-orange-800',
-  Sports:     'bg-red-100 text-red-800',
-  Cultural:   'bg-pink-100 text-pink-800',
+  Sports: 'bg-red-100 text-red-800',
+  Cultural: 'bg-pink-100 text-pink-800',
 };
 
 // hash -> table map
 const hashToTab: Record<string, string> = {
-  '#be-first-year':     'batches',
+  '#be-first-year': 'batches',
   '#research-scholars': 'research',
-  '#notices':           'notices',
-  '#scholarships':      'scholarships',
-  '#aicte-scholarships':'aicte',
-  '#achievements':      'achievements',
-  '#activities':        'activities',
+  '#notices': 'notices',
+  '#scholarships': 'scholarships',
+  '#aicte-scholarships': 'aicte',
+  '#achievements': 'achievements',
+  '#activities': 'activities',
   '#medical-emergency': 'emergency',
 };
 
@@ -123,14 +123,14 @@ const Students = () => {
         <Tabs id="students-tabs" value={activeTab} onValueChange={handleTabChange} className="mb-16">
           <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-4 lg:grid-cols-8 mb-8 h-auto p-1">
             {[
-              { value: 'batches',       label: 'BE Batches'   },
-              { value: 'research',      label: 'Research'     },
-              { value: 'notices',       label: 'Notices'      },
-              { value: 'scholarships',  label: 'Scholarships' },
-              { value: 'aicte',         label: 'AICTE'        },
-              { value: 'achievements',  label: 'Achievements' },
-              { value: 'activities',    label: 'Activities'   },
-              { value: 'emergency',     label: 'Emergency'    },
+              { value: 'batches', label: 'BE Batches' },
+              { value: 'research', label: 'Research' },
+              { value: 'notices', label: 'Notices' },
+              { value: 'scholarships', label: 'Scholarships' },
+              { value: 'aicte', label: 'AICTE' },
+              { value: 'achievements', label: 'Achievements' },
+              { value: 'activities', label: 'Activities' },
+              { value: 'emergency', label: 'Emergency' },
             ].map(tab => (
               <TabsTrigger key={tab.value} value={tab.value}
                 className="px-2 py-3 text-xs data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">
@@ -155,9 +155,9 @@ const Students = () => {
                     <div className="space-y-4">
                       {[
                         { dept: 'Computer Science & Engineering', intake: 120, coord: 'Dr. Sarbjeet Singh' },
-                        { dept: 'Electronics & Communication',    intake: 60,  coord: 'Dr. Jaget Singha'  },
-                        { dept: 'Mechanical Engineering',          intake: 60,  coord: 'Prof. Shankar Sehgal' },
-                        { dept: 'Information Technology',          intake: 60,  coord: 'Dr. Amandeep Verma'  },
+                        { dept: 'Electronics & Communication', intake: 60, coord: 'Dr. Jaget Singha' },
+                        { dept: 'Mechanical Engineering', intake: 60, coord: 'Prof. Shankar Sehgal' },
+                        { dept: 'Information Technology', intake: 60, coord: 'Dr. Amandeep Verma' },
                       ].map(d => (
                         <div key={d.dept} className="p-4 rounded-lg" style={{ backgroundColor: '#e6f3fb' }}>
                           <h5 className="font-semibold mb-1">{d.dept}</h5>
@@ -170,10 +170,10 @@ const Students = () => {
                     <h4 className="text-lg font-semibold mb-4">Important Information</h4>
                     <div className="space-y-3">
                       {[
-                        { color: 'border-[#118DC4]', title: 'Academic Session',    detail: 'July 2024 - June 2028' },
+                        { color: 'border-[#118DC4]', title: 'Academic Session', detail: 'July 2024 - June 2028' },
                         { color: 'border-green-500', title: 'Orientation Program', detail: '21st - 23rd August 2024' },
-                        { color: 'border-purple-500', title: 'First Semester',     detail: 'Common for all branches' },
-                        { color: 'border-orange-500', title: 'Mentor Assignment',  detail: 'Each student assigned a faculty mentor' },
+                        { color: 'border-purple-500', title: 'First Semester', detail: 'Common for all branches' },
+                        { color: 'border-orange-500', title: 'Mentor Assignment', detail: 'Each student assigned a faculty mentor' },
                       ].map(item => (
                         <div key={item.title} className={`border-l-4 ${item.color} pl-4`}>
                           <h5 className="font-semibold">{item.title}</h5>
@@ -205,9 +205,9 @@ const Students = () => {
                     <h4 className="text-lg font-semibold mb-4">Current Ph.D. Scholars</h4>
                     <div className="space-y-3">
                       {[
-                        { name: 'Rahul Verma',  area: 'Machine Learning in Healthcare', sup: 'Dr. Rajesh Kumar', year: '3rd' },
-                        { name: 'Priya Sharma', area: 'IoT Security Frameworks',        sup: 'Dr. Amit Singh',   year: '2nd' },
-                        { name: 'Amit Kumar',   area: 'Renewable Energy Systems',       sup: 'Prof. Neha Gupta', year: '4th' },
+                        { name: 'Rahul Verma', area: 'Machine Learning in Healthcare', sup: 'Dr. Rajesh Kumar', year: '3rd' },
+                        { name: 'Priya Sharma', area: 'IoT Security Frameworks', sup: 'Dr. Amit Singh', year: '2nd' },
+                        { name: 'Amit Kumar', area: 'Renewable Energy Systems', sup: 'Prof. Neha Gupta', year: '4th' },
                       ].map(s => (
                         <div key={s.name} className="bg-gray-50 p-4 rounded-lg">
                           <h5 className="font-semibold">{s.name}</h5>
@@ -220,7 +220,7 @@ const Students = () => {
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Research Opportunities</h4>
                     <div className="space-y-3">
-                      {['Ph.D. Admission Guidelines','Research Fellowship Information','Publication Guidelines','Research Proposal Format'].map(title => (
+                      {['Ph.D. Admission Guidelines', 'Research Fellowship Information', 'Publication Guidelines', 'Research Proposal Format'].map(title => (
                         <Button key={title} className="w-full justify-start" variant="outline">
                           <FileText className="h-4 w-4 mr-2 text-[#118DC4]" />{title}
                         </Button>
@@ -305,7 +305,9 @@ const Students = () => {
                         <p className="text-sm text-gray-600 mb-1"><strong>Eligibility:</strong> {s.eligibility}</p>
                         <p className="text-sm text-gray-600 mb-2"><strong>Deadline:</strong> {s.deadline}</p>
                         {s.details && <p className="text-xs text-gray-500">{s.details}</p>}
-                        <Button size="sm" className="mt-3 w-full bg-[#118DC4] hover:bg-[#0a6ba2]">Apply Now</Button>
+                        <Button size="sm" className="mt-3 w-full bg-[#118DC4] hover:bg-[#0a6ba2] h-auto whitespace-normal sm:whitespace-nowrap text-center leading-tight">
+                          Apply via Official Portal
+                        </Button>
                       </div>
                     ))}
                   </div>
@@ -395,12 +397,12 @@ const Students = () => {
               <CardContent>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { name: 'Technical Club',   desc: 'Coding, hackathons, and tech workshops',    icon: '💻' },
-                    { name: 'Cultural Club',    desc: 'Arts, music, dance, and cultural events',   icon: '🎭' },
-                    { name: 'Sports Club',      desc: 'Inter-college sports and fitness programs',  icon: '⚽' },
-                    { name: 'Literary Club',    desc: 'Debates, quizzes, and creative writing',    icon: '📚' },
-                    { name: 'Robotics Club',    desc: 'Robotics, automation, and AI projects',     icon: '🤖' },
-                    { name: 'NSS',              desc: 'National Service Scheme and community work', icon: '🌱' },
+                    { name: 'Technical Club', desc: 'Coding, hackathons, and tech workshops', icon: '💻' },
+                    { name: 'Cultural Club', desc: 'Arts, music, dance, and cultural events', icon: '🎭' },
+                    { name: 'Sports Club', desc: 'Inter-college sports and fitness programs', icon: '⚽' },
+                    { name: 'Literary Club', desc: 'Debates, quizzes, and creative writing', icon: '📚' },
+                    { name: 'Robotics Club', desc: 'Robotics, automation, and AI projects', icon: '🤖' },
+                    { name: 'NSS', desc: 'National Service Scheme and community work', icon: '🌱' },
                   ].map(club => (
                     <div key={club.name} className="bg-gray-50 p-4 rounded-lg text-center hover:shadow-sm transition-shadow">
                       <div className="text-3xl mb-2">{club.icon}</div>
@@ -425,10 +427,10 @@ const Students = () => {
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
                   {[
-                    { title: 'Campus Health Center', phone: '+91-172-2534820', hours: '24/7',  note: 'On-campus medical facility' },
-                    { title: 'Emergency Ambulance',  phone: '108',             hours: '24/7',  note: 'Free government ambulance service' },
-                    { title: 'PGIMER Hospital',      phone: '+91-172-2755555', hours: '24/7',  note: 'Nearest major hospital — 2km' },
-                    { title: 'Student Counsellor',   phone: '+91-172-2534821', hours: '9–5 PM', note: 'Mental health and welfare support' },
+                    { title: 'Campus Health Center', phone: '+91-172-2534820', hours: '24/7', note: 'On-campus medical facility' },
+                    { title: 'Emergency Ambulance', phone: '108', hours: '24/7', note: 'Free government ambulance service' },
+                    { title: 'PGIMER Hospital', phone: '+91-172-2755555', hours: '24/7', note: 'Nearest major hospital — 2km' },
+                    { title: 'Student Counsellor', phone: '+91-172-2534821', hours: '9–5 PM', note: 'Mental health and welfare support' },
                   ].map(c => (
                     <div key={c.title} className="bg-red-50 border border-red-100 p-4 rounded-lg">
                       <h4 className="font-semibold text-gray-900 mb-1">{c.title}</h4>

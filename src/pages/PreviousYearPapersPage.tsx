@@ -17,10 +17,10 @@ const deptColors: Record<string, string> = {
   CSE: "bg-blue-100 text-blue-800",
   ECE: "bg-purple-100 text-purple-800",
   EEE: "bg-yellow-100 text-yellow-800",
-  IT:  "bg-green-100 text-green-800",
-  ME:  "bg-orange-100 text-orange-800",
-  BT:  "bg-pink-100 text-pink-800",
-  AS:  "bg-gray-100 text-gray-800",
+  IT: "bg-green-100 text-green-800",
+  ME: "bg-orange-100 text-orange-800",
+  BT: "bg-pink-100 text-pink-800",
+  AS: "bg-gray-100 text-gray-800",
 };
 
 // Paper card
@@ -103,7 +103,7 @@ const PreviousYearPapersPage = () => {
   const filterPapers = (program: string) => {
     let items = (allPapers ?? []).filter(p => p.program === program);
     if (selectedDepartment !== "All") items = items.filter(p => p.department === selectedDepartment);
-    if (selectedYear !== "All")       items = items.filter(p => p.year === selectedYear);
+    if (selectedYear !== "All") items = items.filter(p => p.year === selectedYear);
     if (searchTerm) {
       const q = searchTerm.toLowerCase();
       items = items.filter(p =>
@@ -179,7 +179,7 @@ const PreviousYearPapersPage = () => {
           )}
 
           <Tabs defaultValue="B.Tech">
-            <TabsList className="mb-8 bg-white shadow-sm">
+            <TabsList className="mb-8 bg-white shadow-sm w-full grid grid-cols-1 sm:grid-cols-3 h-auto">
               {PROGRAMS.map(p => (
                 <TabsTrigger key={p} value={p}
                   className="data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">

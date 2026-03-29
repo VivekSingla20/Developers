@@ -15,14 +15,14 @@ const formatDate = (dateString: string) =>
 const getFileIcon = (filename?: string) => {
   if (!filename) return <FileText className="h-6 w-6 text-gray-500" />;
   const ext = filename.split('.').pop()?.toLowerCase();
-  if (ext === 'pdf')                 return <FileText className="h-6 w-6 text-red-600" />;
+  if (ext === 'pdf') return <FileText className="h-6 w-6 text-red-600" />;
   if (ext === 'doc' || ext === 'docx') return <File className="h-6 w-6 text-blue-600" />;
-  if (['jpg','jpeg','png'].includes(ext ?? '')) return <Image className="h-6 w-6 text-green-600" />;
+  if (['jpg', 'jpeg', 'png'].includes(ext ?? '')) return <Image className="h-6 w-6 text-green-600" />;
   return <FileText className="h-6 w-6 text-gray-600" />;
 };
 
 const DownloadRow = ({ item }: { item: StrapiEventDownload }) => {
-  const fileUrl  = getStrapiImageUrl(item.file  ?? null);
+  const fileUrl = getStrapiImageUrl(item.file ?? null);
   const imageUrl = getStrapiImageUrl(item.image ?? null);
   const url = fileUrl ?? imageUrl;
   const filename = item.file?.url?.split('/').pop() ?? item.image?.url?.split('/').pop();
@@ -80,9 +80,9 @@ const ImportantDownloadsPage = () => {
   const byCategory = useMemo(() => {
     const items = (downloads ?? []).filter(d => d.isActive !== false);
     return {
-      event:    items.filter(d => d.category === 'event'),
+      event: items.filter(d => d.category === 'event'),
       download: items.filter(d => d.category === 'download'),
-      notice:   items.filter(d => d.category === 'notice'),
+      notice: items.filter(d => d.category === 'notice'),
     };
   }, [downloads]);
 
@@ -137,7 +137,7 @@ const ImportantDownloadsPage = () => {
           )}
 
           <Tabs defaultValue="download">
-            <TabsList className="mb-8 bg-white shadow-sm">
+            <TabsList className="mb-8 bg-white shadow-sm w-full flex-wrap h-auto">
               <TabsTrigger value="download"
                 className="data-[state=active]:bg-indigo-600 data-[state=active]:text-white">
                 <FileText className="h-4 w-4 mr-1.5" />Documents

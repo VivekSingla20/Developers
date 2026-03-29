@@ -20,7 +20,7 @@ const Academics = () => {
   useEffect(() => {
     // Handle tab switching (no hash for programs)
     setActiveTab("undergraduate");
-    
+
     // Handle scrolling to specific sections for hash fragments
     const hash = location.hash;
     if (hash) {
@@ -262,14 +262,14 @@ const Academics = () => {
 
         {/* Programs Tabs */}
         <Tabs id="academics-tabs" value={activeTab} onValueChange={handleTabChange} className="mb-20">
-          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-3 mb-8 h-12">
-            <TabsTrigger value="undergraduate" className="px-8 text-base">
+          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-3 mb-8 h-auto">
+            <TabsTrigger value="undergraduate" className="px-2 sm:px-8 text-xs sm:text-base">
               Undergraduate
             </TabsTrigger>
-            <TabsTrigger value="postgraduate" className="px-8 text-base">
+            <TabsTrigger value="postgraduate" className="px-2 sm:px-8 text-xs sm:text-base">
               Postgraduate
             </TabsTrigger>
-            <TabsTrigger value="doctoral" className="px-8 text-base">
+            <TabsTrigger value="doctoral" className="px-2 sm:px-8 text-xs sm:text-base">
               Doctoral
             </TabsTrigger>
           </TabsList>

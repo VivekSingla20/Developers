@@ -136,7 +136,7 @@ const trendingNews = [
     id: 1,
     type: "admission",
     icon: GraduationCap,
-    title: "JEE Main 2024-25 Counselling Started - Apply Now",
+    title: "JEE Main 2024-25 Counselling Started - Visit Official Portal",
     link: "/news",
     isNew: true,
     priority: "high"
@@ -199,7 +199,7 @@ const Header = () => {
   // Handle keyboard navigation for news banner
   const handleKeyDown = (e) => {
     if (!showNotifications) return;
-    
+
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
       setCurrentNewsIndex((prev) => (prev === 0 ? trendingNews.length - 1 : prev - 1));
@@ -251,16 +251,16 @@ const Header = () => {
   // Auto-rotate trending news with progress tracking
   useEffect(() => {
     if (!showNotifications || isPaused) return;
-    
+
     const interval = setInterval(() => {
       setCurrentNewsIndex((prev) => (prev + 1) % trendingNews.length);
       setProgress(0);
     }, 4000); // Change every 4 seconds
-    
+
     const progressInterval = setInterval(() => {
       setProgress((prev) => (prev >= 100 ? 0 : prev + (100 / (4000 / 50))));
     }, 50);
-    
+
     return () => {
       clearInterval(interval);
       clearInterval(progressInterval);
@@ -332,158 +332,157 @@ const Header = () => {
   return (
     <>
       <header ref={topBarsRef}>
-      {/* Government Info Bar */}
-      <div className="bg-gradient-to-r from-[#118DC4] to-[#0f7db0] text-white py-1 sm:py-2">
-        <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6">
-          <div className="flex justify-between items-center text-xs sm:text-sm">
-            <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4 min-w-0 flex-1">
-              <div className="flex items-center space-x-1 min-w-0">
-                <Building className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
-                <span className="font-medium truncate">
-                  Government Institute
-                </span>
+        {/* Government Info Bar */}
+        <div className="bg-gradient-to-r from-[#118DC4] to-[#0f7db0] text-white py-1 sm:py-2">
+          <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6">
+            <div className="flex justify-between items-center text-xs sm:text-sm">
+              <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4 min-w-0 flex-1">
+                <div className="flex items-center space-x-1 min-w-0">
+                  <Building className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                  <span className="font-medium truncate">
+                    Government Institute
+                  </span>
+                </div>
+                <div className="hidden sm:flex items-center space-x-1 min-w-0">
+                  <GraduationCap className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                  <span className="truncate">Panjab University</span>
+                </div>
               </div>
-              <div className="hidden sm:flex items-center space-x-1 min-w-0">
-                <GraduationCap className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
-                <span className="truncate">Panjab University</span>
+              <div className="bg-white/20 text-white border border-white/30 text-xs px-1.5 sm:px-2 py-1 rounded flex-shrink-0 ml-1 sm:ml-2">
+                NAAC A+
               </div>
-            </div>
-            <div className="bg-white/20 text-white border border-white/30 text-xs px-1.5 sm:px-2 py-1 rounded flex-shrink-0 ml-1 sm:ml-2">
-              NAAC A+
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Trending News/Announcements Banner */}
-      {showNotifications && trendingNews.length > 0 && (
-        <div 
-          className="relative bg-gradient-to-r from-orange-50 to-red-50 border-b border-orange-100 py-2 overflow-hidden"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onKeyDown={handleKeyDown}
-          tabIndex={0}
-          role="region"
-          aria-label="Trending news and announcements"
-        >
-          <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2 min-w-0 flex-1">
-                <div className="flex items-center space-x-1 flex-shrink-0">
-                  <Bell className="h-4 w-4 text-orange-600 animate-pulse" />
-                  <span className="text-xs sm:text-sm font-semibold text-orange-800 hidden sm:inline">
-                    Trending
-                  </span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="relative h-6 overflow-hidden">
-                    <div 
-                      className="absolute inset-0 transition-transform duration-500 ease-in-out"
-                      style={{ transform: `translateY(-${currentNewsIndex * 100}%)` }}
-                    >
-                      {trendingNews.map((news, index) => (
-                        <Link 
-                          key={news.id}
-                          to={news.link}
-                          className="flex items-center h-6 group hover:text-[#118DC4] transition-colors duration-200"
-                        >
-                          <div className="flex items-center space-x-2 min-w-0">
-                            {React.createElement(news.icon, {
-                              className: "h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0 text-orange-600 group-hover:text-[#118DC4] transition-colors"
-                            })}
-                            <span className="text-xs sm:text-sm text-gray-800 group-hover:text-[#118DC4] truncate font-medium transition-colors">
-                              {news.title}
-                            </span>
-                            {news.isNew && (
-                              <span className="inline-block px-2 py-0.5 bg-red-500 text-white text-xs rounded-full font-bold animate-pulse flex-shrink-0">
-                                NEW
+        {/* Trending News/Announcements Banner */}
+        {showNotifications && trendingNews.length > 0 && (
+          <div
+            className="relative bg-gradient-to-r from-orange-50 to-red-50 border-b border-orange-100 py-2 overflow-hidden"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+            role="region"
+            aria-label="Trending news and announcements"
+          >
+            <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 min-w-0 flex-1">
+                  <div className="flex items-center space-x-1 flex-shrink-0">
+                    <Bell className="h-4 w-4 text-orange-600 animate-pulse" />
+                    <span className="text-xs sm:text-sm font-semibold text-orange-800 hidden sm:inline">
+                      Trending
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="relative h-6 overflow-hidden">
+                      <div
+                        className="absolute inset-0 transition-transform duration-500 ease-in-out"
+                        style={{ transform: `translateY(-${currentNewsIndex * 100}%)` }}
+                      >
+                        {trendingNews.map((news, index) => (
+                          <Link
+                            key={news.id}
+                            to={news.link}
+                            className="flex items-center h-6 group hover:text-[#118DC4] transition-colors duration-200"
+                          >
+                            <div className="flex items-center space-x-2 min-w-0">
+                              {React.createElement(news.icon, {
+                                className: "h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0 text-orange-600 group-hover:text-[#118DC4] transition-colors"
+                              })}
+                              <span className="text-xs sm:text-sm text-gray-800 group-hover:text-[#118DC4] truncate font-medium transition-colors">
+                                {news.title}
                               </span>
-                            )}
-                            <ExternalLink className="h-3 w-3 text-gray-400 group-hover:text-[#118DC4] transition-colors flex-shrink-0" />
-                          </div>
-                        </Link>
-                      ))}
+                              {news.isNew && (
+                                <span className="inline-block px-2 py-0.5 bg-red-500 text-white text-xs rounded-full font-bold animate-pulse flex-shrink-0">
+                                  NEW
+                                </span>
+                              )}
+                              <ExternalLink className="h-3 w-3 text-gray-400 group-hover:text-[#118DC4] transition-colors flex-shrink-0" />
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center space-x-2 flex-shrink-0">
-                {/* News counter for mobile */}
-                <div className="sm:hidden text-xs text-orange-700 bg-orange-100 px-2 py-1 rounded-full font-medium">
-                  {currentNewsIndex + 1}/{trendingNews.length}
+                <div className="flex items-center space-x-2 flex-shrink-0">
+                  {/* News counter for mobile */}
+                  <div className="sm:hidden text-xs text-orange-700 bg-orange-100 px-2 py-1 rounded-full font-medium">
+                    {currentNewsIndex + 1}/{trendingNews.length}
+                  </div>
+                  {/* News navigation dots */}
+                  <div className="hidden sm:flex items-center space-x-1">
+                    {trendingNews.map((news, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentNewsIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#118DC4] focus:ring-offset-1 ${index === currentNewsIndex
+                            ? 'bg-[#118DC4] scale-110'
+                            : 'bg-gray-300 hover:bg-gray-400'
+                          }`}
+                        aria-label={`Show news: ${news.title.substring(0, 50)}...`}
+                        title={news.title}
+                      />
+                    ))}
+                  </div>
+                  {/* Close button */}
+                  <button
+                    onClick={() => setShowNotifications(false)}
+                    className="p-1 hover:bg-orange-100 rounded-full transition-colors duration-200 text-orange-600 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1"
+                    aria-label="Close trending news banner"
+                    title="Close notifications"
+                  >
+                    <X className="h-3 w-3 sm:h-4 sm:w-4" />
+                  </button>
                 </div>
-                {/* News navigation dots */}
-                <div className="hidden sm:flex items-center space-x-1">
-                  {trendingNews.map((news, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentNewsIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#118DC4] focus:ring-offset-1 ${
-                        index === currentNewsIndex 
-                          ? 'bg-[#118DC4] scale-110' 
-                          : 'bg-gray-300 hover:bg-gray-400'
-                      }`}
-                      aria-label={`Show news: ${news.title.substring(0, 50)}...`}
-                      title={news.title}
-                    />
-                  ))}
-                </div>
-                {/* Close button */}
-                <button
-                  onClick={() => setShowNotifications(false)}
-                  className="p-1 hover:bg-orange-100 rounded-full transition-colors duration-200 text-orange-600 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1"
-                  aria-label="Close trending news banner"
-                  title="Close notifications"
-                >
-                  <X className="h-3 w-3 sm:h-4 sm:w-4" />
-                </button>
               </div>
             </div>
+            {/* Progress bar */}
+            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-orange-200">
+              <div
+                className="h-full bg-[#118DC4] transition-all duration-75 ease-linear"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </div>
-          {/* Progress bar */}
-          <div className="absolute bottom-0 left-0 w-full h-0.5 bg-orange-200">
-            <div 
-              className="h-full bg-[#118DC4] transition-all duration-75 ease-linear"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-      )}
+        )}
 
-      {/* Contact Info */}
-      <div className="bg-gray-50/80 backdrop-blur-sm border-b py-1 sm:py-2">
-        <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6">
-          <div className="flex justify-between items-center text-xs sm:text-sm text-gray-700">
-            <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4 min-w-0 flex-1">
-              <a
-                href="tel:+91-172-2541242"
-                className="flex items-center hover:text-[#118DC4] transition-colors min-w-0"
-              >
-                <Phone className="h-3 w-3 mr-1 flex-shrink-0" />
-                <span className="hidden sm:inline truncate">
-                  +91-172-2541242
-                </span>
-                <span className="sm:hidden">Call</span>
-              </a>
-              <a
-                href="mailto:directoruiet@pu.ac.in"
-                className="hidden sm:flex items-center hover:text-[#118DC4] transition-colors min-w-0"
-              >
-                <Mail className="h-3 w-3 mr-1 flex-shrink-0" />
-                <span className="hidden lg:inline truncate">
-                  directoruiet@pu.ac.in
-                </span>
-                <span className="lg:hidden">Email</span>
-              </a>
-            </div>
-            <div className="flex items-center space-x-1 text-xs flex-shrink-0 ml-1 sm:ml-2">
-              <MapPin className="h-3 w-3 flex-shrink-0" />
-              <span className="hidden sm:inline">Sector 25, Chandigarh</span>
-              <span className="sm:hidden">CHD</span>
+        {/* Contact Info */}
+        <div className="bg-gray-50/80 backdrop-blur-sm border-b py-1 sm:py-2">
+          <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6">
+            <div className="flex justify-between items-center text-xs sm:text-sm text-gray-700">
+              <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4 min-w-0 flex-1">
+                <a
+                  href="tel:+91-172-2541242"
+                  className="flex items-center hover:text-[#118DC4] transition-colors min-w-0"
+                >
+                  <Phone className="h-3 w-3 mr-1 flex-shrink-0" />
+                  <span className="hidden sm:inline truncate">
+                    +91-172-2541242
+                  </span>
+                  <span className="sm:hidden">Call</span>
+                </a>
+                <a
+                  href="mailto:directoruiet@pu.ac.in"
+                  className="hidden sm:flex items-center hover:text-[#118DC4] transition-colors min-w-0"
+                >
+                  <Mail className="h-3 w-3 mr-1 flex-shrink-0" />
+                  <span className="hidden lg:inline truncate">
+                    directoruiet@pu.ac.in
+                  </span>
+                  <span className="lg:hidden">Email</span>
+                </a>
+              </div>
+              <div className="flex items-center space-x-1 text-xs flex-shrink-0 ml-1 sm:ml-2">
+                <MapPin className="h-3 w-3 flex-shrink-0" />
+                <span className="hidden sm:inline">Sector 25, Chandigarh</span>
+                <span className="sm:hidden">CHD</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
       </header>
 
@@ -491,9 +490,8 @@ const Header = () => {
       <div
         ref={mainNavRef}
         style={{ top: `${topOffset}px` }}
-        className={`fixed left-0 right-0 z-50 w-full mx-auto px-1 sm:px-2 md:px-4 lg:px-6 bg-white/95 backdrop-blur-md border-b border-gray-200/90 ${
-          isScrolled ? "shadow-sm" : ""
-        }`}
+        className={`fixed left-0 right-0 z-50 w-full mx-auto px-1 sm:px-2 md:px-4 lg:px-6 bg-white/95 backdrop-blur-md border-b border-gray-200/90 ${isScrolled ? "shadow-sm" : ""
+          }`}
       >
         <div className="flex justify-between items-center py-2 sm:py-3 md:py-4">
           {/* Logo and Institute Name */}
@@ -545,12 +543,11 @@ const Header = () => {
               >
                 <Link
                   to={item.href}
-                  className={`flex items-center px-1.5 lg:px-2 xl:px-3 py-2 transition-all duration-200 font-medium hover:bg-[#118DC4]/10 rounded-lg text-xs xl:text-sm whitespace-nowrap ${
-                    isActivePath(item.href) ||
-                    (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                  className={`flex items-center px-1.5 lg:px-2 xl:px-3 py-2 transition-all duration-200 font-medium hover:bg-[#118DC4]/10 rounded-lg text-xs xl:text-sm whitespace-nowrap ${isActivePath(item.href) ||
+                      (item.dropdown && hasActiveDropdownItem(item.dropdown))
                       ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
                       : "text-gray-700 hover:text-[#118DC4]"
-                  }`}
+                    }`}
                 >
                   {item.name}
                   {item.dropdown && (
@@ -564,11 +561,10 @@ const Header = () => {
                       <Link
                         key={subItem.name}
                         to={subItem.href}
-                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                          isActivePath(subItem.href.split("#")[0])
+                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${isActivePath(subItem.href.split("#")[0])
                             ? "bg-[#118DC4]/10 text-[#118DC4] font-medium border-l-4 border-l-[#118DC4]"
                             : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
-                        }`}
+                          }`}
                       >
                         {subItem.name}
                       </Link>
@@ -581,78 +577,86 @@ const Header = () => {
             {/* Improved More Dropdown */}
             {hiddenNavItems.length > 0 && (
               <div
-                className="relative group"
+                className="relative"
                 onMouseEnter={() => setActiveDropdown("more")}
                 onMouseLeave={() => {
                   setActiveDropdown(null);
                   setExpandedMoreItem(null);
                 }}
               >
-                <button className="flex items-center px-1.5 lg:px-2 xl:px-3 py-2 text-xs xl:text-sm text-gray-700 hover:text-[#118DC4] hover:bg-[#118DC4]/10 font-medium rounded-lg transition-all duration-200 whitespace-nowrap">
-                  <MoreHorizontal className="h-4 w-4 mr-1" />
+                <button
+                  type="button"
+                  className={`flex items-center px-1.5 lg:px-2 xl:px-3 py-2 transition-all duration-200 font-medium hover:bg-[#118DC4]/10 rounded-lg text-xs xl:text-sm whitespace-nowrap ${activeDropdown === "more" ||
+                      hiddenNavItems.some(
+                        (item) =>
+                          isActivePath(item.href) ||
+                          (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                      )
+                      ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
+                      : "text-gray-700 hover:text-[#118DC4]"
+                    }`}
+                  aria-label="More navigation items"
+                >
                   More
+                  <MoreHorizontal className="ml-1 h-3 w-3" />
                 </button>
+
                 {activeDropdown === "more" && (
-                  <div className="absolute top-full right-0 mt-1 w-64 lg:w-72 bg-white rounded-xl shadow-xl border border-gray-200 z-50 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards] before:content-[''] before:absolute before:-top-1 before:right-4 before:w-16 before:h-1 before:bg-transparent max-h-[75vh] overflow-y-auto">
-                    {/* Scrollable container with custom scrollbar */}
-                    <div className="py-2 space-y-1 custom-scrollbar">
-                      {hiddenNavItems.map((item) => (
-                        <div key={item.name} className="relative">
-                          <div className="flex items-center">
-                            <Link
-                              to={item.href}
-                              className={`flex-1 block px-4 py-3 text-sm transition-all duration-150 hover:pl-6 ${
-                                isActivePath(item.href)
-                                  ? "bg-[#118DC4]/10 text-[#118DC4] font-medium border-l-4 border-l-[#118DC4]"
-                                  : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
-                              }`}
-                            >
-                              {item.name}
-                            </Link>
-                            {item.dropdown && (
-                              <button
-                                className="p-2 text-gray-400 hover:text-[#118DC4] hover:bg-[#118DC4]/10 rounded-lg mr-2 transition-all duration-150"
-                                onClick={() =>
-                                  setExpandedMoreItem(
-                                    expandedMoreItem === item.name
-                                      ? null
-                                      : item.name
-                                  )
-                                }
-                              >
-                                <ChevronRight
-                                  className={`h-4 w-4 transition-transform duration-200 ${
-                                    expandedMoreItem === item.name
-                                      ? "rotate-90"
-                                      : ""
+                  <div className="absolute top-full right-0 w-64 lg:w-72 pt-2 z-50">
+                    {/* Keep hover area continuous between trigger and dropdown */}
+                    <div className="bg-white rounded-xl shadow-xl border border-gray-200 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards] max-h-[75vh] overflow-y-auto">
+                      <div className="py-2 space-y-1 custom-scrollbar">
+                        {hiddenNavItems.map((item) => (
+                          <div key={item.name} className="relative">
+                            <div className="flex items-center">
+                              <Link
+                                to={item.href}
+                                className={`flex-1 block px-4 py-3 text-sm transition-all duration-150 hover:pl-6 ${isActivePath(item.href)
+                                    ? "bg-[#118DC4]/10 text-[#118DC4] font-medium border-l-4 border-l-[#118DC4]"
+                                    : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
                                   }`}
-                                />
-                              </button>
+                              >
+                                {item.name}
+                              </Link>
+                              {item.dropdown && (
+                                <button
+                                  type="button"
+                                  className="p-2 text-gray-400 hover:text-[#118DC4] hover:bg-[#118DC4]/10 rounded-lg mr-2 transition-all duration-150"
+                                  onClick={() =>
+                                    setExpandedMoreItem(
+                                      expandedMoreItem === item.name ? null : item.name
+                                    )
+                                  }
+                                >
+                                  <ChevronRight
+                                    className={`h-4 w-4 transition-transform duration-200 ${expandedMoreItem === item.name ? "rotate-90" : ""
+                                      }`}
+                                  />
+                                </button>
+                              )}
+                            </div>
+
+                            {item.dropdown && expandedMoreItem === item.name && (
+                              <div className="pl-6 bg-gray-50/50 border-l-2 border-gray-200 ml-4 mr-2 rounded-r-lg">
+                                <div className="py-2 space-y-1">
+                                  {item.dropdown.map((subItem) => (
+                                    <Link
+                                      key={subItem.name}
+                                      to={subItem.href}
+                                      className={`block px-3 py-2 text-xs transition-all duration-150 rounded-lg hover:pl-5 ${isActivePath(subItem.href.split("#")[0])
+                                          ? "bg-[#118DC4]/10 text-[#118DC4] font-medium"
+                                          : "text-gray-600 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
+                                        }`}
+                                    >
+                                      {subItem.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
                             )}
                           </div>
-
-                          {/* Collapsible sub-items */}
-                          {item.dropdown && expandedMoreItem === item.name && (
-                            <div className="pl-6 bg-gray-50/50 border-l-2 border-gray-200 ml-4 mr-2 rounded-r-lg">
-                              <div className="py-2 space-y-1">
-                                {item.dropdown.map((subItem) => (
-                                  <Link
-                                    key={subItem.name}
-                                    to={subItem.href}
-                                    className={`block px-3 py-2 text-xs transition-all duration-150 rounded-lg hover:pl-5 ${
-                                      isActivePath(subItem.href.split("#")[0])
-                                        ? "bg-[#118DC4]/10 text-[#118DC4] font-medium"
-                                        : "text-gray-600 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
-                                    }`}
-                                  >
-                                    {subItem.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -664,8 +668,8 @@ const Header = () => {
           <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-3 flex-shrink-0">
             <Link to="/admissions" className="block">
               <Button className="bg-gradient-to-r from-[#118DC4] to-[#0f7db0] hover:from-[#0f7db0] hover:to-[#0d6a94] text-white font-medium text-xs sm:text-sm px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                <span className="hidden sm:inline">Apply Now</span>
-                <span className="sm:hidden">Apply</span>
+                <span className="hidden sm:inline">Admissions Portal</span>
+                <span className="sm:hidden">Portal</span>
               </Button>
             </Link>
             <Button
@@ -692,12 +696,11 @@ const Header = () => {
                   <div className="flex items-center justify-between">
                     <Link
                       to={item.href}
-                      className={`flex-1 block px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 transition-all duration-200 rounded-lg mx-2 font-medium text-sm ${
-                        isActivePath(item.href) ||
-                        (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                      className={`flex-1 block px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 transition-all duration-200 rounded-lg mx-2 font-medium text-sm ${isActivePath(item.href) ||
+                          (item.dropdown && hasActiveDropdownItem(item.dropdown))
                           ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
                           : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
-                      }`}
+                        }`}
                       onClick={() => !item.dropdown && setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -714,9 +717,8 @@ const Header = () => {
                         }
                       >
                         <ChevronDown
-                          className={`h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-200 ${
-                            activeDropdown === item.name ? "rotate-180" : ""
-                          }`}
+                          className={`h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-200 ${activeDropdown === item.name ? "rotate-180" : ""
+                            }`}
                         />
                       </Button>
                     )}
@@ -727,11 +729,10 @@ const Header = () => {
                         <Link
                           key={subItem.name}
                           to={subItem.href}
-                          className={`block px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-sm transition-all duration-150 rounded ${
-                            isActivePath(subItem.href.split("#")[0])
+                          className={`block px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-sm transition-all duration-150 rounded ${isActivePath(subItem.href.split("#")[0])
                               ? "text-[#118DC4] bg-[#118DC4]/10 font-medium"
                               : "text-gray-600 hover:text-[#118DC4] hover:bg-[#118DC4]/10"
-                          }`}
+                            }`}
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {subItem.name}
@@ -747,7 +748,7 @@ const Header = () => {
                     className="w-full bg-gradient-to-r from-[#118DC4] to-[#0f7db0] hover:from-[#0f7db0] hover:to-[#0d6a94] text-white font-medium text-sm shadow-lg py-2 sm:py-2.5"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Apply Now
+                    Admissions Portal
                   </Button>
                 </Link>
               </div>

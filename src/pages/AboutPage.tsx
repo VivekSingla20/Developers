@@ -41,7 +41,7 @@ const AboutPage = () => {
   // Map hash fragments to tab values
   const hashToTab = {
     "#mission": "mission",
-    "#director": "director", 
+    "#director": "director",
     "#location": "location",
     "#infrastructure": "infrastructure",
     "#chandigarh": "chandigarh"
@@ -124,7 +124,7 @@ const AboutPage = () => {
       <section
         id="uiet"
         className="text-white py-16"
-        style={{background: 'linear-gradient(to right, #118DC4, #0d6fa3)'}}
+        style={{ background: 'linear-gradient(to right, #118DC4, #0d6fa3)' }}
       >
         <div className="container mx-auto px-4">
           <div className="text-center">
@@ -132,7 +132,7 @@ const AboutPage = () => {
             <h1 className="text-4xl font-bold mb-4">
               University Institute of Engineering & Technology
             </h1>
-            <p className="text-xl max-w-3xl mx-auto mb-6" style={{color: '#e1f4fd'}}>
+            <p className="text-xl max-w-3xl mx-auto mb-6" style={{ color: '#e1f4fd' }}>
               A premier engineering institution under Panjab University,
               committed to excellence in technical education, research, and
               innovation since <strong>2002</strong>.
@@ -141,35 +141,35 @@ const AboutPage = () => {
               <Badge
                 variant="secondary"
                 className="text-white"
-                style={{backgroundColor: 'rgba(255,255,255,0.2)', borderColor: 'rgba(255,255,255,0.3)'}}
+                style={{ backgroundColor: 'rgba(255,255,255,0.2)', borderColor: 'rgba(255,255,255,0.3)' }}
               >
                 NAAC Accredited (Front‑Runner Institute)
               </Badge>
               <Badge
                 variant="secondary"
                 className="text-white"
-                style={{backgroundColor: 'rgba(255,255,255,0.2)', borderColor: 'rgba(255,255,255,0.3)'}}
+                style={{ backgroundColor: 'rgba(255,255,255,0.2)', borderColor: 'rgba(255,255,255,0.3)' }}
               >
                 NBA Accredited
               </Badge>
               <Badge
                 variant="secondary"
                 className="text-white"
-                style={{backgroundColor: 'rgba(255,255,255,0.2)', borderColor: 'rgba(255,255,255,0.3)'}}
+                style={{ backgroundColor: 'rgba(255,255,255,0.2)', borderColor: 'rgba(255,255,255,0.3)' }}
               >
                 NIRF Tier‑1
               </Badge>
             </div>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/academics">
-                <Button className="bg-white hover:bg-gray-100" style={{color: '#118DC4'}}>
+                <Button className="bg-white hover:bg-gray-100" style={{ color: '#118DC4' }}>
                   <GraduationCap className="h-4 w-4 mr-2" />
                   Explore Academics
                 </Button>
               </Link>
               <Link to="/admissions">
-                <Button className="bg-white hover:bg-gray-100" style={{color: '#118DC4'}}>
-                  Apply Now
+                <Button className="bg-white hover:bg-gray-100 h-auto whitespace-normal sm:whitespace-nowrap text-center leading-tight" style={{ color: '#118DC4' }}>
+                  Official Admissions Portal
                 </Button>
               </Link>
             </div>
@@ -236,7 +236,7 @@ const AboutPage = () => {
                   className="text-center hover:shadow-lg transition-shadow"
                 >
                   <CardContent className="p-6">
-                    <stat.icon className="h-8 w-8 mx-auto mb-3" style={{color: '#118DC4'}} />
+                    <stat.icon className="h-8 w-8 mx-auto mb-3" style={{ color: '#118DC4' }} />
                     <div className="text-2xl font-bold text-gray-900">
                       {stat.value}
                     </div>
@@ -256,11 +256,11 @@ const AboutPage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-gray-700">  
-                  The University Institute of Engineering and Technology (UIET) is the engineering 
-                  institute of Panjab University, Chandigarh. It offers undergraduate (BE/B.Tech), 
-                  postgraduate (M.Tech), and doctoral programs. UIET is known for its strong focus on 
-                  academics, research, and industry interaction. It is recognized by the AICTE and accredited by the NBA.
+                  <p className="text-gray-700">
+                    The University Institute of Engineering and Technology (UIET) is the engineering
+                    institute of Panjab University, Chandigarh. It offers undergraduate (BE/B.Tech),
+                    postgraduate (M.Tech), and doctoral programs. UIET is known for its strong focus on
+                    academics, research, and industry interaction. It is recognized by the AICTE and accredited by the NBA.
                   </p>
                   <p className="text-gray-700">
                     UIET offers B.E., M.E. and Ph.D. programs across 7 core
@@ -269,7 +269,7 @@ const AboutPage = () => {
                   </p>
                   <div className="flex gap-3">
                     <Link to="/academics">
-                      <Button size="sm" style={{backgroundColor: '#118DC4', color: 'white'}}>
+                      <Button size="sm" style={{ backgroundColor: '#118DC4', color: 'white' }}>
                         <BookOpen className="h-4 w-4 mr-2" />
                         View Programs
                       </Button>
@@ -315,7 +315,7 @@ const AboutPage = () => {
                   </ul>
                   <div className="mt-4 pt-4 border-t">
                     <Link to="/placements">
-                      <Button variant="outline" size="sm" className="w-full" style={{borderColor: '#118DC4', color: '#118DC4'}}>
+                      <Button variant="outline" size="sm" className="w-full" style={{ borderColor: '#118DC4', color: '#118DC4' }}>
                         <Trophy className="h-4 w-4 mr-2" />
                         View Placement Records
                         <ArrowRight className="h-4 w-4 ml-2" />
@@ -327,7 +327,7 @@ const AboutPage = () => {
             </div>
 
             {/* Quick Navigation */}
-            <Card style={{background: 'linear-gradient(to right, #f0f9ff, #e1f4fd)'}}>
+            <Card style={{ background: 'linear-gradient(to right, #f0f9ff, #e1f4fd)' }}>
               <CardHeader>
                 <CardTitle>Explore More</CardTitle>
               </CardHeader>
@@ -335,7 +335,7 @@ const AboutPage = () => {
                 <div className="grid md:grid-cols-3 gap-4">
                   <Link to="/research" className="block">
                     <div className="p-4 bg-white rounded-lg hover:shadow-md transition-shadow">
-                      <Lightbulb className="h-6 w-6 mb-2" style={{color: '#118DC4'}} />
+                      <Lightbulb className="h-6 w-6 mb-2" style={{ color: '#118DC4' }} />
                       <h4 className="font-semibold">Research & Innovation</h4>
                       <p className="text-sm text-gray-600">
                         Cutting-edge research projects
@@ -384,7 +384,7 @@ const AboutPage = () => {
                 </p>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <h4 className="font-semibold mb-2" style={{color: '#118DC4'}}>
+                    <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       Key Highlights
                     </h4>
                     <ul className="text-sm text-gray-600 space-y-1">
@@ -400,7 +400,7 @@ const AboutPage = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2" style={{color: '#118DC4'}}>
+                    <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       Recognition & Rankings
                     </h4>
                     <ul className="text-sm text-gray-600 space-y-1">
@@ -425,18 +425,18 @@ const AboutPage = () => {
                     </ul>
                   </div>
                 </div>
-                  <a
-                    href="https://puchd.ac.in/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <a
+                  href="https://puchd.ac.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    className="mt-4"
+                    style={{ backgroundColor: '#118DC4', color: 'white' }}
                   >
-                    <Button
-                      className="mt-4"
-                      style={{ backgroundColor: '#118DC4', color: 'white' }}
-                    >
-                      Explore Panjab University
-                    </Button>
-                  </a>
+                    Explore Panjab University
+                  </Button>
+                </a>
               </CardContent>
             </Card>
           </TabsContent>
@@ -454,13 +454,13 @@ const AboutPage = () => {
                   Chandigarh, the dream city of India's first Prime Minister Pt.
                   Jawahar Lal Nehru, was designed by the legendary architect
                   Le Corbusier. Located at the foothills of the Shivaliks, it
-                  derives its name from the nearby "Chandi Mandir", The deity ‘Chandi’, 
-                  the goddess of power and a fort of ‘garh’ laying beyond the temple gave 
+                  derives its name from the nearby "Chandi Mandir", The deity ‘Chandi’,
+                  the goddess of power and a fort of ‘garh’ laying beyond the temple gave
                   the city its name “Chandigarh-The City Beautiful”.
                 </p>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold mb-2" style={{color: '#118DC4'}}>
+                    <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       Historical & Geographical Highlights
                     </h4>
                     <ul className="text-sm text-gray-600 space-y-1">
@@ -485,7 +485,7 @@ const AboutPage = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2" style={{color: '#118DC4'}}>
+                    <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       City Design & Urban Features
                     </h4>
                     <ul className="text-sm text-gray-600 space-y-1">
@@ -511,7 +511,7 @@ const AboutPage = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2" style={{color: '#118DC4'}}>
+                    <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       Environment & Infrastructure
                     </h4>
                     <ul className="text-sm text-gray-600 space-y-1">
@@ -536,7 +536,7 @@ const AboutPage = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2" style={{color: '#118DC4'}}>
+                    <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       Demographics & Stats
                     </h4>
                     <ul className="text-sm text-gray-600 space-y-1">
@@ -571,7 +571,7 @@ const AboutPage = () => {
               <CardContent className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold mb-3" style={{color: '#118DC4'}}>
+                    <h4 className="font-semibold mb-3" style={{ color: '#118DC4' }}>
                       Campus Address
                     </h4>
                     <div className="bg-gray-50 p-4 rounded-lg">
@@ -587,25 +587,25 @@ const AboutPage = () => {
                     </div>
                     <div className="mt-4 space-y-2">
                       <div className="flex items-center">
-                        <Phone className="h-4 w-4 mr-2" style={{color: '#118DC4'}} />
+                        <Phone className="h-4 w-4 mr-2" style={{ color: '#118DC4' }} />
                         <span className="text-sm">+91‑172‑2541242</span>
                       </div>
                       <div className="flex items-center">
-                        <Phone className="h-4 w-4 mr-2" style={{color: '#118DC4'}} />
+                        <Phone className="h-4 w-4 mr-2" style={{ color: '#118DC4' }} />
                         <span className="text-sm">+91‑62800 89748</span>
                       </div>
                       <div className="flex items-center">
-                        <Mail className="h-4 w-4 mr-2" style={{color: '#118DC4'}} />
+                        <Mail className="h-4 w-4 mr-2" style={{ color: '#118DC4' }} />
                         <span className="text-sm">directoruiet@pu.ac.in</span>
                       </div>
                       <div className="flex items-center">
-                        <Globe className="h-4 w-4 mr-2" style={{color: '#118DC4'}} />
+                        <Globe className="h-4 w-4 mr-2" style={{ color: '#118DC4' }} />
                         <span className="text-sm">www.uiet.puchd.ac.in</span>
                       </div>
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3" style={{color: '#118DC4'}}>
+                    <h4 className="font-semibold mb-3" style={{ color: '#118DC4' }}>
                       Campus Features
                     </h4>
                     <ul className="space-y-2 text-sm text-gray-600">
@@ -640,16 +640,16 @@ const AboutPage = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="p-6 rounded-lg" style={{backgroundColor: '#f0f9ff'}}>
+                <div className="p-6 rounded-lg" style={{ backgroundColor: '#f0f9ff' }}>
                   <div className="flex items-start space-x-4">
-                    <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{backgroundColor: '#118DC4'}}>
+                    <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: '#118DC4' }}>
                       <GraduationCap className="h-10 w-10 text-white" />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 mb-2">
                         Professor Sukhwinder Singh
                       </h3>
-                      <p className="font-medium mb-4" style={{color: '#118DC4'}}>
+                      <p className="font-medium mb-4" style={{ color: '#118DC4' }}>
                         Director, UIET
                       </p>
                       <blockquote className="text-gray-700 italic">
@@ -718,8 +718,8 @@ const AboutPage = () => {
                   <p className="text-gray-700 mb-4">
                     To be the Front runner in Engineering Education and Research
                   </p>
-                  <div className="p-4 rounded-lg" style={{backgroundColor: '#f0f9ff'}}>
-                    <h4 className="font-semibold mb-2" style={{color: '#118DC4'}}>
+                  <div className="p-4 rounded-lg" style={{ backgroundColor: '#f0f9ff' }}>
+                    <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       Key Focus Areas
                     </h4>
                     <ul className="text-sm text-gray-600 space-y-1">

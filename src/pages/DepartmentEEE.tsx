@@ -180,8 +180,8 @@ const DepartmentEEE = () => {
           "Smart Grid",
         ],
         courses: [
-          "Microcontrollers", 
-          "Control Systems", 
+          "Microcontrollers",
+          "Control Systems",
           "Smart Grid"
         ],
       },
@@ -203,8 +203,8 @@ const DepartmentEEE = () => {
           "Power Electronics",
         ],
         courses: [
-          "Power Electronics", 
-          "Smart Grids", 
+          "Power Electronics",
+          "Smart Grids",
           "Renewable Systems"
         ],
       },
@@ -270,8 +270,8 @@ const DepartmentEEE = () => {
           "Control Systems",
         ],
         courses: [
-          "Computer Networks", 
-          "Network Security", 
+          "Computer Networks",
+          "Network Security",
           "Cryptography"
         ],
       },
@@ -286,13 +286,13 @@ const DepartmentEEE = () => {
         publications: 21,
         image: "",
         researchAreas: [
-          "Power Electronics", 
-          "Communication, Optical Comm.", 
+          "Power Electronics",
+          "Communication, Optical Comm.",
           "Signal Processing",
         ],
         courses: [
-          "Power Electronics", 
-          "Communication, Optical Comm.", 
+          "Power Electronics",
+          "Communication, Optical Comm.",
           "Signal Processing",
         ],
       },
@@ -309,13 +309,13 @@ const DepartmentEEE = () => {
         publications: 5,
         image: "",
         researchAreas: [
-          "Nanoelectronics", 
-          "Analog & Digital Electronics", 
+          "Nanoelectronics",
+          "Analog & Digital Electronics",
           "Semiconductors",
         ],
         courses: [
-          "Analog Electronics", 
-          "Digital Electronics", 
+          "Analog Electronics",
+          "Digital Electronics",
           "Nanoelectronics / Device Physics",
         ],
       },
@@ -330,11 +330,11 @@ const DepartmentEEE = () => {
         publications: 9,
         image: "",
         researchAreas: [
-          "Power Systems", 
+          "Power Systems",
         ],
         courses: [
-          "Power Systems", 
-          "core EEE courses", 
+          "Power Systems",
+          "core EEE courses",
         ],
       },
       {
@@ -348,14 +348,14 @@ const DepartmentEEE = () => {
         publications: 51,
         image: "",
         researchAreas: [
-          "DSP", 
-          "Sensors", 
+          "DSP",
+          "Sensors",
           "Nanotech",
           "Biomedical Devices",
         ],
         courses: [
-          "DSP", 
-          "Sensor/Device Design", 
+          "DSP",
+          "Sensor/Device Design",
           "Bio-Instrumentation",
         ],
       },
@@ -370,13 +370,13 @@ const DepartmentEEE = () => {
         publications: 5,
         image: "",
         researchAreas: [
-          "Electrical & Electronic Engineering", 
-          "Energy, Materials Science", 
+          "Electrical & Electronic Engineering",
+          "Energy, Materials Science",
           "CS",
         ],
         courses: [
-          "Electrical & Electronic Engineering", 
-          "Energy, Materials Science", 
+          "Electrical & Electronic Engineering",
+          "Energy, Materials Science",
           "CS",
         ],
       },
@@ -391,13 +391,13 @@ const DepartmentEEE = () => {
         publications: 0,
         image: "",
         researchAreas: [
-          "", 
-          "", 
+          "",
+          "",
           "",
         ],
         courses: [
-          "", 
-          "", 
+          "",
+          "",
           "",
         ],
       },
@@ -412,11 +412,11 @@ const DepartmentEEE = () => {
         publications: 7,
         image: "",
         researchAreas: [
-          "Power Electronics & Drives", 
+          "Power Electronics & Drives",
         ],
         courses: [
-          "Power Electronics", 
-          "Drives", 
+          "Power Electronics",
+          "Drives",
           "EEE core courses",
         ],
       },
@@ -431,12 +431,12 @@ const DepartmentEEE = () => {
         publications: 0,
         image: "",
         researchAreas: [
-          "", 
+          "",
           "",
           "",
         ],
         courses: [
-          "", 
+          "",
           "",
           "",
         ],
@@ -452,19 +452,19 @@ const DepartmentEEE = () => {
         publications: 0,
         image: "",
         researchAreas: [
-          "", 
+          "",
           "",
           "",
         ],
         courses: [
-          "", 
+          "",
           "",
           "",
         ],
       },
     ],
     guestFaculty: [
-    
+
     ],
   };
 
@@ -493,7 +493,7 @@ const DepartmentEEE = () => {
                   size="lg"
                   className="bg-white text-[#118DC4] hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Apply Now <ChevronRight className="ml-2 h-5 w-5" />
+                  Admissions Portal <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Button
@@ -570,64 +570,64 @@ const DepartmentEEE = () => {
 
               {/* Department Vision and Mission */}
               <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Target className="h-5 w-5 mr-2" />
+                      Vision
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-700">
+                      To impart knowledge of Electrical and Electronics Engineering and prepare graduates to achieve excellence in engineering education and research.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Target className="h-5 w-5 mr-2" />
+                      Mission
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="text-gray-700 space-y-2">
+                      <li>• To prepare students with deep understanding of fundamentals of Electrical and Electronics Engineering.</li>
+                      <li>• To prepare professionals with positive attitude, values and vision.</li>
+                      <li>• To collaborate with industry, research organizations and academia to encourage innovation.</li>
+                      <li>• To provide a platform for engineering graduates to create and design new products and systems that can help industry and society as a whole.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Program Educational Objectives */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Target className="h-5 w-5 mr-2" />
-                    Vision
-                  </CardTitle>
+                  <CardTitle>Program Educational Objectives (PEOs)</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700">
-                    To impart knowledge of Electrical and Electronics Engineering and prepare graduates to achieve excellence in engineering education and research.
-                  </p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO1</h4>
+                      <p className="text-sm text-gray-600 mb-4">
+                        Graduates will have knowledge of electrical and electronics engineering to solve problems of social relevance, pursue higher education and research.
+                      </p>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO2</h4>
+                      <p className="text-sm text-gray-600">
+                        Graduates will undertake complex problems and develop appropriate solutions.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO3</h4>
+                      <p className="text-sm text-gray-600 mb-4">
+                        Graduates will work effectively as individuals and as team members in multidisciplinary projects.
+                      </p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Target className="h-5 w-5 mr-2" />
-                    Mission
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="text-gray-700 space-y-2">
-                    <li>• To prepare students with deep understanding of fundamentals of Electrical and Electronics Engineering.</li>
-                    <li>• To prepare professionals with positive attitude, values and vision.</li>
-                    <li>• To collaborate with industry, research organizations and academia to encourage innovation.</li>
-                    <li>• To provide a platform for engineering graduates to create and design new products and systems that can help industry and society as a whole.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Program Educational Objectives */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Program Educational Objectives (PEOs)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO1</h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      Graduates will have knowledge of electrical and electronics engineering to solve problems of social relevance, pursue higher education and research.
-                    </p>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO2</h4>
-                    <p className="text-sm text-gray-600">
-                      Graduates will undertake complex problems and develop appropriate solutions.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO3</h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      Graduates will work effectively as individuals and as team members in multidisciplinary projects.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
             </TabsContent>
 
             <TabsContent value="programs" className="space-y-8">
@@ -697,139 +697,139 @@ const DepartmentEEE = () => {
               />
             </TabsContent>
 
-          <TabsContent value="research" className="space-y-6">
-            {/* Research Areas */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {researchAreas.map((area, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold mb-2">{area.area}</h3>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <span className="text-gray-500">Projects: </span>
-                        <span className="font-medium text-[#118DC4]">{area.projects}</span>
+            <TabsContent value="research" className="space-y-6">
+              {/* Research Areas */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {researchAreas.map((area, index) => (
+                  <Card key={index} className="hover:shadow-lg transition-shadow">
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold mb-2">{area.area}</h3>
+                      <div className="grid grid-cols-2 gap-2 text-sm">
+                        <div>
+                          <span className="text-gray-500">Projects: </span>
+                          <span className="font-medium text-[#118DC4]">{area.projects}</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-500">Funding: </span>
+                          <span className="font-medium text-green-600">{area.funding}</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-gray-500">Funding: </span>
-                        <span className="font-medium text-green-600">{area.funding}</span>
-                      </div>
-                    </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Ongoing and Completed Research */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Ongoing Research Projects</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Solar Energy Training Network
+                            (SETNET) Partner with NISE (For Solar Energy Manpower
+                            Training)</span>
+                          <p className="text-sm text-gray-600">Funding: NISE, Gurgaon and MNRE, New Delhi, ₹12.84 Lakhs</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Design Innovation Center (DIC) Sub Theme:  Energy Harvesting and Management Technologies</span>
+                          <p className="text-sm text-gray-600">Funding: MHRD, New Delhi, ₹10.00 Crores</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Energy Harvesting & Management Technologies</span>
+                          <p className="text-sm text-gray-600">Funding: Design Innovation Centre, Department of Higher Education, MHRD, ₹231 Lakhs</p>
+                        </div>
+                      </li>
+
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Design  ,  Development  and Fabrication  of Electronic Preferential Voting  Machine (EPVM)</span>
+                          <p className="text-sm text-gray-600">Funding: Department of Science & Technology & Renewable Energy, Chandigarh Administration , ₹1.50 Lakhs</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Development  of  an  Indigenous multi-axis  Machine  for  machining of Dental Implants</span>
+                          <p className="text-sm text-gray-600">Funding: M/S Esteem Industries, ₹26.90560 Lakhs</p>
+                        </div>
+                      </li>
+
+                    </ul>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
 
-            {/* Ongoing and Completed Research */}
-            <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Completed Research Projects</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+
+                          <span className="font-medium">Development of 5G / 4G based UAV augmented intelligent monitoring & surveillance system (2022)</span>
+                          <p className="text-sm text-gray-600">Amount(in Rs): Rs 1.82 Crores</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+                          <span className="font-medium">Visvesvaraya Part time PhD Scheme(2022)</span>
+                          <p className="text-sm text-gray-600">Amount(in Rs): Rs 2.50 Lakhs</p>
+
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+                          <span className="font-medium">Performance Enhancement of Solar Photovoltaic System Using Multi Mirror Arrangement And To find optimum angle of inclination of solar panel in Chandigarh</span>
+                          <p className="text-sm text-gray-600">Funding: DST, Chandigarh, ₹3.00 Lakhs</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Research Collaborations */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Ongoing Research Projects</CardTitle>
+                  <CardTitle>Research Collaborations</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Solar Energy Training Network 
-                        (SETNET) Partner with NISE (For Solar Energy Manpower 
-                        Training)</span>
-                        <p className="text-sm text-gray-600">Funding: NISE, Gurgaon and MNRE, New Delhi, ₹12.84 Lakhs</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Design Innovation Center (DIC) Sub Theme:  Energy Harvesting and Management Technologies</span>
-                        <p className="text-sm text-gray-600">Funding: MHRD, New Delhi, ₹10.00 Crores</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Energy Harvesting & Management Technologies</span>
-                        <p className="text-sm text-gray-600">Funding: Design Innovation Centre, Department of Higher Education, MHRD, ₹231 Lakhs</p>
-                      </div>
-                    </li>
-
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Design  ,  Development  and Fabrication  of Electronic Preferential Voting  Machine (EPVM)</span>
-                        <p className="text-sm text-gray-600">Funding: Department of Science & Technology & Renewable Energy, Chandigarh Administration , ₹1.50 Lakhs</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Development  of  an  Indigenous multi-axis  Machine  for  machining of Dental Implants</span>
-                        <p className="text-sm text-gray-600">Funding: M/S Esteem Industries, ₹26.90560 Lakhs</p>
-                      </div>
-                    </li>
-
-                  </ul>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold text-[#118DC4] mb-3">Industry Partners</h4>
+                      <ul className="space-y-1 text-sm text-gray-600">
+                        <li>• Texas Instruments</li>
+                        <li>• Qualcomm Technologies</li>
+                        <li>• Samsung R&D Institute</li>
+                        <li>• Intel Technology</li>
+                        <li>• MediaTek Inc.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#118DC4] mb-3">Academic Partners</h4>
+                      <ul className="space-y-1 text-sm text-gray-600">
+                        <li>• IIT Delhi</li>
+                        <li>• IIT Kanpur</li>
+                        <li>• IIIT Hyderabad</li>
+                        <li>• University of California</li>
+                        <li>• Technical University of Munich</li>
+                      </ul>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Completed Research Projects</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-
-                        <span className="font-medium">Development of 5G / 4G based UAV augmented intelligent monitoring & surveillance system (2022)</span>
-                        <p className="text-sm text-gray-600">Amount(in Rs): Rs 1.82 Crores</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-                        <span className="font-medium">Visvesvaraya Part time PhD Scheme(2022)</span>
-                        <p className="text-sm text-gray-600">Amount(in Rs): Rs 2.50 Lakhs</p>
-
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-                        <span className="font-medium">Performance Enhancement of Solar Photovoltaic System Using Multi Mirror Arrangement And To find optimum angle of inclination of solar panel in Chandigarh</span>
-                        <p className="text-sm text-gray-600">Funding: DST, Chandigarh, ₹3.00 Lakhs</p>
-                      </div>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Research Collaborations */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Research Collaborations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-[#118DC4] mb-3">Industry Partners</h4>
-                    <ul className="space-y-1 text-sm text-gray-600">
-                      <li>• Texas Instruments</li>
-                      <li>• Qualcomm Technologies</li>
-                      <li>• Samsung R&D Institute</li>
-                      <li>• Intel Technology</li>
-                      <li>• MediaTek Inc.</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#118DC4] mb-3">Academic Partners</h4>
-                    <ul className="space-y-1 text-sm text-gray-600">
-                      <li>• IIT Delhi</li>
-                      <li>• IIT Kanpur</li>
-                      <li>• IIIT Hyderabad</li>
-                      <li>• University of California</li>
-                      <li>• Technical University of Munich</li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+            </TabsContent>
 
             <TabsContent value="facilities" className="space-y-8">
               <div>

@@ -643,7 +643,7 @@ const DepartmentECE = () => {
                   size="lg"
                   className="bg-white text-[#118DC4] hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Apply Now <ChevronRight className="ml-2 h-5 w-5" />
+                  Admissions Portal <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Button
@@ -723,63 +723,63 @@ const DepartmentECE = () => {
 
               {/* Department Vision and Mission */}
               <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Target className="h-5 w-5 mr-2" />
+                      Vision
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-700">
+                      Electronics & Communication Engineering will contribute to the ever changing industrial requirements, economic growth and global societal needs by enhancing the technical skills and entrepreneurship abilities.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Target className="h-5 w-5 mr-2" />
+                      Mission
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="text-gray-700 space-y-2">
+                      <li>• To produce qualified engineers who are competent in the areas of Electronics & Communication Engineering and able to meet the challenges of ever changing industry requirements at global level.</li>
+                      <li>• To develop strong theoretical concepts complemented with practical trainings.</li>
+                      <li>• To inculcate innovative skills, research aptitude, team-work, ethical practices in students so as to meet expectations of the industry as well as society.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Program Educational Objectives */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Target className="h-5 w-5 mr-2" />
-                    Vision
-                  </CardTitle>
+                  <CardTitle>Program Educational Objectives (PEOs)</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700">
-                    Electronics & Communication Engineering will contribute to the ever changing industrial requirements, economic growth and global societal needs by enhancing the technical skills and entrepreneurship abilities.
-                  </p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO1</h4>
+                      <p className="text-sm text-gray-600 mb-4">
+                        To build a strong foundation in scientific and engineering fundamentals necessary to formulate, solve and analyze engineering problems for successful careers to meet the global demands of the society.
+                      </p>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO2</h4>
+                      <p className="text-sm text-gray-600">
+                        To develop the ability among students to synthesize data and technical concepts of Electronics and Communication for application to develop core and multidisciplinary projects.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO3</h4>
+                      <p className="text-sm text-gray-600 mb-4">
+                        To promote awareness among students for the value of lifelong learning and to introduce them to professional ethics and codes of professional practice.
+                      </p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Target className="h-5 w-5 mr-2" />
-                    Mission
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="text-gray-700 space-y-2">
-                    <li>• To produce qualified engineers who are competent in the areas of Electronics & Communication Engineering and able to meet the challenges of ever changing industry requirements at global level.</li>
-                    <li>• To develop strong theoretical concepts complemented with practical trainings.</li>
-                    <li>• To inculcate innovative skills, research aptitude, team-work, ethical practices in students so as to meet expectations of the industry as well as society.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Program Educational Objectives */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Program Educational Objectives (PEOs)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO1</h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      To build a strong foundation in scientific and engineering fundamentals necessary to formulate, solve and analyze engineering problems for successful careers to meet the global demands of the society.
-                    </p>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO2</h4>
-                    <p className="text-sm text-gray-600">
-                      To develop the ability among students to synthesize data and technical concepts of Electronics and Communication for application to develop core and multidisciplinary projects.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO3</h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      To promote awareness among students for the value of lifelong learning and to introduce them to professional ethics and codes of professional practice.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
             </TabsContent>
 
             <TabsContent value="programs" className="space-y-8">
@@ -849,145 +849,145 @@ const DepartmentECE = () => {
               />
             </TabsContent>
 
-          <TabsContent value="research" className="space-y-6">
-            {/* Research Areas */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {researchAreas.map((area, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold mb-2">{area.area}</h3>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <span className="text-gray-500">Projects: </span>
-                        <span className="font-medium text-[#118DC4]">{area.projects}</span>
+            <TabsContent value="research" className="space-y-6">
+              {/* Research Areas */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {researchAreas.map((area, index) => (
+                  <Card key={index} className="hover:shadow-lg transition-shadow">
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold mb-2">{area.area}</h3>
+                      <div className="grid grid-cols-2 gap-2 text-sm">
+                        <div>
+                          <span className="text-gray-500">Projects: </span>
+                          <span className="font-medium text-[#118DC4]">{area.projects}</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-500">Funding: </span>
+                          <span className="font-medium text-green-600">{area.funding}</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-gray-500">Funding: </span>
-                        <span className="font-medium text-green-600">{area.funding}</span>
-                      </div>
-                    </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Ongoing and Completed Research */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Ongoing Research Projects</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Design and development of system on chip for single lead wearable ECG for medical devices</span>
+                          <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹3.63 Crores</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Capacity Building through skill and entrepreneurship development on e-Waste Management </span>
+                          <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹2.53 Crores</p>
+                        </div>
+                      </li>
+
+                      <li className="flex items-start">
+                        {/* <TrendingUp className="h-4 w-4 mr-2 text-green-600 mt-1" /> */}
+                        <div>
+                          <span className="font-medium">Visvesvaraya Part time PhD Scheme</span>
+                          <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology (MeitY), Govt. of India, ₹2.50 Lakhs</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        {/* <TrendingUp className="h-4 w-4 mr-2 text-green-600 mt-1" /> */}
+                        <div>
+                          <span className="font-medium">Revolutionizing Colonic Histopathology using Artificial Intelligence</span>
+                          <p className="text-sm text-gray-600">Funding: Consultancy to M/s Amit Trehan LLC, USA, ₹1.30 Lakhs</p>
+                        </div>
+                      </li>
+
+                    </ul>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
 
-            {/* Ongoing and Completed Research */}
-            <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Completed Research Projects</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+                          <span className="font-medium">Development of 5G / 4G based UAV augmented intelligent monitoring & surveillance system (2022)</span>
+                          <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹1.82 Crores</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+                          <span className="font-medium">Visvesvaraya Part time PhD Scheme(2022)</span>
+                          <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology (MeitY), Govt. of India, ₹2.50 Lakhs</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+                          <span className="font-medium">NTU-PU Science and Technology R&D Project(2022)</span>
+                          <p className="text-sm text-gray-600">Funding: NTU STPC funding, Nottingham Trent University, UK, ₹9.98 Lakhs</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-blue-600 mt-1" />
+                        <div>
+                          <span className="font-medium">Development of Unified IP Based Communication Platform for Voice, Video and Data Services</span>
+                          <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India & Coral Telecommunication, Noida as industry partner, ₹66.00 Lakhs</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-blue-600 mt-1" />
+                        <div>
+                          <span className="font-medium">Kisan Mitra (2019)</span>
+                          <p className="text-sm text-gray-600">Funding: Department of Agriculture & Farmers Welfare, Govt of Haryana, ₹14.84 Lakhs</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Research Collaborations */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Ongoing Research Projects</CardTitle>
+                  <CardTitle>Research Collaborations</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Design and development of system on chip for single lead wearable ECG for medical devices</span>
-                        <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹3.63 Crores</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Capacity Building through skill and entrepreneurship development on e-Waste Management </span>
-                        <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹2.53 Crores</p>
-                      </div>
-                    </li>
-
-                    <li className="flex items-start">
-                      {/* <TrendingUp className="h-4 w-4 mr-2 text-green-600 mt-1" /> */}
-                      <div>
-                        <span className="font-medium">Visvesvaraya Part time PhD Scheme</span>
-                        <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology (MeitY), Govt. of India, ₹2.50 Lakhs</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      {/* <TrendingUp className="h-4 w-4 mr-2 text-green-600 mt-1" /> */}
-                      <div>
-                        <span className="font-medium">Revolutionizing Colonic Histopathology using Artificial Intelligence</span>
-                        <p className="text-sm text-gray-600">Funding: Consultancy to M/s Amit Trehan LLC, USA, ₹1.30 Lakhs</p>
-                      </div>
-                    </li>
-
-                  </ul>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold text-[#118DC4] mb-3">Industry Partners</h4>
+                      <ul className="space-y-1 text-sm text-gray-600">
+                        <li>• Texas Instruments</li>
+                        <li>• Qualcomm Technologies</li>
+                        <li>• Samsung R&D Institute</li>
+                        <li>• Intel Technology</li>
+                        <li>• MediaTek Inc.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#118DC4] mb-3">Academic Partners</h4>
+                      <ul className="space-y-1 text-sm text-gray-600">
+                        <li>• IIT Delhi</li>
+                        <li>• IIT Kanpur</li>
+                        <li>• IIIT Hyderabad</li>
+                        <li>• University of California</li>
+                        <li>• Technical University of Munich</li>
+                      </ul>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Completed Research Projects</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-                        <span className="font-medium">Development of 5G / 4G based UAV augmented intelligent monitoring & surveillance system (2022)</span>
-                        <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹1.82 Crores</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-                        <span className="font-medium">Visvesvaraya Part time PhD Scheme(2022)</span>
-                        <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology (MeitY), Govt. of India, ₹2.50 Lakhs</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-                        <span className="font-medium">NTU-PU Science and Technology R&D Project(2022)</span>
-                        <p className="text-sm text-gray-600">Funding: NTU STPC funding, Nottingham Trent University, UK, ₹9.98 Lakhs</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-blue-600 mt-1" />
-                      <div>
-                        <span className="font-medium">Development of Unified IP Based Communication Platform for Voice, Video and Data Services</span>
-                        <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India & Coral Telecommunication, Noida as industry partner, ₹66.00 Lakhs</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-blue-600 mt-1" />
-                      <div>
-                        <span className="font-medium">Kisan Mitra (2019)</span>
-                        <p className="text-sm text-gray-600">Funding: Department of Agriculture & Farmers Welfare, Govt of Haryana, ₹14.84 Lakhs</p>
-                      </div>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Research Collaborations */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Research Collaborations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-[#118DC4] mb-3">Industry Partners</h4>
-                    <ul className="space-y-1 text-sm text-gray-600">
-                      <li>• Texas Instruments</li>
-                      <li>• Qualcomm Technologies</li>
-                      <li>• Samsung R&D Institute</li>
-                      <li>• Intel Technology</li>
-                      <li>• MediaTek Inc.</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#118DC4] mb-3">Academic Partners</h4>
-                    <ul className="space-y-1 text-sm text-gray-600">
-                      <li>• IIT Delhi</li>
-                      <li>• IIT Kanpur</li>
-                      <li>• IIIT Hyderabad</li>
-                      <li>• University of California</li>
-                      <li>• Technical University of Munich</li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+            </TabsContent>
 
             <TabsContent value="facilities" className="space-y-8">
               <div>

@@ -31,10 +31,10 @@ const publications = [
 ];
 
 const facilities = [
-  { name: 'AI & ML Research Lab',         equipment: 'High-performance Computing Clusters, GPU Servers',                         area: '500 sq ft', capacity: '25 researchers' },
-  { name: 'VLSI Design Center',           equipment: 'EDA Tools, FPGA Development Boards, Testing Equipment',                    area: '400 sq ft', capacity: '20 researchers' },
-  { name: 'Biotechnology Research Lab',   equipment: 'PCR Machines, Spectrophotometers, Cell Culture Facilities',               area: '600 sq ft', capacity: '30 researchers' },
-  { name: 'Sustainable Technology Lab',   equipment: 'Solar Panels, Wind Turbines, Energy Storage Systems',                     area: '800 sq ft', capacity: '35 researchers' },
+  { name: 'AI & ML Research Lab', equipment: 'High-performance Computing Clusters, GPU Servers', area: '500 sq ft', capacity: '25 researchers' },
+  { name: 'VLSI Design Center', equipment: 'EDA Tools, FPGA Development Boards, Testing Equipment', area: '400 sq ft', capacity: '20 researchers' },
+  { name: 'Biotechnology Research Lab', equipment: 'PCR Machines, Spectrophotometers, Cell Culture Facilities', area: '600 sq ft', capacity: '30 researchers' },
+  { name: 'Sustainable Technology Lab', equipment: 'Solar Panels, Wind Turbines, Energy Storage Systems', area: '800 sq ft', capacity: '35 researchers' },
 ];
 
 const AREA_ICONS = [Lightbulb, Microscope, Globe, TrendingUp, BookOpen, Award];
@@ -91,10 +91,10 @@ const Research = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {[
-            { icon: FileText,   color: 'text-[#118DC4]',    value: '200+',   label: 'Research Papers'  },
-            { icon: Award,      color: 'text-green-600',     value: '45',     label: 'Active Projects'  },
-            { icon: Users,      color: 'text-purple-600',    value: '150+',   label: 'Researchers'      },
-            { icon: TrendingUp, color: 'text-orange-600',    value: '₹15 Cr', label: 'Research Funding' },
+            { icon: FileText, color: 'text-[#118DC4]', value: '200+', label: 'Research Papers' },
+            { icon: Award, color: 'text-green-600', value: '45', label: 'Active Projects' },
+            { icon: Users, color: 'text-purple-600', value: '150+', label: 'Researchers' },
+            { icon: TrendingUp, color: 'text-orange-600', value: '₹15 Cr', label: 'Research Funding' },
           ].map(({ icon: Icon, color, value, label }, i) => (
             <Card key={i} className="text-center bg-white shadow-lg border-0 hover:shadow-xl transition-shadow">
               <CardContent className="p-6">
@@ -177,11 +177,11 @@ const Research = () => {
 
         {/* Publications & Facilities tabs (static) */}
         <Tabs defaultValue="publications" className="mb-16">
-          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-2 mb-8 h-12">
-            <TabsTrigger value="publications" className="px-8 text-base data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">
+          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-2 mb-8 h-auto">
+            <TabsTrigger value="publications" className="px-2 sm:px-8 text-xs sm:text-base data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">
               Recent Publications
             </TabsTrigger>
-            <TabsTrigger value="facilities" className="px-8 text-base data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">
+            <TabsTrigger value="facilities" className="px-2 sm:px-8 text-xs sm:text-base data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">
               Research Facilities
             </TabsTrigger>
           </TabsList>

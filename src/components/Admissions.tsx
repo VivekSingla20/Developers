@@ -16,7 +16,7 @@ const specialAdmissions = [
     icon: Trophy,
     description: "Special admission for outstanding sports persons",
     seats: "5% of total seats",
-    requirements: ["State/National level sports certificate","Academic eligibility","Sports trial"],
+    requirements: ["State/National level sports certificate", "Academic eligibility", "Sports trial"],
     process: "Merit-based selection with sports achievements consideration",
   },
   {
@@ -24,7 +24,7 @@ const specialAdmissions = [
     icon: GraduationCap,
     description: "Panjab University Management Entrance Examination Test",
     seats: "Variable",
-    requirements: ["Bachelor's degree","PUMEET qualification","Group discussion & interview"],
+    requirements: ["Bachelor's degree", "PUMEET qualification", "Group discussion & interview"],
     process: "Written test followed by GD-PI rounds",
   },
   {
@@ -32,32 +32,38 @@ const specialAdmissions = [
     icon: Users,
     description: "Panjab University Law Entrance Examination Test",
     seats: "Variable",
-    requirements: ["10+2 or graduation","PULEET qualification","English proficiency"],
+    requirements: ["10+2 or graduation", "PULEET qualification", "English proficiency"],
     process: "Written examination and merit-based selection",
   },
 ];
 
 const eligibilityCriteria = {
-  be:  ["Passed 10+2 with PCM subjects","Minimum 60% marks (55% for reserved)","Valid JEE Main score","Age limit: 25 years (relaxable)","Medical fitness certificate"],
-  me:  ["B.E./B.Tech in relevant discipline","Minimum 60% marks or 6.5 CGPA","Valid GATE score","No age limit","Work experience (preferred)"],
-  phd: ["M.E./M.Tech/M.Sc. in relevant field","Minimum 60% marks or 6.5 CGPA","NET/GATE/JRF qualification","Research proposal submission","Interview clearing mandatory"],
-  nri: ["International qualification equivalent","English proficiency (IELTS/TOEFL)","Financial capability certificate","Visa documentation","Medical clearance"],
+  be: ["Must appear in JEE Main (Paper 1) and have a valid All India Rank (AIR)", "Must have passed Class XII or be appearing in Class XII in the same year", "Candidates who passed Class XII in 2022 or earlier are not eligible", "Minimum 60% aggregate in Class XII (as per current admission norms)", "Admissions are through JAC Chandigarh counselling; UIET has no separate entrance exam"],
+  me: ["B.E./B.Tech in relevant discipline", "Minimum 60% marks or 6.5 CGPA", "Valid GATE score", "No age limit", "Work experience (preferred)"],
+  phd: ["M.E./M.Tech/M.Sc. in relevant field", "Minimum 60% marks or 6.5 CGPA", "NET/GATE/JRF qualification", "Research proposal submission", "Interview clearing mandatory"],
+  nri: ["International qualification equivalent", "English proficiency (IELTS/TOEFL)", "Financial capability certificate", "Visa documentation", "Medical clearance"],
 };
 
 const applicationProcess = [
-  { step: 1, title: "Online Registration", description: "Create account on admission portal",    icon: Users       },
-  { step: 2, title: "Fill Application",    description: "Complete application form with details", icon: FileText    },
-  { step: 3, title: "Upload Documents",    description: "Upload required certificates",           icon: CheckCircle },
-  { step: 4, title: "Pay Fees",            description: "Pay application fee online",             icon: CreditCard  },
-  { step: 5, title: "Submit Application",  description: "Review and submit application",          icon: Clock       },
-  { step: 6, title: "Admit Card",          description: "Download admit card",                    icon: GraduationCap },
+  { step: 1, title: "Clear JEE Main", description: "Appear in JEE Main (Paper 1). UIET admissions are based on JEE Main AIR through JAC Chandigarh.", icon: GraduationCap },
+  { step: 2, title: "Check Eligibility", description: "Confirm Class XII year and minimum marks eligibility before registration.", icon: CheckCircle },
+  { step: 3, title: "Register on JAC Portal", description: "Register at jacchd.admissions.nic.in using JEE Main Application Number and personal details.", icon: Users },
+  { step: 4, title: "Pay Counselling Fee", description: "Pay non-refundable counselling fee: Rs. 2800 (General) / Rs. 1400 (SC/ST/PwD).", icon: CreditCard },
+  { step: 5, title: "Upload Documents", description: "Upload Class XII marksheet and applicable category certificates before deadline.", icon: FileText },
+  { step: 6, title: "Fill & Lock Choices", description: "Select and lock institute/branch choices on the portal. Locked choices cannot be edited.", icon: Clock },
+  { step: 7, title: "Seat Allotment Rounds", description: "Participate in counselling rounds (regular, special, and spot) based on JEE Main AIR and choices.", icon: Calendar },
+  { step: 8, title: "Pay Seat Acceptance Fee", description: "Pay seat acceptance fee of Rs. 40000 to confirm allotted seat.", icon: CreditCard },
+  { step: 9, title: "Report Physically at UIET", description: "Report at UIET with original documents for verification and final admission formalities.", icon: CheckCircle },
 ];
 
+const importantAdmissionNote =
+  "Important note: UIET admissions are in the All India category through JAC Chandigarh. Unlike some other institutes, there is no Chandigarh state quota for UIET seats.";
+
 const feeStructure = [
-  { program: "B.E. (per year)",          tuition: "₹1,20,000", hostel: "₹45,000", other: "₹15,000", total: "₹1,80,000" },
-  { program: "M.E./M.Tech (per year)",   tuition: "₹80,000",   hostel: "₹45,000", other: "₹12,000", total: "₹1,37,000" },
-  { program: "Ph.D (per year)",          tuition: "₹30,000",   hostel: "₹45,000", other: "₹8,000",  total: "₹83,000"   },
-  { program: "NRI/Foreign (per year)",   tuition: "$5,000",     hostel: "$1,200",  other: "$300",    total: "$6,500"    },
+  { program: "B.E. (per year)", tuition: "₹1,20,000", hostel: "₹45,000", other: "₹15,000", total: "₹1,80,000" },
+  { program: "M.E./M.Tech (per year)", tuition: "₹80,000", hostel: "₹45,000", other: "₹12,000", total: "₹1,37,000" },
+  { program: "Ph.D (per year)", tuition: "₹30,000", hostel: "₹45,000", other: "₹8,000", total: "₹83,000" },
+  { program: "NRI/Foreign (per year)", tuition: "$5,000", hostel: "$1,200", other: "$300", total: "$6,500" },
 ];
 
 // Schedule card skeleton
@@ -122,10 +128,10 @@ const Admissions = () => {
         {/* Quick Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {[
-            { value: '602',     label: 'Total Seats'     },
-            { value: '95%',     label: 'Placement Rate'  },
+            { value: '602', label: 'Total Seats' },
+            { value: '95%', label: 'Placement Rate' },
             { value: '₹45 LPA', label: 'Highest Package' },
-            { value: '22+',     label: 'Years Legacy'    },
+            { value: '22+', label: 'Years Legacy' },
           ].map(stat => (
             <Card key={stat.label} className="text-center border-0 shadow-md bg-white">
               <CardContent className="p-6">
@@ -138,12 +144,37 @@ const Admissions = () => {
 
         {/* Main Tabs */}
         <Tabs id="admissions-tabs" value={activeTab} onValueChange={handleTabChange} className="mb-12">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full lg:w-fit mx-auto mb-8 bg-white shadow-sm">
-            <TabsTrigger value="schedule">Schedule</TabsTrigger>
-            <TabsTrigger value="special">Special</TabsTrigger>
-            <TabsTrigger value="eligibility">Eligibility</TabsTrigger>
-            <TabsTrigger value="process">Process</TabsTrigger>
-            <TabsTrigger value="fees">Fees</TabsTrigger>
+          <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full lg:w-fit mx-auto mb-8 bg-white shadow-sm h-auto p-1 gap-1 rounded-xl">
+            <TabsTrigger
+              value="schedule"
+              className="rounded-lg text-xs sm:text-sm px-3 py-2.5 font-medium data-[state=active]:bg-[#118DC4] data-[state=active]:text-white"
+            >
+              Schedule
+            </TabsTrigger>
+            <TabsTrigger
+              value="special"
+              className="rounded-lg text-xs sm:text-sm px-3 py-2.5 font-medium data-[state=active]:bg-[#118DC4] data-[state=active]:text-white"
+            >
+              Special
+            </TabsTrigger>
+            <TabsTrigger
+              value="eligibility"
+              className="rounded-lg text-xs sm:text-sm px-3 py-2.5 font-medium data-[state=active]:bg-[#118DC4] data-[state=active]:text-white"
+            >
+              Eligibility
+            </TabsTrigger>
+            <TabsTrigger
+              value="process"
+              className="rounded-lg text-xs sm:text-sm px-3 py-2.5 font-medium data-[state=active]:bg-[#118DC4] data-[state=active]:text-white"
+            >
+              Process
+            </TabsTrigger>
+            <TabsTrigger
+              value="fees"
+              className="rounded-lg text-xs sm:text-sm px-3 py-2.5 font-medium data-[state=active]:bg-[#118DC4] data-[state=active]:text-white"
+            >
+              Fees
+            </TabsTrigger>
           </TabsList>
 
           {/* Schedule — live from Strapi */}
@@ -159,8 +190,8 @@ const Admissions = () => {
                 {(admissionSchedule ?? []).map((schedule) => (
                   <Card key={schedule.id} className="border-0 shadow-md bg-white">
                     <CardContent className="p-6">
-                      <div className="grid grid-cols-1 md:grid-cols-7 gap-4 items-center">
-                        <div className="md:col-span-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4 items-center">
+                        <div className="sm:col-span-2 lg:col-span-2">
                           <h3 className="text-xl font-bold text-slate-900">{schedule.program}</h3>
                           <p className="text-slate-600 text-sm">{schedule.seats} seats</p>
                           <p className="text-[#118DC4] text-xs">{schedule.eligibility}</p>
@@ -181,9 +212,11 @@ const Admissions = () => {
                           <div className="text-sm font-medium text-slate-900">Results</div>
                           <div className="text-green-600 text-sm">{schedule.resultsDate}</div>
                         </div>
-                        <div>
+                        <div className="sm:col-span-2 lg:col-span-1">
                           <a href={schedule.applyLink} target="_blank" rel="noopener noreferrer" className="block w-full">
-                            <Button className="w-full bg-[#118DC4] hover:bg-[#0d7db0]">Apply Now</Button>
+                            <Button className="w-full bg-[#118DC4] hover:bg-[#0d7db0] text-white font-semibold rounded-lg text-xs sm:text-sm px-3 sm:px-4 py-2.5 h-auto whitespace-normal lg:whitespace-nowrap leading-tight text-center">
+                              Visit Admissions Portal
+                            </Button>
                           </a>
                         </div>
                       </div>
@@ -274,6 +307,11 @@ const Admissions = () => {
                 </Card>
               ))}
             </div>
+            <div className="mt-6 p-4 rounded-lg border border-[#118DC4]/30 bg-[#118DC4]/10">
+              <p className="text-sm text-[#0f7ab8]">
+                <strong>Important:</strong> {importantAdmissionNote}
+              </p>
+            </div>
           </TabsContent>
 
           {/* Fee Structure */}
@@ -320,8 +358,13 @@ const Admissions = () => {
               Take the first step towards your engineering career at UIET. Our admissions team is here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-[#118DC4] hover:bg-blue-50 font-semibold px-8 py-3">Apply Now</Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-8 py-3">
+              <Button className="w-full sm:w-auto bg-white text-[#118DC4] hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl">
+                Admissions Portal
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full sm:w-auto border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-xl"
+              >
                 Download Brochure
               </Button>
             </div>

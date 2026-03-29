@@ -332,7 +332,7 @@ const DepartmentBT = () => {
                   size="lg"
                   className="bg-white text-[#118DC4] hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Apply Now <ChevronRight className="ml-2 h-5 w-5" />
+                  Admissions Portal <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Button
@@ -400,70 +400,70 @@ const DepartmentBT = () => {
                 <CardContent className="prose max-w-none">
                   <p className="text-gray-700 text-lg leading-relaxed mb-6">
                     Biotechnology department aims to promote academic and research programme in biotechnology through upto-date curricula for developing trained manpower in its various branches. The labs are equipped with the following instruments: Ultra-Pure Water Purification System, Refrigerated Incubator Shaker, Autoclaves Cold Centrifuge, Sonicator, Bioreactor Precision Balance, Orbital Shaker, Laminar Air Flow, Micro-Centrifuge Refrigerated (Table top portable type), CO2 Incubator, Laminar Air Flow, Inverted Microscope PCR Machine, Elisa Reader, Gel Documentation System, UV Transilluminator, Electroporator, HPLC, Refrigerated Incubator Shaker, -200C Freezer, Continuous Stirred Tank Reactor (CSTR), Plug Flow Reactor, Batch Reactor, Residence Time Distribution Studies (RTD), Studies in CSTR etc.
-                    </p>
+                  </p>
                 </CardContent>
               </Card>
 
               {/* Department Vision and Mission */}
               <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Target className="h-5 w-5 mr-2" />
+                      Vision
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-700">
+                      To nurture world-class bioengineers with a potential to innovate, invent and disseminate knowledge for the benefit of society and environment.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Target className="h-5 w-5 mr-2" />
+                      Mission
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="text-gray-700 space-y-2">
+                      <li>• Regular updation of the course curriculum to cater to the needs of academia and industry.</li>
+                      <li>• To provide a platform for engineering graduates to create and design products and processes that can help industry and society.</li>
+                      <li>• Initiate multi-disciplinary programs through the academia-industry interface with special emphasis on implementation of bioprocess design and scale-up.</li>
+                      <li>• Emphasis on recent trends in bioengineering through the organization of conferences, symposia, workshops.</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Program Educational Objectives */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Target className="h-5 w-5 mr-2" />
-                    Vision
-                  </CardTitle>
+                  <CardTitle>Program Educational Objectives (PEOs)</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700">
-                    To nurture world-class bioengineers with a potential to innovate, invent and disseminate knowledge for the benefit of society and environment.
-                  </p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO1</h4>
+                      <p className="text-sm text-gray-600 mb-4">
+                        Our graduates will contribute to the field of biotechnology and allied industries designing, developing and providing solutions for product/processes/technology development.
+                      </p>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO2</h4>
+                      <p className="text-sm text-gray-600">
+                        Work as entrepreneurs and techno managers with strong ethics and communication skills.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2 text-[#118DC4]">PEO3</h4>
+                      <p className="text-sm text-gray-600 mb-4">
+                        Pursue higher education and research in reputed institute at national and international level.
+                      </p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Target className="h-5 w-5 mr-2" />
-                    Mission
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="text-gray-700 space-y-2">
-                    <li>• Regular updation of the course curriculum to cater to the needs of academia and industry.</li>
-                    <li>• To provide a platform for engineering graduates to create and design products and processes that can help industry and society.</li>
-                    <li>• Initiate multi-disciplinary programs through the academia-industry interface with special emphasis on implementation of bioprocess design and scale-up.</li>
-                    <li>• Emphasis on recent trends in bioengineering through the organization of conferences, symposia, workshops.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Program Educational Objectives */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Program Educational Objectives (PEOs)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO1</h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      Our graduates will contribute to the field of biotechnology and allied industries designing, developing and providing solutions for product/processes/technology development.
-                    </p>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO2</h4>
-                    <p className="text-sm text-gray-600">
-                      Work as entrepreneurs and techno managers with strong ethics and communication skills.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-[#118DC4]">PEO3</h4>
-                    <p className="text-sm text-gray-600 mb-4">
-                      Pursue higher education and research in reputed institute at national and international level.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
             </TabsContent>
 
             <TabsContent value="programs" className="space-y-8">
@@ -533,115 +533,115 @@ const DepartmentBT = () => {
               />
             </TabsContent>
 
-          <TabsContent value="research" className="space-y-6">
-            {/* Research Areas */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {researchAreas.map((area, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold mb-2">{area.area}</h3>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <span className="text-gray-500">Projects: </span>
-                        <span className="font-medium text-[#118DC4]">{area.projects}</span>
+            <TabsContent value="research" className="space-y-6">
+              {/* Research Areas */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {researchAreas.map((area, index) => (
+                  <Card key={index} className="hover:shadow-lg transition-shadow">
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold mb-2">{area.area}</h3>
+                      <div className="grid grid-cols-2 gap-2 text-sm">
+                        <div>
+                          <span className="text-gray-500">Projects: </span>
+                          <span className="font-medium text-[#118DC4]">{area.projects}</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-500">Funding: </span>
+                          <span className="font-medium text-green-600">{area.funding}</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-gray-500">Funding: </span>
-                        <span className="font-medium text-green-600">{area.funding}</span>
-                      </div>
-                    </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Ongoing and Completed Research */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Ongoing Research Projects</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Design and development of system on chip for single lead wearable ECG for medical devices</span>
+                          <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹3.63 Crores</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <div>
+                          <span className="font-medium">Capacity Building through skill and entrepreneurship development on e-Waste Management </span>
+                          <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹2.53 Crores</p>
+                        </div>
+                      </li>
+                    </ul>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
 
-            {/* Ongoing and Completed Research */}
-            <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Completed Research Projects</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+                          <span className="font-medium">Development of 5G / 4G based UAV augmented intelligent monitoring & surveillance system (2022)</span>
+                          <p className="text-sm text-gray-600">Amount(in Rs): Rs 1.82 Crores</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+                          <span className="font-medium">Visvesvaraya Part time PhD Scheme(2022)</span>
+                          <p className="text-sm text-gray-600">Amount(in Rs): Rs 2.50 Lakhs</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start">
+                        <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
+                        <div>
+                          <span className="font-medium">NTU-PU Science and Technology R&D Project(2022)</span>
+                          <p className="text-sm text-gray-600">Amount(in Rs): Rs 9.98 Lakhs</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Research Collaborations */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Ongoing Research Projects</CardTitle>
+                  <CardTitle>Research Collaborations</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Design and development of system on chip for single lead wearable ECG for medical devices</span>
-                        <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹3.63 Crores</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <div>
-                        <span className="font-medium">Capacity Building through skill and entrepreneurship development on e-Waste Management </span>
-                        <p className="text-sm text-gray-600">Funding: Ministry of Electronics & Information Technology, Govt. of India, ₹2.53 Crores</p>
-                      </div>
-                    </li>
-                  </ul>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold text-[#118DC4] mb-3">Industry Partners</h4>
+                      <ul className="space-y-1 text-sm text-gray-600">
+                        <li>• Texas Instruments</li>
+                        <li>• Qualcomm Technologies</li>
+                        <li>• Samsung R&D Institute</li>
+                        <li>• Intel Technology</li>
+                        <li>• MediaTek Inc.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#118DC4] mb-3">Academic Partners</h4>
+                      <ul className="space-y-1 text-sm text-gray-600">
+                        <li>• IIT Delhi</li>
+                        <li>• IIT Kanpur</li>
+                        <li>• IIIT Hyderabad</li>
+                        <li>• University of California</li>
+                        <li>• Technical University of Munich</li>
+                      </ul>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Completed Research Projects</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-                        <span className="font-medium">Development of 5G / 4G based UAV augmented intelligent monitoring & surveillance system (2022)</span>
-                        <p className="text-sm text-gray-600">Amount(in Rs): Rs 1.82 Crores</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-                        <span className="font-medium">Visvesvaraya Part time PhD Scheme(2022)</span>
-                        <p className="text-sm text-gray-600">Amount(in Rs): Rs 2.50 Lakhs</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="h-4 w-4 mr-2 text-[#118DC4] mt-1" />
-                      <div>
-                        <span className="font-medium">NTU-PU Science and Technology R&D Project(2022)</span>
-                        <p className="text-sm text-gray-600">Amount(in Rs): Rs 9.98 Lakhs</p>
-                      </div>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Research Collaborations */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Research Collaborations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-[#118DC4] mb-3">Industry Partners</h4>
-                    <ul className="space-y-1 text-sm text-gray-600">
-                      <li>• Texas Instruments</li>
-                      <li>• Qualcomm Technologies</li>
-                      <li>• Samsung R&D Institute</li>
-                      <li>• Intel Technology</li>
-                      <li>• MediaTek Inc.</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#118DC4] mb-3">Academic Partners</h4>
-                    <ul className="space-y-1 text-sm text-gray-600">
-                      <li>• IIT Delhi</li>
-                      <li>• IIT Kanpur</li>
-                      <li>• IIIT Hyderabad</li>
-                      <li>• University of California</li>
-                      <li>• Technical University of Munich</li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+            </TabsContent>
 
             <TabsContent value="facilities" className="space-y-8">
               <div>

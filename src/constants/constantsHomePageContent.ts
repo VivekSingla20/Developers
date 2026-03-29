@@ -149,7 +149,7 @@ export const downloads = [
 export const quickAccess = [
   {
     title: "Admissions 2024",
-    description: "Apply now for various programs",
+    description: "Access official admissions portal for various programs",
     icon: GraduationCap,
     href: "/admissions",
     iconBg: "bg-green-100 group-hover:bg-green-500",
