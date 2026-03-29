@@ -257,15 +257,29 @@ const Faculty = () => {
               )}
             </TabsContent>
 
-            {DEPARTMENTS.filter((d) => byDepartment[d]?.length > 0).map((dept) => (
-              <TabsContent key={dept} value={dept}>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {byDepartment[dept].map((f) => (
-                    <FacultyCard key={f.id} faculty={f} />
-                  ))}
-                </div>
-              </TabsContent>
-            ))}
+            {DEPARTMENTS.filter((d) => byDepartment[d]?.length > 0).map((dept) => {
+              const deptFaculty = searchTerm
+                ? byDepartment[dept].filter(f =>
+                  f.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  f.specialization?.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+                : byDepartment[dept];
+
+              return (
+                <TabsContent key={dept} value={dept}>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {deptFaculty.map((f) => (
+                      <FacultyCard key={f.id} faculty={f} />
+                    ))}
+                  </div>
+                  {deptFaculty.length === 0 && searchTerm && (
+                    <p className="text-center text-slate-500 py-12">
+                      No faculty found matching "{searchTerm}"
+                    </p>
+                  )}
+                </TabsContent>
+              );
+            })}
           </Tabs>
         )}
 
