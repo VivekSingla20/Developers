@@ -1,414 +1,253 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Users, Shield, Heart, Scale, UserCheck, AlertTriangle, Beaker, Laptop, Search, Phone, Mail, Clock, MapPin } from 'lucide-react';
+import {
+  Users, Shield, Heart, Scale, UserCheck, AlertTriangle,
+  Beaker, Laptop, Search, Phone, Mail, Clock, MapPin, AlertCircle
+} from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import { useCommittees } from '@/hooks/useStrapi';
+
+// Icon map
+const categoryIconMap: Record<string, React.ElementType> = {
+  academic:  Users,
+  welfare:   Heart,
+  safety:    Shield,
+  research:  Beaker,
+  events:    Laptop,
+};
+
+const categoryColors: Record<string, string> = {
+  academic: 'bg-blue-100 text-blue-800',
+  welfare:  'bg-green-100 text-green-800',
+  safety:   'bg-red-100 text-red-800',
+  research: 'bg-purple-100 text-purple-800',
+  events:   'bg-orange-100 text-orange-800',
+};
+
+const CATEGORIES = ['all', 'academic', 'welfare', 'safety', 'research', 'events'] as const;
+
+// committee skeleton
+const CommitteeSkeleton = () => (
+  <div className="grid gap-6 md:grid-cols-2">
+    {[...Array(4)].map((_, i) => (
+      <Card key={i} className="animate-pulse">
+        <CardHeader>
+          <div className="h-5 bg-slate-200 rounded w-2/3 mb-2" />
+          <div className="h-3 bg-slate-200 rounded w-full" />
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            <div className="h-3 bg-slate-200 rounded w-1/2" />
+            <div className="h-3 bg-slate-200 rounded w-3/4" />
+            <div className="h-3 bg-slate-200 rounded w-1/3" />
+          </div>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+);
 
 const CommitteesPage = () => {
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const { data: committees, isLoading, error } = useCommittees();
 
-  // Handle hash navigation to scroll to specific committees
   useEffect(() => {
     const hash = location.hash;
     if (hash) {
-      const sectionId = hash.substring(1); // Remove the # character
-      const element = document.getElementById(sectionId);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
+      const el = document.getElementById(hash.substring(1));
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
     }
   }, [location.hash]);
 
-  const committees = [
-    {
-      name: 'Departmental Committee',
-      icon: Users,
-      category: 'academic',
-      description: 'Oversees academic and administrative functions of all departments',
-      chairperson: 'Prof. R.K. Sharma',
-      members: ['Prof. R.K. Sharma (Chairperson)', 'Dr. P. Singh', 'Dr. M. Gupta', 'Dr. S. Verma', 'Dr. A. Kumar', 'Prof. N. Rani'],
-      responsibilities: [
-        'Academic policy formulation and implementation',
-        'Curriculum development and updates',
-        'Faculty recruitment and promotion',
-        'Research coordination and funding',
-        'Industry collaboration initiatives',
-        'Quality assurance and NAAC compliance'
-      ],
-      meetingSchedule: 'First Monday of every month',
-      contact: 'dept.committee@uiet.puchd.ac.in',
-      achievements: ['Implemented new curriculum 2023', 'NAAC A+ grade achievement']
-    },
-    {
-      name: 'Grievance Redressal Cell',
-      icon: Scale,
-      category: 'welfare',
-      description: 'Addresses student and staff grievances in a fair and timely manner',
-      chairperson: 'Dr. A. Kumar',
-      members: ['Dr. A. Kumar (Chairperson)', 'Prof. S. Rani', 'Dr. N. Patel', 'Student Representative', 'Staff Representative'],
-      responsibilities: [
-        'Handle student and staff complaints',
-        'Ensure fair and timely resolution',
-        'Maintain complete confidentiality',
-        'Regular grievance monitoring and reporting',
-        'Conduct awareness programs',
-        'Maintain grievance portal'
-      ],
-      meetingSchedule: 'Every Wednesday, 2:00 PM',
-      contact: 'grievance@uiet.puchd.ac.in',
-      achievements: ['98% resolution rate in 2023', 'Online portal implementation']
-    },
-    {
-      name: 'Committee Against Sexual Harassment',
-      icon: Shield,
-      category: 'safety',
-      description: 'Prevents and addresses cases of sexual harassment as per UGC guidelines',
-      chairperson: 'Dr. Priya Sharma',
-      members: ['Dr. Priya Sharma (Chairperson)', 'Prof. M. Singh', 'External Legal Expert', 'Student Member (Female)', 'NGO Representative'],
-      responsibilities: [
-        'Prevention of sexual harassment',
-        'Complaint investigation and resolution',
-        'Awareness and sensitivity programs',
-        'Policy implementation and monitoring',
-        'Training sessions for staff and students',
-        'Annual report submission to UGC'
-      ],
-      meetingSchedule: 'Monthly or as required',
-      contact: 'antish@uiet.puchd.ac.in',
-      achievements: ['Zero tolerance policy implementation', 'Campus safety certification']
-    },
-    {
-      name: 'Board of Control',
-      icon: UserCheck,
-      category: 'academic',
-      description: 'Maintains academic standards and examination procedures',
-      chairperson: 'Director UIET',
-      members: ['Director (Chairperson)', 'All HODs', 'External Examiner', 'Controller of Examinations', 'Academic Coordinator'],
-      responsibilities: [
-        'Examination oversight and conduct',
-        'Result declaration and verification',
-        'Academic standards maintenance',
-        'Quality assurance in evaluation',
-        'Appeals and re-evaluation handling',
-        'Academic calendar approval'
-      ],
-      meetingSchedule: 'Before each examination session',
-      contact: 'board.control@uiet.puchd.ac.in',
-      achievements: ['Digital examination system', 'Reduced result declaration time']
-    },
-    {
-      name: 'SC/ST Cell',
-      icon: Heart,
-      category: 'welfare',
-      description: 'Ensures welfare and equal opportunities for SC/ST students and staff',
-      chairperson: 'Dr. R. Patel',
-      members: ['Dr. R. Patel (Coordinator)', 'Prof. K. Singh', 'SC/ST Student Representatives', 'Administrative Officer'],
-      responsibilities: [
-        'Scholarship assistance and guidance',
-        'Mentoring and counseling programs',
-        'Grievance handling for SC/ST community',
-        'Awareness and empowerment initiatives',
-        'Fee concession facilitation',
-        'Liaison with government agencies'
-      ],
-      meetingSchedule: 'Bi-monthly',
-      contact: 'scst.cell@uiet.puchd.ac.in',
-      achievements: ['100% scholarship disbursement', 'Mentorship program success']
-    },
-    {
-      name: 'Anti-Ragging Committee',
-      icon: AlertTriangle,
-      category: 'safety',
-      description: 'Prevents ragging and ensures a safe campus environment for all students',
-      chairperson: 'Prof. S.K. Gupta',
-      members: ['Prof. S.K. Gupta (Chairperson)', 'Security Officer', 'Student Counselor', 'Senior Students', 'Hostel Wardens'],
-      responsibilities: [
-        'Ragging prevention and awareness',
-        'Complaint handling and investigation',
-        'Disciplinary action implementation',
-        'Campus safety monitoring',
-        'New student orientation programs',
-        'Anti-ragging affidavit management'
-      ],
-      meetingSchedule: 'Monthly during academic session',
-      contact: 'antiragging@uiet.puchd.ac.in',
-      achievements: ['Ragging-free campus certification', 'Proactive prevention measures']
-    },
-    {
-      name: 'Research & Development Cell',
-      icon: Beaker,
-      category: 'research',
-      description: 'Promotes research culture and facilitates R&D activities',
-      chairperson: 'Dr. V. Kumar',
-      members: ['Dr. V. Kumar (Coordinator)', 'Research Faculty Representatives', 'Industry Representatives', 'PhD Scholars'],
-      responsibilities: [
-        'Research promotion and facilitation',
-        'Funding assistance and guidance',
-        'Industry collaboration development',
-        'Patent filing support and IPR',
-        'Conference and publication support',
-        'Research infrastructure development'
-      ],
-      meetingSchedule: 'Monthly',
-      contact: 'research@uiet.puchd.ac.in',
-      achievements: ['50+ research projects funded', 'International collaborations established']
-    },
-    {
-      name: 'UTechnos Committee',
-      icon: Laptop,
-      category: 'events',
-      description: 'Organizes the annual technical festival and promotes technical activities',
-      chairperson: 'Prof. A. Rani',
-      members: ['Prof. A. Rani (Faculty Coordinator)', 'Student Coordinators', 'Technical Team', 'Event Management Team'],
-      responsibilities: [
-        'Technical festival organization',
-        'Inter-college competition management',
-        'Industry partnership for events',
-        'Student engagement activities',
-        'Technical workshop coordination',
-        'Innovation showcase platforms'
-      ],
-      meetingSchedule: 'Weekly during event preparation',
-      contact: 'utechnos@uiet.puchd.ac.in',
-      achievements: ['National level participation', 'Industry recognition awards']
+  const filtered = useMemo(() => {
+    let items = committees ?? [];
+    if (activeCategory !== 'all') items = items.filter(c => c.category === activeCategory);
+    if (searchTerm) {
+      const q = searchTerm.toLowerCase();
+      items = items.filter(c =>
+        c.name.toLowerCase().includes(q) ||
+        c.description?.toLowerCase().includes(q) ||
+        c.chairperson?.toLowerCase().includes(q)
+      );
     }
-  ];
-
-  const categories = ['all', 'academic', 'welfare', 'safety', 'research', 'events'];
-
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  const filteredCommittees = committees.filter(committee => {
-    const matchesSearch = committee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         committee.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || committee.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+    return items;
+  }, [committees, activeCategory, searchTerm]);
 
   return (
-    <div className="min-h-screen">
-  <Header />
-  
-  {/* Page Hero */}
-  <section className="bg-gradient-to-r from-[#118DC4] to-[#0a6ba2] text-white py-16">
-    <div className="container mx-auto px-4">
-      <div className="text-center">
-        <Users className="h-16 w-16 mx-auto mb-4" />
-        <h1 className="text-4xl font-bold mb-4">Institute Committees</h1>
-        <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-          Ensuring governance, welfare, and excellence across all aspects of institute life through 
-          dedicated committees and transparent processes
-        </p>
-      </div>
-    </div>
-  </section>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
 
-  <div className="container mx-auto px-4 py-12">
-    {/* Search and Filter */}
-    <Card className="mb-8">
-      <CardContent className="p-6">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <input
-              type="text"
-              placeholder="Search committees..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#118DC4]"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <div className="flex gap-2 flex-wrap">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                size="sm"
-                onClick={() => setSelectedCategory(category)}
-                className={`capitalize ${selectedCategory === category ? 'bg-[#118DC4] text-white' : 'border-[#118DC4] text-[#118DC4] hover:bg-[#118DC4]/10'}`}
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
+      {/* Hero */}
+      <section className="bg-gradient-to-r from-[#118DC4] to-[#0d6fa3] text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Institutional Committees</h1>
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            UIET's governance structure includes specialized committees ensuring academic excellence,
+            student welfare, and institutional integrity.
+          </p>
         </div>
-      </CardContent>
-    </Card>
+      </section>
 
-    {/* Committees Grid */}
-    <div className="grid gap-8">
-      {filteredCommittees.map((committee, index) => {
-        // Generate ID based on committee name
-        const committeeId = committee.name
-          .toLowerCase()
-          .replace(/[^a-z0-9]/g, '')
-          .replace('departmentalcommittee', 'departmental')
-          .replace('grievanceredressalcell', 'grievance')
-          .replace('antisexualharassment', 'harassment')
-          .replace('boardofcontrol', 'board')
-          .replace('scstcell', 'scst')
-          .replace('antiraggingcommittee', 'ragging')
-          .replace('rdcell', 'rnd')
-          .replace('utechnoscommittee', 'utechnos');
-        
-        return (
-        <Card key={index} id={committeeId} className="overflow-hidden hover:shadow-xl transition-shadow">
-          <CardHeader className="bg-gradient-to-r from-gray-50 to-[#118DC4]/10">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center">
-                <committee.icon className="h-8 w-8 mr-3 text-[#118DC4]" />
-                <div>
-                  <CardTitle className="text-xl">{committee.name}</CardTitle>
-                  <div className="flex items-center mt-2 gap-2">
-                    <Badge variant="secondary" className="capitalize bg-[#118DC4]/10 text-[#118DC4] hover:bg-[#118DC4]/20">{committee.category}</Badge>
-                    <span className="text-sm text-gray-600">Chair: {committee.chairperson}</span>
-                  </div>
-                </div>
-              </div>
+      {/* Search */}
+      <section className="py-6 bg-white border-b">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search committees..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#118DC4] focus:border-[#118DC4]"
+              />
             </div>
-            <p className="text-gray-600 mt-3">{committee.description}</p>
-          </CardHeader>
-          <CardContent className="p-6">
-            <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="overview" className="data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">Overview</TabsTrigger>
-                <TabsTrigger value="members" className="data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">Members</TabsTrigger>
-                <TabsTrigger value="responsibilities" className="data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">Responsibilities</TabsTrigger>
-                <TabsTrigger value="contact" className="data-[state=active]:bg-[#118DC4] data-[state=active]:text-white">Contact</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="overview" className="mt-4">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-3 text-gray-900">Meeting Schedule</h4>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Clock className="h-4 w-4 mr-2 text-[#118DC4]" />
-                      {committee.meetingSchedule}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-3 text-gray-900">Recent Achievements</h4>
-                    <ul className="space-y-1">
-                      {committee.achievements.map((achievement, idx) => (
-                        <li key={idx} className="flex items-center text-sm text-gray-600">
-                          <div className="w-2 h-2 bg-[#118DC4] rounded-full mr-3"></div>
-                          {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="members" className="mt-4">
-                <h4 className="font-semibold mb-3 text-gray-900">Committee Members</h4>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {committee.members.map((member, idx) => (
-                    <div key={idx} className="flex items-center p-3 bg-[#118DC4]/5 rounded-lg">
-                      <div className="w-2 h-2 bg-[#118DC4] rounded-full mr-3"></div>
-                      <span className="text-sm">{member}</span>
-                    </div>
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="responsibilities" className="mt-4">
-                <h4 className="font-semibold mb-3 text-gray-900">Key Responsibilities</h4>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {committee.responsibilities.map((responsibility, idx) => (
-                    <div key={idx} className="flex items-start p-3 bg-[#118DC4]/5 rounded-lg">
-                      <div className="w-2 h-2 bg-[#118DC4] rounded-full mr-3 mt-2"></div>
-                      <span className="text-sm">{responsibility}</span>
-                    </div>
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="contact" className="mt-4">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-3 text-gray-900">Contact Information</h4>
-                    <div className="space-y-3">
-                      <div className="flex items-center">
-                        <Mail className="h-4 w-4 mr-2 text-[#118DC4]" />
-                        <span className="text-sm">{committee.contact}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Phone className="h-4 w-4 mr-2 text-[#118DC4]" />
-                        <span className="text-sm">+91-172-2534816</span>
-                      </div>
-                      <div className="flex items-center">
-                        <MapPin className="h-4 w-4 mr-2 text-[#118DC4]" />
-                        <span className="text-sm">UIET Campus, Sector 25, Chandigarh</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-3 text-gray-900">Office Hours</h4>
-                    <div className="bg-[#118DC4]/10 p-4 rounded-lg">
-                      <p className="text-sm text-[#118DC4]">Monday - Friday: 9:00 AM - 5:00 PM</p>
-                      <p className="text-sm text-[#118DC4]">Saturday: 9:00 AM - 1:00 PM</p>
-                      <p className="text-sm text-[#118DC4] mt-2">For urgent matters, contact via email</p>
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </CardContent>
-        </Card>
-        );
-      })}
-    </div>
-
-    {filteredCommittees.length === 0 && (
-      <Card className="text-center py-12">
-        <CardContent>
-          <Users className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No committees found</h3>
-          <p className="text-gray-600">Try adjusting your search or filter criteria</p>
-        </CardContent>
-      </Card>
-    )}
-
-    {/* General Contact Information */}
-    <Card className="mt-12 bg-gradient-to-r from-[#118DC4]/10 to-[#0a6ba2]/10">
-      <CardContent className="p-8 text-center">
-        <h3 className="text-2xl font-bold mb-4">Need Assistance?</h3>
-        <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-          For any concerns, suggestions, or queries related to any committee, 
-          please reach out through the following channels. We are committed to transparency and prompt response.
-        </p>
-        <div className="grid md:grid-cols-3 gap-4 text-sm">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Mail className="h-6 w-6 mx-auto mb-2 text-[#118DC4]" />
-            <h4 className="font-semibold mb-1">Email</h4>
-            <p className="text-[#118DC4]">committees@uiet.puchd.ac.in</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Phone className="h-6 w-6 mx-auto mb-2 text-[#118DC4]" />
-            <h4 className="font-semibold mb-1">Phone</h4>
-            <p className="text-[#118DC4]">+91-172-2534816</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <Clock className="h-6 w-6 mx-auto mb-2 text-[#118DC4]" />
-            <h4 className="font-semibold mb-1">Office Hours</h4>
-            <p className="text-[#118DC4]">9:00 AM - 5:00 PM</p>
+            <div className="flex gap-2 flex-wrap">
+              {CATEGORIES.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors capitalize ${
+                    activeCategory === cat
+                      ? 'bg-[#118DC4] text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
-  </div>
+      </section>
 
-  <Footer />
-</div>
+      {/* Committees */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          {error && (
+            <div className="flex items-center gap-3 text-red-600 bg-red-50 rounded-xl p-5 mb-8">
+              <AlertCircle className="h-5 w-5 flex-shrink-0" />
+              <p>Could not load committee data. Please check your connection.</p>
+            </div>
+          )}
+
+          {isLoading ? <CommitteeSkeleton /> : (
+            <>
+              {filtered.length === 0 && (
+                <div className="text-center py-16 text-gray-500">
+                  <Users className="h-12 w-12 mx-auto mb-4 opacity-30" />
+                  <p className="text-lg">No committees found matching your search.</p>
+                </div>
+              )}
+              <div className="grid gap-6 md:grid-cols-2">
+                {filtered.map(committee => {
+                  const Icon = categoryIconMap[committee.category] ?? Users;
+                  const members = committee.members
+                    ? committee.members.split(',').map(m => m.trim()).filter(Boolean)
+                    : [];
+                  const responsibilities = committee.responsibilities
+                    ? committee.responsibilities.split(',').map(r => r.trim()).filter(Boolean)
+                    : [];
+                  const achievements = committee.achievements
+                    ? committee.achievements.split(',').map(a => a.trim()).filter(Boolean)
+                    : [];
+
+                  return (
+                    <Card key={committee.id} className="border-0 shadow-md hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 bg-[#118DC4]/10 rounded-lg">
+                              <Icon className="h-6 w-6 text-[#118DC4]" />
+                            </div>
+                            <div>
+                              <CardTitle className="text-lg">{committee.name}</CardTitle>
+                              <Badge className={`mt-1 text-xs capitalize ${categoryColors[committee.category] ?? 'bg-gray-100 text-gray-700'}`}>
+                                {committee.category}
+                              </Badge>
+                            </div>
+                          </div>
+                        </div>
+                        {committee.description && (
+                          <p className="text-gray-600 text-sm mt-2">{committee.description}</p>
+                        )}
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {committee.chairperson && (
+                          <div>
+                            <h4 className="font-semibold text-sm text-gray-700 mb-1">Chairperson</h4>
+                            <p className="text-sm text-[#118DC4]">{committee.chairperson}</p>
+                          </div>
+                        )}
+
+                        {members.length > 0 && (
+                          <div>
+                            <h4 className="font-semibold text-sm text-gray-700 mb-1">Members</h4>
+                            <ul className="text-sm text-gray-600 space-y-0.5">
+                              {members.map((m, i) => (
+                                <li key={i} className="flex items-start">
+                                  <span className="text-[#118DC4] mr-1">•</span>{m}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {responsibilities.length > 0 && (
+                          <div>
+                            <h4 className="font-semibold text-sm text-gray-700 mb-1">Key Responsibilities</h4>
+                            <ul className="text-sm text-gray-600 space-y-0.5">
+                              {responsibilities.slice(0, 4).map((r, i) => (
+                                <li key={i} className="flex items-start">
+                                  <span className="text-green-500 mr-1">✓</span>{r}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        <div className="flex flex-wrap gap-4 text-sm text-gray-500 pt-2 border-t">
+                          {committee.meetingSchedule && (
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-3.5 w-3.5" />{committee.meetingSchedule}
+                            </span>
+                          )}
+                          {committee.contact && (
+                            <a href={`mailto:${committee.contact}`}
+                              className="flex items-center gap-1 text-[#118DC4] hover:underline">
+                              <Mail className="h-3.5 w-3.5" />{committee.contact}
+                            </a>
+                          )}
+                        </div>
+
+                        {achievements.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                            {achievements.map((a, i) => (
+                              <Badge key={i} variant="outline" className="text-xs border-[#118DC4]/30 text-[#118DC4]">
+                                {a}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 };
 
