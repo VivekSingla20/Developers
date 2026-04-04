@@ -16,6 +16,23 @@ import { Input } from "@/components/ui/input";
 import { useFaculty } from "@/hooks/useStrapi";
 import { getStrapiImageUrl, StrapiFaculty } from "@/lib/strapi";
 
+const getRank = (designation: string = "") => {
+  const key = designation.toLowerCase();
+  const order = [
+    ["professor & co-ordinator", 1],
+    ["professor & coordinator",  1],
+    ["associate professor",       2],
+    ["assistant professor",       3],
+    ["guest",                     4],
+    ["professor",                 1],
+  ] as [string, number][];
+
+  for (const [title, rank] of order) {
+    if (key.includes(title)) return rank;
+  }
+  return 5;
+};
+
 // Faculty Card
 const FacultyCard = ({ faculty }: { faculty: StrapiFaculty }) => {
   const photoUrl = getStrapiImageUrl(faculty.photo ?? null);
@@ -146,7 +163,7 @@ const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { data: faculty, isLoading, error } = useFaculty();
 
-  // Group faculty by department
+  // Group faculty by department, sorted by designation hierarchy
   const byDepartment = React.useMemo(() => {
     if (!faculty) return {} as Record<string, StrapiFaculty[]>;
     return faculty.reduce<Record<string, StrapiFaculty[]>>((acc, f) => {
@@ -157,7 +174,19 @@ const Faculty = () => {
     }, {});
   }, [faculty]);
 
-  const allFaculty = faculty ?? [];
+  const sortedByDepartment = React.useMemo(() => {
+    return Object.fromEntries(
+      Object.entries(byDepartment).map(([dept, members]) => [
+        dept,
+        [...members].sort((a, b) => getRank(a.designation) - getRank(b.designation)),
+      ])
+    );
+  }, [byDepartment]);
+
+  const allFaculty = React.useMemo(
+    () => [...(faculty ?? [])].sort((a, b) => getRank(a.designation) - getRank(b.designation)),
+    [faculty]
+  );
 
   const filteredFaculty = React.useMemo(() => {
     if (!searchTerm) return allFaculty;
@@ -235,7 +264,7 @@ const Faculty = () => {
               >
                 All Faculty
               </TabsTrigger>
-              {DEPARTMENTS.filter((d) => byDepartment[d]?.length > 0).map((dept) => (
+              {DEPARTMENTS.filter((d) => sortedByDepartment[d]?.length > 0).map((dept) => (
                 <TabsTrigger
                   key={dept}
                   value={dept}
@@ -257,13 +286,13 @@ const Faculty = () => {
               )}
             </TabsContent>
 
-            {DEPARTMENTS.filter((d) => byDepartment[d]?.length > 0).map((dept) => {
+            {DEPARTMENTS.filter((d) => sortedByDepartment[d]?.length > 0).map((dept) => {
               const deptFaculty = searchTerm
-                ? byDepartment[dept].filter(f =>
-                  f.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                  f.specialization?.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-                : byDepartment[dept];
+                ? sortedByDepartment[dept].filter(f =>
+                    f.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    f.specialization?.toLowerCase().includes(searchTerm.toLowerCase())
+                  )
+                : sortedByDepartment[dept];
 
               return (
                 <TabsContent key={dept} value={dept}>

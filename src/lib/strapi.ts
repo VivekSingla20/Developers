@@ -153,7 +153,7 @@ export interface StrapiEventDownload {
 
 // API functions
 export const getFaculty = () =>
-  fetchStrapi<StrapiFaculty[]>('faculties?populate=photo&sort=department:asc,name:asc&pagination[limit]=200');
+  fetchStrapi<StrapiFaculty[]>('faculties?populate=photo&sort=department:asc,pagination[limit]=200');
 
 export const getNews = () =>
   fetchStrapi<StrapiNewsNotice[]>('news-notices?populate=attachment&sort=isPinned:desc,date:desc&pagination[limit]=100');
