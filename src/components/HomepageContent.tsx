@@ -558,7 +558,7 @@ const HomepageContent = () => {
             <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="p-6 sm:p-8 lg:p-10">
                 <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-                  Find Us on the Map
+                  Visit Us
                 </h3>
                 <p className="text-gray-700 leading-relaxed mb-6 max-w-xl">
                   View the campus location directly on Google Maps for easy navigation to UIET, Sector 25, Chandigarh.

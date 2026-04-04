@@ -59,7 +59,7 @@ const applicationProcess = [
 ];
 
 const importantAdmissionNote =
-  "Important note: UIET admissions follow JAC Chandigarh counselling and the latest official notices. Dates are tentative until published by the institute.";
+  "UIET admissions follow JAC Chandigarh counselling and the latest official notices. Dates are tentative until published by the institute.";
 
 const admissionContacts = [
   { label: "Admissions Office", value: "+91-172-2541242", href: "tel:+911722541242" },
@@ -415,12 +415,16 @@ const Admissions = () => {
                   Admissions Portal
                 </Button>
               </a>
-              <Button
-                variant="outline"
-                className="w-full sm:w-auto border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-xl"
+              <a
+                href={JAC_PORTAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(event) => openExternalLink(event, JAC_PORTAL_URL)}
               >
-                Download Brochure
-              </Button>
+                <Button className="w-full sm:w-auto bg-white text-[#118DC4] hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl">
+                  Download Brochure
+                </Button>
+              </a>
             </div>
           </div>
         </div>
