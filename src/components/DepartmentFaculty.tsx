@@ -219,7 +219,7 @@ const DepartmentFaculty: React.FC<DepartmentFacultyProps> = ({
 
         {/* Faculty Tabs */}
         <Tabs defaultValue="all" className="w-full">
-          <TabsList className="grid grid-cols-3 lg:grid-cols-6 w-full lg:w-fit mx-auto mb-8 h-auto p-1 bg-white shadow-lg rounded-xl">
+          <TabsList className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 w-full lg:w-fit mx-auto mb-8 h-auto p-1 bg-white shadow-lg rounded-xl gap-2 sm:gap-1">
             <TabsTrigger value="all" className="px-3 py-2 rounded-lg text-sm">
               All Faculty
             </TabsTrigger>

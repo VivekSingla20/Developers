@@ -33,7 +33,7 @@ const CATEGORIES = ['all', 'academic', 'welfare', 'safety', 'research', 'events'
 
 // committee skeleton
 const CommitteeSkeleton = () => (
-  <div className="grid gap-6 md:grid-cols-2">
+  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
     {[...Array(4)].map((_, i) => (
       <Card key={i} className="animate-pulse">
         <CardHeader>
@@ -146,7 +146,7 @@ const CommitteesPage = () => {
                   <p className="text-lg">No committees found matching your search.</p>
                 </div>
               )}
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 {filtered.map(committee => {
                   const Icon = categoryIconMap[committee.category] ?? Users;
                   const members = committee.members

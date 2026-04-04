@@ -92,7 +92,7 @@ const About = () => {
           {/* Key Facts */}
           <div className="gov-card p-6 rounded-lg" style={{border: '1px solid #118DC4'}}>
             <h4 className="text-lg font-semibold mb-4" style={{color: '#118DC4'}}>Institute at a Glance</h4>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div><strong style={{color: '#118DC4'}}>Established:</strong> 2002</div>
               <div><strong style={{color: '#118DC4'}}>Type:</strong> Government Institute</div>
               <div><strong style={{color: '#118DC4'}}>Affiliated to:</strong> Panjab University</div>

@@ -87,21 +87,27 @@ const FacultyProfile: React.FC<FacultyProfileProps> = ({ faculty }) => {
 
                 <div className="flex flex-wrap justify-center lg:justify-start gap-2">
                   {faculty.googleScholar && (
-                    <Button variant="outline" size="sm" className="border-white text-white hover:bg-white hover:text-blue-600">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Google Scholar
+                    <Button asChild variant="outline" size="sm" className="border-white text-white hover:bg-white hover:text-blue-600">
+                      <a href={faculty.googleScholar} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Google Scholar
+                      </a>
                     </Button>
                   )}
                   {faculty.researchGate && (
-                    <Button variant="outline" size="sm" className="border-white text-white hover:bg-white hover:text-blue-600">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      ResearchGate
+                    <Button asChild variant="outline" size="sm" className="border-white text-white hover:bg-white hover:text-blue-600">
+                      <a href={faculty.researchGate} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        ResearchGate
+                      </a>
                     </Button>
                   )}
                   {faculty.linkedin && (
-                    <Button variant="outline" size="sm" className="border-white text-white hover:bg-white hover:text-blue-600">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      LinkedIn
+                    <Button asChild variant="outline" size="sm" className="border-white text-white hover:bg-white hover:text-blue-600">
+                      <a href={faculty.linkedin} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        LinkedIn
+                      </a>
                     </Button>
                   )}
                 </div>
@@ -111,7 +117,7 @@ const FacultyProfile: React.FC<FacultyProfileProps> = ({ faculty }) => {
         </CardContent>
       </Card>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column */}
         <div className="lg:col-span-2 space-y-6">
           {/* Biography */}

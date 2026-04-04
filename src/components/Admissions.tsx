@@ -4,15 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Calendar, FileText, Users, GraduationCap, CheckCircle,
-  AlertCircle, Clock, CreditCard, Globe, Trophy,
+  AlertCircle, Clock, CreditCard, Globe, Trophy, ExternalLink,
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useAdmissionSchedules } from "@/hooks/useStrapi";
 
+const JAC_PORTAL_URL = "https://jacchd.admissions.nic.in/";
+
 // static data
 const specialAdmissions = [
   {
-    name: "Sports Quota",
+    name: "Sports Admissions",
     icon: Trophy,
     description: "Special admission for outstanding sports persons",
     seats: "5% of total seats",
@@ -39,7 +41,7 @@ const specialAdmissions = [
 
 const eligibilityCriteria = {
   be: ["Must appear in JEE Main (Paper 1) and have a valid All India Rank (AIR)", "Must have passed Class XII or be appearing in Class XII in the same year", "Candidates who passed Class XII in 2022 or earlier are not eligible", "Minimum 60% aggregate in Class XII (as per current admission norms)", "Admissions are through JAC Chandigarh counselling; UIET has no separate entrance exam"],
-  me: ["B.E./B.Tech in relevant discipline", "Minimum 60% marks or 6.5 CGPA", "Valid GATE score", "No age limit", "Work experience (preferred)"],
+  me: ["B.E./B.Tech in relevant discipline", "Minimum 60% marks or 6.5 CGPA", "Valid GATE score", "Relevant qualifying degree from a recognized university"],
   phd: ["M.E./M.Tech/M.Sc. in relevant field", "Minimum 60% marks or 6.5 CGPA", "NET/GATE/JRF qualification", "Research proposal submission", "Interview clearing mandatory"],
   nri: ["International qualification equivalent", "English proficiency (IELTS/TOEFL)", "Financial capability certificate", "Visa documentation", "Medical clearance"],
 };
@@ -47,7 +49,7 @@ const eligibilityCriteria = {
 const applicationProcess = [
   { step: 1, title: "Clear JEE Main", description: "Appear in JEE Main (Paper 1). UIET admissions are based on JEE Main AIR through JAC Chandigarh.", icon: GraduationCap },
   { step: 2, title: "Check Eligibility", description: "Confirm Class XII year and minimum marks eligibility before registration.", icon: CheckCircle },
-  { step: 3, title: "Register on JAC Portal", description: "Register at jacchd.admissions.nic.in using JEE Main Application Number and personal details.", icon: Users },
+  { step: 3, title: "Register on JAC Portal", description: "Register on the JAC Chandigarh portal using your JEE Main application number and personal details.", icon: Users, link: JAC_PORTAL_URL },
   { step: 4, title: "Pay Counselling Fee", description: "Pay non-refundable counselling fee: Rs. 2800 (General) / Rs. 1400 (SC/ST/PwD).", icon: CreditCard },
   { step: 5, title: "Upload Documents", description: "Upload Class XII marksheet and applicable category certificates before deadline.", icon: FileText },
   { step: 6, title: "Fill & Lock Choices", description: "Select and lock institute/branch choices on the portal. Locked choices cannot be edited.", icon: Clock },
@@ -57,7 +59,13 @@ const applicationProcess = [
 ];
 
 const importantAdmissionNote =
-  "Important note: UIET admissions are in the All India category through JAC Chandigarh. Unlike some other institutes, there is no Chandigarh state quota for UIET seats.";
+  "Important note: UIET admissions follow JAC Chandigarh counselling and the latest official notices. Dates are tentative until published by the institute.";
+
+const admissionContacts = [
+  { label: "Admissions Office", value: "+91-172-2541242", href: "tel:+911722541242" },
+  { label: "Admissions Email", value: "admissions@uiet.puchd.ac.in", href: "mailto:admissions@uiet.puchd.ac.in" },
+  { label: "UIET Notices", value: "Latest notices and updates", href: "/news" },
+];
 
 const feeStructure = [
   { program: "B.E. (per year)", tuition: "₹1,20,000", hostel: "₹45,000", other: "₹15,000", total: "₹1,80,000" },
@@ -72,8 +80,8 @@ const ScheduleSkeleton = () => (
     {[...Array(4)].map((_, i) => (
       <Card key={i} className="border-0 shadow-md bg-white animate-pulse">
         <CardContent className="p-6">
-          <div className="grid grid-cols-7 gap-4">
-            <div className="col-span-2 space-y-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4">
+            <div className="col-span-1 sm:col-span-2 lg:col-span-2 space-y-2">
               <div className="h-5 bg-slate-200 rounded w-3/4" />
               <div className="h-3 bg-slate-200 rounded w-1/2" />
             </div>
@@ -95,6 +103,10 @@ const Admissions = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("schedule");
   const { data: admissionSchedule, isLoading, error } = useAdmissionSchedules();
+  const openExternalLink = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    window.open(href, "_blank", "noopener,noreferrer");
+  };
 
   useEffect(() => {
     const hash = location.hash;
@@ -117,7 +129,7 @@ const Admissions = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center px-4 py-2 bg-[#118DC4]/10 text-[#118DC4] rounded-full text-sm font-medium mb-4">
-            <GraduationCap className="w-4 h-4 mr-2" />Admissions 2024
+            <GraduationCap className="w-4 h-4 mr-2" />Admissions
           </div>
           <h2 className="text-4xl font-bold text-slate-900 mb-4">Join UIET</h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -139,6 +151,19 @@ const Admissions = () => {
                 <div className="text-slate-600 text-sm">{stat.label}</div>
               </CardContent>
             </Card>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+          {admissionContacts.map((contact) => (
+            <a key={contact.label} href={contact.href} className="block">
+              <Card className="border-0 shadow-md bg-white hover:shadow-lg transition-shadow h-full">
+                <CardContent className="p-5">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-[#118DC4] mb-1">{contact.label}</div>
+                  <div className="text-slate-900 font-medium leading-tight">{contact.value}</div>
+                </CardContent>
+              </Card>
+            </a>
           ))}
         </div>
 
@@ -197,23 +222,29 @@ const Admissions = () => {
                           <p className="text-[#118DC4] text-xs">{schedule.eligibility}</p>
                         </div>
                         <div className="text-center">
-                          <div className="text-sm font-medium text-slate-900">App Start</div>
+                          <div className="text-sm font-medium text-slate-900">Registration Open</div>
                           <div className="text-[#118DC4] text-sm">{schedule.applicationStart}</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-sm font-medium text-slate-900">App End</div>
+                          <div className="text-sm font-medium text-slate-900">Registration Close</div>
                           <div className="text-red-600 text-sm">{schedule.applicationEnd}</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-sm font-medium text-slate-900">Exam</div>
+                          <div className="text-sm font-medium text-slate-900">Entrance Exam</div>
                           <div className="text-purple-600 text-sm">{schedule.examDate}</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-sm font-medium text-slate-900">Results</div>
+                          <div className="text-sm font-medium text-slate-900">Result Date</div>
                           <div className="text-green-600 text-sm">{schedule.resultsDate}</div>
                         </div>
                         <div className="sm:col-span-2 lg:col-span-1">
-                          <a href={schedule.applyLink} target="_blank" rel="noopener noreferrer" className="block w-full">
+                          <a
+                            href={schedule.applyLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(event) => openExternalLink(event, schedule.applyLink)}
+                            className="block w-full"
+                          >
                             <Button className="w-full bg-[#118DC4] hover:bg-[#0d7db0] text-white font-semibold rounded-lg text-xs sm:text-sm px-3 sm:px-4 py-2.5 h-auto whitespace-normal lg:whitespace-nowrap leading-tight text-center">
                               Visit Admissions Portal
                             </Button>
@@ -229,7 +260,7 @@ const Admissions = () => {
 
           {/* Special Admissions */}
           <TabsContent value="special">
-            <div className="grid gap-6">
+            <div className="grid grid-cols-1 gap-6">
               {specialAdmissions.map((admission, index) => (
                 <Card key={index} className="border-0 shadow-md bg-white">
                   <CardHeader>
@@ -240,7 +271,7 @@ const Admissions = () => {
                     <p className="text-gray-600">{admission.description}</p>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       <div>
                         <h4 className="font-semibold mb-2">Available Seats</h4>
                         <p className="text-[#118DC4] font-medium">{admission.seats}</p>
@@ -268,7 +299,7 @@ const Admissions = () => {
 
           {/* Eligibility */}
           <TabsContent value="eligibility">
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {Object.entries(eligibilityCriteria).map(([key, criteria]) => (
                 <Card key={key} className="border-0 shadow-md bg-white">
                   <CardHeader>
@@ -293,7 +324,7 @@ const Admissions = () => {
 
           {/* Application Process */}
           <TabsContent value="process">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {applicationProcess.map((step) => (
                 <Card key={step.step} className="border-0 shadow-md bg-white text-center">
                   <CardContent className="p-6">
@@ -303,6 +334,17 @@ const Admissions = () => {
                     <step.icon className="h-6 w-6 text-[#118DC4] mx-auto mb-2" />
                     <h4 className="font-semibold text-slate-900 mb-1">{step.title}</h4>
                     <p className="text-sm text-slate-600">{step.description}</p>
+                    {step.link && (
+                      <a
+                        href={step.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(event) => openExternalLink(event, step.link!)}
+                        className="inline-flex items-center mt-4 text-sm font-medium text-[#118DC4] hover:text-[#0a6ba2]"
+                      >
+                        Visit JAC Portal <Globe className="ml-2 h-4 w-4" />
+                      </a>
+                    )}
                   </CardContent>
                 </Card>
               ))}
@@ -343,10 +385,15 @@ const Admissions = () => {
                   </table>
                 </div>
                 <div className="p-4 bg-amber-50 border-t">
-                  <p className="text-xs text-amber-700">* Fee structure subject to revision. Scholarships and concessions available for eligible students.</p>
+                  <p className="text-xs text-amber-700">* Fee structure is tentative and subject to revision as per official UIET notices. Scholarships and concessions available for eligible students.</p>
                 </div>
               </CardContent>
             </Card>
+            <div className="mt-4 flex justify-end">
+              <a href="/news" className="inline-flex items-center text-sm font-medium text-[#118DC4] hover:text-[#0a6ba2]">
+                View UIET Notices <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
+            </div>
           </TabsContent>
         </Tabs>
 
@@ -358,9 +405,16 @@ const Admissions = () => {
               Take the first step towards your engineering career at UIET. Our admissions team is here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="w-full sm:w-auto bg-white text-[#118DC4] hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl">
-                Admissions Portal
-              </Button>
+              <a
+                href={JAC_PORTAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(event) => openExternalLink(event, JAC_PORTAL_URL)}
+              >
+                <Button className="w-full sm:w-auto bg-white text-[#118DC4] hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl">
+                  Admissions Portal
+                </Button>
+              </a>
               <Button
                 variant="outline"
                 className="w-full sm:w-auto border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-xl"

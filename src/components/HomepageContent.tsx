@@ -142,162 +142,6 @@ const HomepageContent = () => {
         </div>
       </section> */}
 
-      {/* Departments Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-[#118DC4]/5 py-10 sm:py-14">
-        <div className="container-modern">
-          <div className="text-center mb-10 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-              Our Departments
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore our diverse range of engineering programs designed to
-              shape tomorrow's innovators
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {departments.map((dept, index) => (
-              <Card
-                key={index}
-                className="hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:shadow-[#118DC4]/20 hover:-translate-y-2"
-              >
-                <Link to={dept.link}>
-                  <CardContent className="p-5 sm:p-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="w-12 h-12 bg-[#118DC4]/10 rounded-lg flex items-center justify-center group-hover:bg-[#118DC4] group-hover:scale-110 transition-all duration-300">
-                        <dept.icon className="h-6 w-6 text-[#118DC4] group-hover:text-white transition-colors" />
-                      </div>
-                      <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-[#118DC4] group-hover:scale-110 transition-all duration-300" />
-                    </div>
-                    <h3 className="font-semibold text-gray-900 mb-4 group-hover:text-[#118DC4] transition-colors leading-tight">
-                      {dept.name}
-                    </h3>
-                    <div className="space-y-2 text-sm text-gray-600">
-                      <div className="flex justify-between items-center">
-                        <span>Students:</span>
-                        <span className="font-semibold text-[#118DC4]">
-                          {dept.students}
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span>Faculty:</span>
-                        <span className="font-semibold text-[#118DC4]">
-                          {dept.faculty}
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Link>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-8 sm:mt-12">
-            <Link to="/departments">
-              <Button className="w-full sm:w-auto bg-gradient-to-r from-[#118DC4] to-[#0d75a8] hover:from-[#0f7db0] hover:to-[#0a5d87] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                View All Departments
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Resources & Quick Access Section */}
-      <section className="container-modern py-4">
-        <div className="text-center mb-10 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-            Resources & Quick Access
-          </h2>
-          <p className="text-base sm:text-lg text-gray-600">
-            Find important links and downloadable resources in one place
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {resourceAndAccessItems.map((item) => (
-            <Link key={item.title} to={item.href} className="h-full">
-              <Card
-                className={`h-full hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:-translate-y-2 ${item.shadowColor}`}
-              >
-                <CardContent className="p-6 sm:p-8 text-center">
-                  <div
-                    className={`w-14 h-14 sm:w-16 sm:h-16 ${item.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-300`}
-                  >
-                    <item.icon
-                      className={`h-7 w-7 sm:h-8 sm:w-8 ${item.iconColor} transition-colors`}
-                    />
-                  </div>
-                  <h3
-                    className={`text-sm sm:text-base font-semibold text-gray-900 ${item.titleColor} transition-colors mb-2`}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </section>
-      {/* Recruiters Marquee */}
-      <section className="bg-gray-50 border-y border-gray-200 py-8 overflow-hidden">
-        <div className="container-modern">
-          <h3 className="text-center text-base sm:text-lg font-semibold text-gray-800 mb-4 sm:mb-5">
-            Our Students Work At
-          </h3>
-          <div className="relative overflow-hidden">
-            <div className="marquee-track hover:[animation-play-state:paused]">
-              {[...companies, ...companies].map((company, index) => (
-                <div
-                  key={`${company}-${index}`}
-                  className="px-4 sm:px-5 py-2 rounded-full bg-white border border-gray-200 text-xs sm:text-sm text-gray-700 font-medium whitespace-nowrap shadow-sm"
-                >
-                  {company}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Placement Stats Section */}
-      <section ref={placementSectionRef} className="container-modern py-4">
-        <div className="text-center mb-10 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-            Placements at UIET
-          </h2>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {placementStats.map((stat, index) => (
-            <Card
-              key={stat.label}
-              className="border border-[#118DC4]/20 bg-gradient-to-br from-white to-[#118DC4]/5 shadow-md"
-            >
-              <CardContent className="p-6 sm:p-8 text-center">
-                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#118DC4] mb-2">
-                  {stat.prefix}
-                  {statValues[index]}
-                  {stat.suffix}
-                </p>
-                <p className="text-sm md:text-base text-gray-700 font-medium">
-                  {stat.label}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="text-center mt-8 sm:mt-10">
-          <Link to="/placements#statistics">
-            <Button className="w-full sm:w-auto bg-gradient-to-r from-[#118DC4] to-[#0d75a8] hover:from-[#0f7db0] hover:to-[#0a5d87] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              View Placement Report
-            </Button>
-          </Link>
-        </div>
-      </section>
       {/* Campus Life Section */}
       <section className="bg-gradient-to-br from-[#118DC4]/8 via-[#118DC4]/5 to-transparent py-10 sm:py-14">
         <div className="container-modern">
@@ -311,7 +155,7 @@ const HomepageContent = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {campusLife.map((item, index) => (
               <Card
                 key={index}
@@ -349,6 +193,117 @@ const HomepageContent = () => {
           </div>
         </div>
       </section>
+
+      {/* Departments Section */}
+      <section className="bg-gradient-to-br from-gray-50 to-[#118DC4]/5 py-10 sm:py-14">
+        <div className="container-modern">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+              Our Departments
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              Explore our diverse range of engineering programs designed to
+              shape tomorrow's innovators
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {departments.map((dept, index) => (
+              <Card
+                key={index}
+                className="hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:shadow-[#118DC4]/20 hover:-translate-y-2"
+              >
+                <Link to={dept.link}>
+                  <CardContent className="p-5 sm:p-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="w-12 h-12 bg-[#118DC4]/10 rounded-lg flex items-center justify-center group-hover:bg-[#118DC4] group-hover:scale-110 transition-all duration-300">
+                        <dept.icon className="h-6 w-6 text-[#118DC4] group-hover:text-white transition-colors" />
+                      </div>
+                      <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-[#118DC4] group-hover:scale-110 transition-all duration-300" />
+                    </div>
+                    <h3 className="font-semibold text-gray-900 mb-4 group-hover:text-[#118DC4] transition-colors leading-tight">
+                      {dept.name}
+                    </h3>
+                    <div className="space-y-2 text-sm text-gray-600">
+                      {dept.showStudents !== false && (
+                        <div className="flex justify-between items-center">
+                          <span>Students:</span>
+                          <span className="font-semibold text-[#118DC4]">
+                            {dept.students}
+                          </span>
+                        </div>
+                      )}
+                      <div className="flex justify-between items-center">
+                        <span>Faculty:</span>
+                        <span className="font-semibold text-[#118DC4]">
+                          {dept.faculty}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Link>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* Recruiters Marquee */}
+      <section className="bg-gray-50 border-y border-gray-200 py-8 overflow-hidden">
+        <div className="container-modern">
+          <h3 className="text-center text-base sm:text-lg font-semibold text-gray-800 mb-4 sm:mb-5">
+            Our Students Work At
+          </h3>
+          <div className="relative overflow-hidden">
+            <div className="marquee-track hover:[animation-play-state:paused]">
+              {[...companies, ...companies].map((company, index) => (
+                <div
+                  key={`${company}-${index}`}
+                  className="px-4 sm:px-5 py-2 rounded-full bg-white border border-gray-200 text-xs sm:text-sm text-gray-700 font-medium whitespace-nowrap shadow-sm"
+                >
+                  {company}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Placement Stats Section */}
+      <section ref={placementSectionRef} className="container-modern py-4">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+            Placements at UIET
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {placementStats.map((stat, index) => (
+            <Card
+              key={stat.label}
+              className="border border-[#118DC4]/20 bg-gradient-to-br from-white to-[#118DC4]/5 shadow-md"
+            >
+              <CardContent className="p-6 sm:p-8 text-center">
+                <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#118DC4] mb-2">
+                  {stat.prefix}
+                  {statValues[index]}
+                  {stat.suffix}
+                </p>
+                <p className="text-sm md:text-base text-gray-700 font-medium">
+                  {stat.label}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="text-center mt-8 sm:mt-10">
+          <Link to="/placements#statistics">
+            <Button className="w-full sm:w-auto bg-gradient-to-r from-[#118DC4] to-[#0d75a8] hover:from-[#0f7db0] hover:to-[#0a5d87] text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              View Placement Report
+            </Button>
+          </Link>
+        </div>
+      </section>
+
 
       {/* Vision & Mission Section */}
       <section id="mission" className="container-modern py-4">
@@ -423,6 +378,45 @@ const HomepageContent = () => {
             </div>
           </CardContent>
         </Card>
+      </section>
+      {/* Resources & Quick Access Section */}
+      <section className="container-modern py-4">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+            Resources & Quick Access
+          </h2>
+          <p className="text-base sm:text-lg text-gray-600">
+            Find important links and downloadable resources in one place
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {resourceAndAccessItems.map((item) => (
+            <Link key={item.title} to={item.href} className="h-full">
+              <Card
+                className={`h-full hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-md hover:-translate-y-2 ${item.shadowColor}`}
+              >
+                <CardContent className="p-6 sm:p-8 text-center">
+                  <div
+                    className={`w-14 h-14 sm:w-16 sm:h-16 ${item.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-300`}
+                  >
+                    <item.icon
+                      className={`h-7 w-7 sm:h-8 sm:w-8 ${item.iconColor} transition-colors`}
+                    />
+                  </div>
+                  <h3
+                    className={`text-sm sm:text-base font-semibold text-gray-900 ${item.titleColor} transition-colors mb-2`}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {item.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <style>
@@ -557,6 +551,38 @@ const HomepageContent = () => {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </form>
+            </div>
+          </div>
+
+          <div className="mt-10 overflow-hidden rounded-3xl border border-gray-200 shadow-xl bg-white">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="p-6 sm:p-8 lg:p-10">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+                  Find Us on the Map
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-6 max-w-xl">
+                  View the campus location directly on Google Maps for easy navigation to UIET, Sector 25, Chandigarh.
+                </p>
+                <a
+                  href="https://www.google.com/maps?q=University+Institute+of+Engineering+and+Technology+Panjab+University+Chandigarh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button className="bg-[#118DC4] hover:bg-[#0a6ba2] text-white">
+                    Open Google Maps
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
+              </div>
+              <div className="min-h-[320px]">
+                <iframe
+                  title="UIET Google Map"
+                  src="https://www.google.com/maps?q=University+Institute+of+Engineering+and+Technology+Panjab+University+Chandigarh&output=embed"
+                  className="h-full w-full min-h-[320px] border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
             </div>
           </div>
         </div>

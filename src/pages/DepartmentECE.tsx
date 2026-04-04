@@ -15,15 +15,10 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   GraduationCap,
-  BookOpen,
   Users,
   Award,
   Building,
   Code,
-  Database,
-  Globe,
-  Smartphone,
-  Brain,
   Beaker,
   ChevronRight,
   ExternalLink,
@@ -987,6 +982,14 @@ const DepartmentECE = () => {
                   </div>
                 </CardContent>
               </Card>
+              <div className="flex justify-center pt-2">
+                <Link to="/research">
+                  <Button variant="outline" className="border-[#118DC4] text-[#118DC4] hover:bg-[#118DC4]/10">
+                    Explore Central Research Hub
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
             </TabsContent>
 
             <TabsContent value="facilities" className="space-y-8">

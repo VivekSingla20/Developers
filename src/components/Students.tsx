@@ -121,7 +121,7 @@ const Students = () => {
 
         {/* Tabs */}
         <Tabs id="students-tabs" value={activeTab} onValueChange={handleTabChange} className="mb-16">
-          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-4 lg:grid-cols-8 mb-8 h-auto p-1">
+          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 mb-8 h-auto p-1 gap-1">
             {[
               { value: 'batches', label: 'BE Batches' },
               { value: 'research', label: 'Research' },
@@ -149,7 +149,7 @@ const Students = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Batch 2024-28</h4>
                     <div className="space-y-4">
@@ -200,7 +200,7 @@ const Students = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Current Ph.D. Scholars</h4>
                     <div className="space-y-3">
@@ -295,7 +295,7 @@ const Students = () => {
                   </div>
                 )}
                 {loadingScholarships ? <CardSkeleton /> : (
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {(scholarships ?? []).map(s => (
                       <div key={s.id} className="bg-gray-50 p-4 rounded-lg border hover:shadow-sm transition-shadow">
                         <div className="flex justify-between items-start mb-2">
@@ -361,7 +361,7 @@ const Students = () => {
                   </div>
                 )}
                 {loadingAchievements ? <CardSkeleton /> : (
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {(achievements ?? []).map(a => (
                       <div key={a.id} className="bg-gray-50 p-4 rounded-lg flex items-start space-x-3">
                         <div className="w-10 h-10 bg-[#118DC4]/10 rounded-full flex items-center justify-center flex-shrink-0">
@@ -387,33 +387,149 @@ const Students = () => {
 
           {/* Activities */}
           <TabsContent value="activities">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Activity className="h-6 w-6 mr-2" style={{ color: '#118DC4' }} />
-                  Student Activities & Clubs
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { name: 'Technical Club', desc: 'Coding, hackathons, and tech workshops', icon: '💻' },
-                    { name: 'Cultural Club', desc: 'Arts, music, dance, and cultural events', icon: '🎭' },
-                    { name: 'Sports Club', desc: 'Inter-college sports and fitness programs', icon: '⚽' },
-                    { name: 'Literary Club', desc: 'Debates, quizzes, and creative writing', icon: '📚' },
-                    { name: 'Robotics Club', desc: 'Robotics, automation, and AI projects', icon: '🤖' },
-                    { name: 'NSS', desc: 'National Service Scheme and community work', icon: '🌱' },
-                  ].map(club => (
-                    <div key={club.name} className="bg-gray-50 p-4 rounded-lg text-center hover:shadow-sm transition-shadow">
-                      <div className="text-3xl mb-2">{club.icon}</div>
-                      <h4 className="font-semibold text-gray-900 mb-1">{club.name}</h4>
-                      <p className="text-sm text-gray-600">{club.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+  <Card>
+    <CardHeader>
+      <CardTitle className="flex items-center">
+        <Activity className="h-6 w-6 mr-2" style={{ color: '#118DC4' }} />
+        Student Activities & Clubs
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-6">
+
+      {/* UTECHNOS Official Committees */}
+      <div>
+        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+          UTECHNOS — Official Student Committees
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            {
+              name: 'Cultural Committee',
+              desc: 'Organises Goonj — UIET\'s annual techno-cultural fest with fashion shows, dance (Groovz), rock night, Pronite & city-level pageants',
+              icon: '🎭',
+            },
+            {
+              name: 'Sports Committee',
+              desc: 'Organises UMANG — the annual inter-college sports fest — plus intra-UIET tournaments in cricket, football, basketball & more',
+              icon: '⚽',
+            },
+            {
+              name: 'Technical Committee',
+              desc: 'Drives technical workshops, hackathons, coding competitions, and coordinates IEEE, ISTE, SAE & ACM student chapter activities',
+              icon: '💻',
+            },
+            {
+              name: 'Art & Literary Committee',
+              desc: 'Oversees debates, elocution, quizzes, creative writing, and fine arts events across the campus',
+              icon: '📚',
+            },
+            {
+              name: 'Brand Promotion Committee (BPC)',
+              desc: 'Handles UIET\'s public image, organises UIET-MUN annually, and manages outreach, social media & institutional branding',
+              icon: '📣',
+            },
+            {
+              name: 'Fund Management Committee',
+              desc: 'Manages the financial planning and resource allocation for all UTECHNOS student activities and events',
+              icon: '💰',
+            },
+            {
+              name: 'Alumni Affairs Cell (STAR)',
+              desc: 'STAR (Student Team for Alumni Relations) bridges students with 9,000+ global alumni via ATalks, placement prep & mentorship',
+              icon: '🤝',
+            },
+           
+          ].map(club => (
+            <div
+              key={club.name}
+              className="bg-gray-50 p-4 rounded-lg text-center hover:shadow-sm transition-shadow"
+            >
+              <div className="text-3xl mb-2">{club.icon}</div>
+              <h4 className="font-semibold text-gray-900 mb-1">{club.name}</h4>
+              <p className="text-sm text-gray-600">{club.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Student-Run Clubs */}
+      <div>
+        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+          Student-Run Clubs & Societies
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+             {
+              name: 'TPC',
+              desc: 'Training & Placement Cell — coordinates campus drives, mock interviews, resume workshops & industry connects with 50+ companies annually',
+              icon: '🏢',
+            },
+            {
+              name: 'JUGAAD',
+              desc: 'Official Robotics Club — Arduino, embedded systems, 3D printing, robotics projects and hardware competitions',
+              icon: '🤖',
+            },
+            {
+              name: 'OSMIUM',
+              desc: 'Theatre Club — award-winning stage plays & street performances; won prizes at IIT Guwahati\'s Alcheringa fest',
+              icon: '🎬',
+            },
+            {
+              name: 'EUPHORIA',
+              desc: 'Music Club — jam sessions, open mics, and inter-college music competitions across genres',
+              icon: '🎵',
+            },
+            {
+              name: 'P-Club',
+              desc: 'Programming Club — competitive coding, DSA workshops, inter-college coding contests and developer events',
+              icon: '👨‍💻',
+            },
+            {
+              name: 'EDC',
+              desc: 'Entrepreneurship Development Cell (est. 2011) — organises UDYAMI, UIET\'s national entrepreneurship summit with CEOs & investors',
+              icon: '🚀',
+            },
+            {
+              name: 'SAE UIET',
+              desc: 'Society of Automotive Engineers student chapter — BAJA SAE, Student Formula One, and Aero-modelling events',
+              icon: '🏎️',
+            },
+            {
+              name: 'Google Developer Club',
+              desc: 'GDC UIET — Google technology stack, DevFests, solution challenges, study jams and women-in-tech initiatives',
+              icon: '🌐',
+            },
+            {
+              name: 'MagBoard',
+              desc: 'The official magazine and media board of UIET — content creation, journalism, newsletters and campus media',
+              icon: '📰',
+            },
+            {
+              name: 'DebSoc',
+              desc: 'Debate Society — parliamentary debates, MUN preparation, elocution competitions and public speaking workshops',
+              icon: '🗣️',
+            },
+            {
+              name: 'NSS',
+              desc: 'National Service Scheme — community outreach, blood donation drives, cleanliness campaigns and social welfare activities',
+              icon: '🌱',
+            },
+          ].map(club => (
+            <div
+              key={club.name}
+              className="bg-gray-50 p-4 rounded-lg text-center hover:shadow-sm transition-shadow"
+            >
+              <div className="text-3xl mb-2">{club.icon}</div>
+              <h4 className="font-semibold text-gray-900 mb-1">{club.name}</h4>
+              <p className="text-sm text-gray-600">{club.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </CardContent>
+  </Card>
+</TabsContent>
 
           {/* Emergency */}
           <TabsContent value="emergency">
@@ -425,7 +541,7 @@ const Students = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     { title: 'Campus Health Center', phone: '+91-172-2534820', hours: '24/7', note: 'On-campus medical facility' },
                     { title: 'Emergency Ambulance', phone: '108', hours: '24/7', note: 'Free government ambulance service' },

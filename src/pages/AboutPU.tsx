@@ -53,7 +53,7 @@ const AboutPU = () => {
 
       <div className="container mx-auto px-4 py-12">
         {/* University Overview */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center">
@@ -128,7 +128,7 @@ const AboutPU = () => {
         </div>
 
         {/* Statistics */}
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           {stats.map((stat, index) => (
             <Card key={index} className="text-center">
               <CardContent className="p-6">
@@ -171,7 +171,7 @@ const AboutPU = () => {
         </Card>
 
         {/* Academic Excellence */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <Card>
             <CardHeader>
               <CardTitle>Academic Excellence</CardTitle>
@@ -249,7 +249,7 @@ const AboutPU = () => {
               Experience the rich heritage and academic excellence of one of
               India's premier universities
             </p>
-            <div className="grid md:grid-cols-3 gap-4 text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="bg-white p-4 rounded-lg">
                 <h4 className="font-semibold">Address</h4>
                 <p style={{ color: "#118DC4" }}>

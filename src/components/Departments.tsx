@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 const Departments = () => {
   const departments = [
     {
-      name: "Computer Science & Engineering",
+      name: "Department of Computer Science & Engineering",
       icon: Computer,
       head: "Dr. Rajesh Kumar",
       faculty: 18,
@@ -34,7 +34,7 @@ const Departments = () => {
       link: "/departments/cse",
     },
     {
-      name: "Electronics & Communication Engineering",
+      name: "Department of Electronics & Communication Engineering",
       icon: Zap,
       head: "Dr. Priya Sharma",
       faculty: 15,
@@ -51,7 +51,7 @@ const Departments = () => {
       link: "/departments/ece",
     },
     {
-      name: "Electrical & Electronics Engineering",
+      name: "Department of Electrical & Electronics Engineering",
       icon: Lightbulb,
       head: "Dr. Santosh Gupta",
       faculty: 12,
@@ -68,7 +68,7 @@ const Departments = () => {
       link: "/departments/eee",
     },
     {
-      name: "Information Technology",
+      name: "Department of Information Technology",
       icon: Smartphone,
       head: "Dr. Neha Verma",
       faculty: 14,
@@ -85,7 +85,7 @@ const Departments = () => {
       link: "/departments/it",
     },
     {
-      name: "Mechanical Engineering",
+      name: "Department of Mechanical Engineering",
       icon: Cog,
       head: "Dr. Amit Singh",
       faculty: 12,
@@ -102,7 +102,7 @@ const Departments = () => {
       link: "/departments/me",
     },
     {
-      name: "Biotechnology",
+      name: "Department of Biotechnology",
       icon: Dna,
       head: "Dr. Suresh Patel",
       faculty: 8,
@@ -119,11 +119,12 @@ const Departments = () => {
       link: "/departments/bt",
     },
     {
-      name: "Applied Sciences",
+      name: "Department of Applied Sciences",
       icon: Calculator,
       head: "Dr. Kavita Rani",
       faculty: 20,
       students: 300,
+      showStudents: false,
       description:
         "Foundation courses in mathematics, physics, and chemistry for all engineering disciplines.",
       specializations: [
@@ -184,19 +185,21 @@ const Departments = () => {
                   <CardContent className="pt-0">
                     <div className="space-y-4">
                       {/* Department Stats */}
-                      <div className="grid grid-cols-3 gap-4 text-center">
+                      <div className={`grid gap-4 text-center ${dept.showStudents === false ? "grid-cols-2" : "grid-cols-3"}`}>
                         <div>
                           <div className="text-lg font-semibold text-slate-900">
                             {dept.faculty}
                           </div>
                           <div className="text-sm text-slate-600">Faculty</div>
                         </div>
-                        <div>
-                          <div className="text-lg font-semibold text-slate-900">
-                            {dept.students}
+                        {dept.showStudents !== false && (
+                          <div>
+                            <div className="text-lg font-semibold text-slate-900">
+                              {dept.students}
+                            </div>
+                            <div className="text-sm text-slate-600">Students</div>
                           </div>
-                          <div className="text-sm text-slate-600">Students</div>
-                        </div>
+                        )}
                         <div>
                           <div className="text-lg font-semibold text-slate-900">
                             A+

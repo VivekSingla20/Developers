@@ -30,12 +30,7 @@ export const features = [
     description: "Highly qualified and experienced faculty members",
     link: "/faculty",
   },
-  {
-    icon: Award,
-    title: "NAAC A+ Accredited",
-    description: "Recognized for academic excellence and quality standards",
-    link: "/about",
-  },
+
   {
     icon: Building2,
     title: "Modern Infrastructure",
@@ -58,84 +53,85 @@ export const features = [
 
 export const departments = [
   {
-    name: "Computer Science & Engineering",
+    name: "Department of Computer Science & Engineering",
     icon: Code,
     students: 480,
     faculty: 25,
     link: "/departments/cse",
   },
   {
-    name: "Electronics & Communication",
+    name: "Department of Electronics & Communication Engineering",
     icon: Cog,
     students: 360,
     faculty: 20,
     link: "/departments/ece",
   },
   {
-    name: "Electrical & Electronics",
+    name: "Department of Electrical & Electronics Engineering",
     icon: Zap,
     students: 240,
     faculty: 15,
     link: "/departments/eee",
   },
   {
-    name: "Information Technology",
+    name: "Department of Information Technology",
     icon: Code,
     students: 360,
     faculty: 18,
     link: "/departments/it",
   },
   {
-    name: "Mechanical Engineering",
+    name: "Department of Mechanical Engineering",
     icon: Wrench,
     students: 240,
     faculty: 16,
     link: "/departments/me",
   },
   {
-    name: "Biotechnology",
+    name: "Department of Biotechnology",
     icon: Dna,
     students: 120,
     faculty: 12,
     link: "/departments/bt",
   },
   {
-    name: "Applied Sciences",
+    name: "Department of Applied Sciences",
     icon: Calculator,
     students: 60,
     faculty: 10,
     link: "/departments/as",
+    showStudents: false,
   },
 ];
 
 export const campusLife = [
   {
-    title: "Student Clubs & Societies",
-    description: "Technical and cultural clubs for holistic development",
-    image:
-      "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=300&h=200&fit=crop",
-    link: "/students#clubs",
+    title: "Goonj – Annual Cultural Fest",
+    description:
+      "UIET's flagship annual cultural festival featuring fashion shows (Glitterati), dance competitions (Groovz), rock nights, Pronite, quizzes, and a city-level beauty pageant. Held every year around March–April, it's the most awaited event on campus.",
+    image: "/images/campus/goonj.jpg", // replace with actual image path
+    link: "/students/goonj",
   },
   {
-    title: "Annual Tech Fest - UTechnos",
-    description: "Premier technical festival with competitions and workshops",
-    image:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300&h=200&fit=crop",
-    link: "/students#events",
+    title: "Technical Clubs & Societies",
+    description:
+      "Home to IEEE, ISTE, SAE, ACM chapters, and student-run clubs like JUGAAD (Robotics), P-Club (Programming), Google Developer Club, DIG (Design & Innovation Group), and EDC — offering workshops, hackathons, and hands-on tech projects year-round.",
+    image: "/images/campus/technical-clubs.jpg",
+    link: "/students/clubs",
   },
   {
-    title: "Sports & Recreation",
-    description: "Sports facilities and inter-college tournaments",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop",
-    link: "/students#sports",
+    title: "Sports & UMANG Fest",
+    description:
+      "Students enjoy cricket, football, basketball, badminton, and tennis on campus, with access to Panjab University's world-class North Campus sports facilities. UMANG is the dedicated annual sports festival celebrating athletic talent across disciplines.",
+    image: "/images/campus/sports.jpg",
+    link: "/students/sports",
   },
   {
-    title: "Research Projects",
-    description: "Student involvement in cutting-edge research",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&h=200&fit=crop",
-    link: "/research",
+    title: "Cultural & Arts Clubs",
+    description:
+      "Express yourself through EUPHORIA (Music Club), OSMIUM (Theatre Club), the Dance Club, DebSoc (Debate Society), Comic Tribe, and MagBoard. Regular performances, open mics, and inter-college competitions keep creative life thriving at UIET.",
+    image: "/images/campus/cultural.jpg",
+    link: "/students/cultural",
   },
 ];
 
@@ -148,7 +144,7 @@ export const downloads = [
 
 export const quickAccess = [
   {
-    title: "Admissions 2024",
+    title: "Admissions",
     description: "Access official admissions portal for various programs",
     icon: GraduationCap,
     href: "/admissions",
@@ -244,6 +240,7 @@ export const companies = [
 
 export const accreditationHighlights = [
   "NAAC A++ Accredited",
+  "AICTE Approved",
   "NIRF Tier-1 Ranking",
   "NBA Accredited Programs",
   "Est. 2002 · 20+ Years",

@@ -19,16 +19,6 @@ const Hero = () => {
     { icon: BookOpen, value: "15+", label: "Programs Offered" },
   ];
 
-  const svgPattern = `data:image/svg+xml,${encodeURIComponent(`
-    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" fill-rule="evenodd">
-        <g fill="#9C92AC" fill-opacity="0.05">
-          <circle cx="30" cy="30" r="2"/>
-        </g>
-      </g>
-    </svg>
-  `)}`;
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Elements */}
@@ -43,9 +33,9 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="container-modern relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen py-8 lg:py-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen py-8 lg:py-0">
           {/* Left Content */}
-          <div className=" space-y-6 lg:space-y-8 text-center lg:text-left">
+          <div className="space-y-6 lg:space-y-8 text-center">
             {/* Badge */}
             <div className="inline-flex items-center px-3 sm:px-4 py-2 bg-white/20 backdrop-blur-sm mt-8 rounded-full border border-white/30 text-xs sm:text-sm">
               <span className="font-medium text-white">
@@ -55,18 +45,34 @@ const Hero = () => {
 
             {/* Main Heading */}
             <div className="space-y-4 lg:space-y-6">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white max-w-3xl mx-auto">
                 Shaping Future
                 <span className="block bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
                   Engineers & Leaders
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-2xl mx-auto lg:mx-0 text-gray-100">
+              <p className="text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-2xl mx-auto text-gray-100">
                 University Institute of Engineering & Technology - A premier
                 government institution under Panjab University, fostering
                 innovation, excellence, and ethical values since 2002.
               </p>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-1">
+              {[
+                "NAAC A++",
+                "AICTE Approved",
+                "NBA Accredited",
+                "NIRF Ranked",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="px-3 py-1.5 rounded-full bg-white/15 border border-white/25 text-xs sm:text-sm font-medium text-white backdrop-blur-sm"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
 
             {/* Key Features */}
@@ -83,7 +89,7 @@ const Hero = () => {
             </div> */}
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 justify-center">
               <Link to="/admissions" className="w-full sm:w-auto">
                 <Button
                   size="lg"

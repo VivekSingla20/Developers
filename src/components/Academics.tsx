@@ -262,7 +262,7 @@ const Academics = () => {
 
         {/* Programs Tabs */}
         <Tabs id="academics-tabs" value={activeTab} onValueChange={handleTabChange} className="mb-20">
-          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-3 mb-8 h-auto">
+          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-1 sm:grid-cols-3 mb-8 h-auto gap-2">
             <TabsTrigger value="undergraduate" className="px-2 sm:px-8 text-xs sm:text-base">
               Undergraduate
             </TabsTrigger>
@@ -349,7 +349,7 @@ const Academics = () => {
           <h3 className="text-2xl font-bold text-slate-900 text-center mb-8">
             Academic Resources
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <Link to="/downloads">
               <Card id="calendar" className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-6 text-center">

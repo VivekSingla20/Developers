@@ -48,31 +48,31 @@ const Contact = () => {
 
   const departments = [
     {
-      name: "Computer Science & Engineering",
+      name: "Department of Computer Science & Engineering",
       email: "cse@uiet.puchd.ac.in",
       phone: "+91-172-2534820",
       head: "Dr. Rajesh Kumar",
     },
     {
-      name: "Electronics & Communication",
+      name: "Department of Electronics & Communication Engineering",
       email: "ece@uiet.puchd.ac.in",
       phone: "+91-172-2534821",
       head: "Dr. Priya Sharma",
     },
     {
-      name: "Mechanical Engineering",
+      name: "Department of Mechanical Engineering",
       email: "me@uiet.puchd.ac.in",
       phone: "+91-172-2534822",
       head: "Dr. Amit Singh",
     },
     {
-      name: "Civil Engineering",
+      name: "Department of Civil Engineering",
       email: "ce@uiet.puchd.ac.in",
       phone: "+91-172-2534823",
       head: "Dr. Neha Gupta",
     },
     {
-      name: "Biotechnology",
+      name: "Department of Biotechnology",
       email: "bt@uiet.puchd.ac.in",
       phone: "+91-172-2534824",
       head: "Dr. Suresh Patel",
@@ -392,49 +392,40 @@ const Contact = () => {
           </Card>
 
           <Card
-            className="border-0 shadow-lg text-white"
+            className="border-0 shadow-lg text-white self-start"
             style={{
               background: "linear-gradient(to bottom right, #118DC4, #8b5cf6)",
             }}
           >
-            <CardContent className="p-8">
-              <h3 className="text-xl font-bold mb-4">
+            <CardContent className="p-5 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
                 Schedule a Campus Visit
               </h3>
-              <p className="mb-6" style={{ color: "#e0f7ff" }}>
-                Experience our world-class facilities firsthand. Schedule a
-                guided campus tour and see why UIET is the perfect choice for
-                your engineering education.
+              <p className="text-sm sm:text-base mb-5 sm:mb-6 leading-relaxed" style={{ color: "#e0f7ff" }}>
+                Experience our world-class facilities firsthand. Schedule a guided
+                campus tour and see why UIET is the perfect choice for your
+                engineering education.
               </p>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center space-x-3">
-                  <Clock className="w-5 h-5" style={{ color: "#b3e5fc" }} />
-                  <span style={{ color: "#e0f7ff" }}>
-                    Tours available Monday-Saturday
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" style={{ color: "#b3e5fc" }} />
+                  <span className="text-sm sm:text-base" style={{ color: "#e0f7ff" }}>
+                    Tours available Monday–Saturday
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Users className="w-5 h-5" style={{ color: "#b3e5fc" }} />
-                  <span style={{ color: "#e0f7ff" }}>
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" style={{ color: "#b3e5fc" }} />
+                  <span className="text-sm sm:text-base" style={{ color: "#e0f7ff" }}>
                     Group and individual tours
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MessageSquare
-                    className="w-5 h-5"
-                    style={{ color: "#b3e5fc" }}
-                  />
-                  <span style={{ color: "#e0f7ff" }}>
+                  <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" style={{ color: "#b3e5fc" }} />
+                  <span className="text-sm sm:text-base" style={{ color: "#e0f7ff" }}>
                     Meet faculty and current students
                   </span>
                 </div>
               </div>
-              <Button
-                className="w-full mt-6 bg-white hover:bg-slate-100"
-                style={{ color: "#118DC4" }}
-              >
-                Schedule Visit
-              </Button>
             </CardContent>
           </Card>
         </div>

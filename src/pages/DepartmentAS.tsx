@@ -20,10 +20,6 @@ import {
   Award,
   Building,
   Code,
-  Database,
-  Globe,
-  Smartphone,
-  Brain,
   Beaker,
   ChevronRight,
   ExternalLink,
@@ -40,7 +36,7 @@ const DepartmentAS = () => {
 
   // Department statistics
   const stats = [
-    { label: "Students Enrolled", value: "400+", icon: Users },
+    { label: "Core Disciplines", value: "4", icon: BookOpen },
     { label: "Faculty", value: "28+", icon: GraduationCap },
     { label: "Laboratories", value: "6", icon: Beaker },
     { label: "Placement", value: "95%", icon: Trophy },
@@ -644,6 +640,14 @@ const DepartmentAS = () => {
                   </div>
                 </CardContent>
               </Card>
+              <div className="flex justify-center pt-2">
+                <Link to="/research">
+                  <Button variant="outline" className="border-[#118DC4] text-[#118DC4] hover:bg-[#118DC4]/10">
+                    Explore Central Research Hub
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
             </TabsContent>
 
             <TabsContent value="facilities" className="space-y-8">

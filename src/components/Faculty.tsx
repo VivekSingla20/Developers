@@ -228,7 +228,7 @@ const Faculty = () => {
         {/* Faculty Tabs */}
         {!isLoading && !error && (
           <Tabs defaultValue="all" className="w-full">
-            <TabsList className="grid grid-cols-3 md:grid-cols-5 lg:flex lg:justify-center gap-2 mx-auto mb-12 bg-white rounded-xl p-2 w-full max-w-4xl">
+            <TabsList className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:flex lg:justify-center gap-2 mx-auto mb-12 bg-white rounded-xl p-2 w-full max-w-4xl">
               <TabsTrigger
                 value="all"
                 className="px-4 py-3 rounded-lg transition-all duration-200 hover:bg-gray-100 data-[state=active]:bg-[#118DC4] data-[state=active]:text-white data-[state=active]:shadow-md text-sm font-medium"

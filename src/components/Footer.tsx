@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Facebook,
   X,
@@ -16,6 +17,7 @@ import {
 
 const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const isExternalLink = (href: string) => /^https?:\/\//.test(href);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -43,28 +45,28 @@ const Footer = () => {
   ];
 
   const departments = [
-    { name: "Computer Science & Engineering", href: "/departments/cse" },
-    { name: "Electronics & Communication", href: "/departments/ece" },
-    { name: "Electrical & Electronics", href: "/departments/eee" },
-    { name: "Information Technology", href: "/departments/it" },
-    { name: "Mechanical Engineering", href: "/departments/me" },
-    { name: "Biotechnology", href: "/departments/bt" },
-    { name: "Applied Sciences", href: "/departments/as" },
+    { name: "Department of Computer Science & Engineering", href: "/departments/cse" },
+    { name: "Department of Electronics & Communication Engineering", href: "/departments/ece" },
+    { name: "Department of Electrical & Electronics Engineering", href: "/departments/eee" },
+    { name: "Department of Information Technology", href: "/departments/it" },
+    { name: "Department of Mechanical Engineering", href: "/departments/me" },
+    { name: "Department of Biotechnology", href: "/departments/bt" },
+    { name: "Department of Applied Sciences", href: "/departments/as" },
   ];
 
   const importantLinks = [
     { name: "Latest News and Notices", href: "/news" },
     { name: "Employment and Jobs", href: "/employment" },
     { name: "Shraman Foundation Scholarship", href: "/scholarships/shraman" },
-    { name: "Panjab University(Official Website)", href: "https://puchd.ac.in/" },
+    { name: "Panjab University (Official Website)", href: "https://puchd.ac.in/" },
     { name: "UIET Web Portal", href: "https://eakadamik.in/uietchd/" },
-    { name: "TEQIP", href: "/teqip" },
+    { name: "TEQIP", href: "https://uiet.puchd.ac.in/teqip/" },
     { name: "Design Innovation Centre (DIC)", href: "https://dicpu.in/" },
     { name: "Telelabs", href: "https://uiet.puchd.ac.in/telelabs/" },
     { name: "Maivrik Labs", href: "https://uiet.puchd.ac.in/maivriklabs/index.html" },
-    { name: "TBIU", href: "/tbiu" },
+    { name: "TBIU", href: "https://tbiu.dicpu.in/" },
     { name: "Government Scholarships", href: "https://scholarships.gov.in/" },
-    { name: "National Apprenticeship Training Scheme (NATS)", href: "/nats" },
+    { name: "National Apprenticeship Training Scheme (NATS)", href: "https://www.mhrdnats.gov.in/" },
   ];
 
   const importantInformation = [
@@ -79,7 +81,7 @@ const Footer = () => {
       href: "https://library.puchd.ac.in/digital-library.php",
     },
     { name: "Research Scholars", href: "/research-scholars" },
-    { name: "RTI-UIET", href: "/rti" },
+    { name: "RTI-UIET", href: "https://rti.puchd.ac.in/" },
     { name: "UIET @ FB", href: "https://www.facebook.com/uietpuofficial" },
   ];
 
@@ -117,9 +119,9 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative z-[60] overflow-hidden pointer-events-auto">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
 
       {/* Scroll to Top Button */}
       {showScrollTop && (
@@ -133,7 +135,7 @@ const Footer = () => {
       )}
 
       {/* Main Footer */}
-      <div className="relative z-10">
+      <div className="relative z-[61] pointer-events-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
           {/* Top Section - University Info */}
           <div className="mb-10 sm:mb-12">
@@ -197,15 +199,29 @@ const Footer = () => {
               <ul className="space-y-2.5">
                 {quickLinks.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-200 flex items-start group text-sm leading-snug"
-                    >
-                      <ExternalLink className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-[#118DC4]" />
-                      <span className="break-words sm:group-hover:translate-x-1 transition-transform">
-                        {link.name}
-                      </span>
-                    </a>
+                    {isExternalLink(link.href) ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-white transition-colors duration-200 flex items-start group text-sm leading-snug"
+                      >
+                        <ExternalLink className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-[#118DC4]" />
+                        <span className="break-words sm:group-hover:translate-x-1 transition-transform">
+                          {link.name}
+                        </span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-gray-400 hover:text-white transition-colors duration-200 flex items-start group text-sm leading-snug"
+                      >
+                        <ExternalLink className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-[#118DC4]" />
+                        <span className="break-words sm:group-hover:translate-x-1 transition-transform">
+                          {link.name}
+                        </span>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -217,14 +233,27 @@ const Footer = () => {
               <ul className="space-y-2.5">
                 {departments.map((dept) => (
                   <li key={dept.name}>
-                    <a
-                      href={dept.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
-                    >
-                      <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
-                        {dept.name}
-                      </span>
-                    </a>
+                    {isExternalLink(dept.href) ? (
+                      <a
+                        href={dept.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
+                      >
+                        <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
+                          {dept.name}
+                        </span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={dept.href}
+                        className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
+                      >
+                        <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
+                          {dept.name}
+                        </span>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -237,18 +266,34 @@ const Footer = () => {
                 Important Links
               </h3>
               <ul className="space-y-2.5">
-                {importantLinks.map((link) => (
+                {importantLinks.map((link) => {
+                  console.log("LINK DATA:", link, "isExternal:", isExternalLink(link.href));
+                  return (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
-                    >
-                      <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
-                        {link.name}
-                      </span>
-                    </a>
+                    {isExternalLink(link.href) ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
+                      >
+                        <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
+                          {link.name}
+                        </span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
+                      >
+                        <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
+                          {link.name}
+                        </span>
+                      </Link>
+                    )}
                   </li>
-                ))}
+                  );
+                })}
               </ul>
             </div>
 
@@ -261,14 +306,27 @@ const Footer = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {importantInformation.map((info) => (
                   <div key={info.name}>
-                    <a
-                      href={info.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
-                    >
-                      <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
-                        {info.name}
-                      </span>
-                    </a>
+                    {isExternalLink(info.href) ? (
+                      <a
+                        href={info.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
+                      >
+                        <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
+                          {info.name}
+                        </span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={info.href}
+                        className="text-gray-400 hover:text-white transition-colors duration-200 group text-sm leading-snug"
+                      >
+                        <span className="break-words sm:group-hover:translate-x-1 transition-transform inline-block">
+                          {info.name}
+                        </span>
+                      </Link>
+                    )}
                   </div>
                 ))}
               </div>
@@ -277,7 +335,7 @@ const Footer = () => {
 
           {/* Contact Info Section */}
           <div className="mb-8 sm:mb-10 pt-8 border-t border-slate-700">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-4xl mx-auto">
               <div className="flex items-center space-x-4 group">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-[#118DC4] transition-colors">
                   <MapPin className="h-5 w-5 text-[#118DC4] group-hover:text-white transition-colors" />
@@ -325,7 +383,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Footer */}
-      <div className="border-t border-slate-700 bg-slate-900/80 backdrop-blur-sm">
+      <div className="relative z-[61] border-t border-slate-700 bg-slate-900/80 backdrop-blur-sm pointer-events-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
             <div className="text-gray-400 text-sm text-center lg:text-left">
@@ -333,36 +391,36 @@ const Footer = () => {
               University. All rights reserved.
             </div>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm">
-              <a
-                href="/about#privacy"
+              <Link
+                to="/about#privacy"
                 className="text-gray-400 hover:text-[#118DC4] transition-colors"
               >
                 Privacy Policy
-              </a>
-              <a
-                href="/about#terms"
+              </Link>
+              <Link
+                to="/about#terms"
                 className="text-gray-400 hover:text-[#118DC4] transition-colors"
               >
                 Terms of Service
-              </a>
-              <a
-                href="/about#cookies"
+              </Link>
+              <Link
+                to="/about#cookies"
                 className="text-gray-400 hover:text-[#118DC4] transition-colors"
               >
                 Cookie Policy
-              </a>
-              <a
-                href="/about#accessibility"
+              </Link>
+              <Link
+                to="/about#accessibility"
                 className="text-gray-400 hover:text-[#118DC4] transition-colors"
               >
                 Accessibility
-              </a>
-              <a
-                href="/contact"
+              </Link>
+              <Link
+                to="/contact"
                 className="text-gray-400 hover:text-[#118DC4] transition-colors"
               >
                 Support
-              </a>
+              </Link>
             </div>
           </div>
         </div>

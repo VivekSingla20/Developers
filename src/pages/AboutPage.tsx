@@ -229,7 +229,7 @@ const AboutPage = () => {
 
           <TabsContent value="overview" className="space-y-8">
             {/* Statistics */}
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
                 <Card
                   key={index}
@@ -247,7 +247,7 @@ const AboutPage = () => {
             </div>
 
             {/* About UIET */}
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -332,7 +332,7 @@ const AboutPage = () => {
                 <CardTitle>Explore More</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <Link to="/research" className="block">
                     <div className="p-4 bg-white rounded-lg hover:shadow-md transition-shadow">
                       <Lightbulb className="h-6 w-6 mb-2" style={{ color: '#118DC4' }} />
@@ -382,7 +382,7 @@ const AboutPage = () => {
                   globally admired architectural heritage, PU continues to be a
                   beacon of learning and research in India.
                 </p>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       Key Highlights
@@ -458,7 +458,7 @@ const AboutPage = () => {
                   the goddess of power and a fort of ‘garh’ laying beyond the temple gave
                   the city its name “Chandigarh-The City Beautiful”.
                 </p>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h4 className="font-semibold mb-2" style={{ color: '#118DC4' }}>
                       Historical & Geographical Highlights
@@ -569,7 +569,7 @@ const AboutPage = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h4 className="font-semibold mb-3" style={{ color: '#118DC4' }}>
                       Campus Address
@@ -680,7 +680,7 @@ const AboutPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Card>
                     <CardContent className="p-4">
                       <h4 className="font-semibold mb-2">Academic Vision</h4>
@@ -706,7 +706,7 @@ const AboutPage = () => {
           </TabsContent>
 
           <TabsContent value="mission" className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -775,7 +775,7 @@ const AboutPage = () => {
                 <CardTitle>Core Values</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center p-4 rounded-lg" style={{ backgroundColor: "#e6f3fb" }}>
                     <h4 className="font-semibold mb-2" style={{ color: "#118DC4" }}>
                       Excellence
@@ -809,7 +809,7 @@ const AboutPage = () => {
           </TabsContent>
 
           <TabsContent value="infrastructure" className="space-y-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {infrastructure.map((facility, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6 text-center">
@@ -830,7 +830,7 @@ const AboutPage = () => {
                 <CardTitle>Detailed Infrastructure</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h4 className="font-semibold mb-3" style={{ color: "#118DC4" }}>
                       Academic Facilities

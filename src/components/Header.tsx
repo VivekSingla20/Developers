@@ -49,6 +49,24 @@ const navigationItems = [
     ],
   },
   {
+    name: "Students",
+    href: "/students",
+    dropdown: [
+      { name: "Student Life Overview", href: "/students" },
+      { name: "B.E. 1st Year Batch", href: "/students#be-first-year" },
+      { name: "Research Scholars", href: "/students#research-scholars" },
+      { name: "Clubs & Societies", href: "/students#clubs" },
+      { name: "Student Activities", href: "/students#activities" },
+      { name: "Student Achievements", href: "/students#achievements" },
+      { name: "Notices & Updates", href: "/students#notices" },
+      { name: "Scholarships", href: "/students#scholarships" },
+      { name: "AICTE Scholarships", href: "/students#aicte-scholarships" },
+      { name: "Medical Emergency", href: "/students#medical-emergency" },
+      { name: "Alumni Network", href: "/students#alumni" },
+      { name: "Employment Opportunities", href: "/employment" },
+    ],
+  },
+  {
     name: "Departments",
     href: "/departments",
     dropdown: [
@@ -68,31 +86,15 @@ const navigationItems = [
     name: "Admissions",
     href: "/admissions",
     dropdown: [
-      { name: "B.E. Admissions 2024", href: "/admissions" },
+      { name: "B.E. Admissions", href: "/admissions" },
       { name: "M.E./M.Tech Admissions", href: "/admissions#mtech" },
       { name: "Ph.D Admissions", href: "/admissions#phd" },
       { name: "NRI/Foreign Admissions", href: "/admissions#nri" },
-      { name: "Sports Quota Admissions", href: "/admissions#sports" },
+      { name: "Sports Admissions", href: "/admissions#sports" },
       { name: "PUMEET Information", href: "/admissions#pumeet" },
       { name: "PULEET Information", href: "/admissions#puleet" },
-    ],
-  },
-  {
-    name: "Students",
-    href: "/students",
-    dropdown: [
-      { name: "Student Life Overview", href: "/students" },
-      { name: "B.E. 1st Year Batch", href: "/students#be-first-year" },
-      { name: "Research Scholars", href: "/students#research-scholars" },
-      { name: "Clubs & Societies", href: "/students#clubs" },
-      { name: "Student Activities", href: "/students#activities" },
-      { name: "Student Achievements", href: "/students#achievements" },
-      { name: "Notices & Updates", href: "/students#notices" },
-      { name: "Scholarships", href: "/students#scholarships" },
-      { name: "AICTE Scholarships", href: "/students#aicte-scholarships" },
-      { name: "Medical Emergency", href: "/students#medical-emergency" },
-      { name: "Alumni Network", href: "/students#alumni" },
-      { name: "Employment Opportunities", href: "/employment" },
+      { name: "JAC Chandigarh Portal", href: "https://jacchd.admissions.nic.in/" },
+      { name: "UIET Notices", href: "/news" },
     ],
   },
   {
@@ -195,6 +197,11 @@ const Header = () => {
   const topBarsRef = useRef<HTMLDivElement | null>(null);
   const mainNavRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
+  const isExternalUrl = (href: string) => /^https?:\/\//.test(href);
+  const openExternalLink = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    window.open(href, "_blank", "noopener,noreferrer");
+  };
 
   // Handle keyboard navigation for news banner
   const handleKeyDown = (e) => {
@@ -348,8 +355,13 @@ const Header = () => {
                   <span className="truncate">Panjab University</span>
                 </div>
               </div>
-              <div className="bg-white/20 text-white border border-white/30 text-xs px-1.5 sm:px-2 py-1 rounded flex-shrink-0 ml-1 sm:ml-2">
-                NAAC A+
+              <div className="flex items-center gap-2 flex-shrink-0 ml-1 sm:ml-2">
+                <div className="bg-white/20 text-white border border-white/30 text-xs px-1.5 sm:px-2 py-1 rounded">
+                  NAAC A++
+                </div>
+                <div className="hidden md:block text-[10px] sm:text-xs font-medium text-white/90">
+                  AICTE • NBA • NIRF
+                </div>
               </div>
             </div>
           </div>
@@ -381,7 +393,7 @@ const Header = () => {
                         className="absolute inset-0 transition-transform duration-500 ease-in-out"
                         style={{ transform: `translateY(-${currentNewsIndex * 100}%)` }}
                       >
-                        {trendingNews.map((news, index) => (
+                        {trendingNews.map((news) => (
                           <Link
                             key={news.id}
                             to={news.link}
@@ -405,6 +417,7 @@ const Header = () => {
                         ))}
                       </div>
                     </div>
+
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 flex-shrink-0">
@@ -419,8 +432,8 @@ const Header = () => {
                         key={index}
                         onClick={() => setCurrentNewsIndex(index)}
                         className={`w-2 h-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#118DC4] focus:ring-offset-1 ${index === currentNewsIndex
-                            ? 'bg-[#118DC4] scale-110'
-                            : 'bg-gray-300 hover:bg-gray-400'
+                          ? 'bg-[#118DC4] scale-110'
+                          : 'bg-gray-300 hover:bg-gray-400'
                           }`}
                         aria-label={`Show news: ${news.title.substring(0, 50)}...`}
                         title={news.title}
@@ -502,26 +515,20 @@ const Header = () => {
             <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 flex items-center justify-center">
               <img
                 src="https://imgs.search.brave.com/xC3gTQLulY-1CaC5-1vGWxLNAxY4ZXfdRp1O-EvepC4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvZW4vdGh1bWIv/OS85NC9VSUVUX2xv/Z28ucG5nLzUxMnB4/LVVJRVRfbG9nby5w/bmc"
-                alt="UIET Logo"
+                alt="Panjab University logo"
                 className="w-full h-full object-contain"
               />
             </div>
 
             <div className="min-w-0 flex-1">
               <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold text-gray-900 tracking-tight leading-tight">
-                <span className="hidden lg:inline">
-                  University Institute of Engineering & Technology
-                </span>
-                <span className="hidden sm:inline lg:hidden">
-                  UIET, Panjab University
-                </span>
-                <span className="sm:hidden">UIET</span>
+                <span className="hidden lg:inline">University Institute of Engineering & Technology</span>
+                <span className="hidden sm:inline lg:hidden">University Institute of Engineering & Technology</span>
+                <span className="sm:hidden">PU</span>
               </h1>
               <p className="text-xs sm:text-sm text-[#118DC4] font-medium">
-                <span className="hidden sm:inline">
-                  Panjab University, Chandigarh
-                </span>
-                <span className="sm:hidden">Panjab University</span>
+                <span className="hidden sm:inline">Panjab University, Chandigarh</span>
+                <span className="sm:hidden">UIET</span>
               </p>
             </div>
           </Link>
@@ -544,9 +551,9 @@ const Header = () => {
                 <Link
                   to={item.href}
                   className={`flex items-center px-1.5 lg:px-2 xl:px-3 py-2 transition-all duration-200 font-medium hover:bg-[#118DC4]/10 rounded-lg text-xs xl:text-sm whitespace-nowrap ${isActivePath(item.href) ||
-                      (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                      ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
-                      : "text-gray-700 hover:text-[#118DC4]"
+                    (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                    ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
+                    : "text-gray-700 hover:text-[#118DC4]"
                     }`}
                 >
                   {item.name}
@@ -558,16 +565,29 @@ const Header = () => {
                 {item.dropdown && activeDropdown === item.name && (
                   <div className="absolute top-full left-0 mt-1 w-56 lg:w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards] before:content-[''] before:absolute before:-top-1 before:left-0 before:w-full before:h-1 before:bg-transparent">
                     {item.dropdown.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        to={subItem.href}
-                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${isActivePath(subItem.href.split("#")[0])
+                      isExternalUrl(subItem.href) ? (
+                        <a
+                          key={subItem.name}
+                          href={subItem.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(event) => openExternalLink(event, subItem.href)}
+                          className="block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
+                        >
+                          {subItem.name}
+                        </a>
+                      ) : (
+                        <Link
+                          key={subItem.name}
+                          to={subItem.href}
+                          className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${isActivePath(subItem.href.split("#")[0])
                             ? "bg-[#118DC4]/10 text-[#118DC4] font-medium border-l-4 border-l-[#118DC4]"
                             : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
-                          }`}
-                      >
-                        {subItem.name}
-                      </Link>
+                            }`}
+                        >
+                          {subItem.name}
+                        </Link>
+                      )
                     ))}
                   </div>
                 )}
@@ -587,13 +607,13 @@ const Header = () => {
                 <button
                   type="button"
                   className={`flex items-center px-1.5 lg:px-2 xl:px-3 py-2 transition-all duration-200 font-medium hover:bg-[#118DC4]/10 rounded-lg text-xs xl:text-sm whitespace-nowrap ${activeDropdown === "more" ||
-                      hiddenNavItems.some(
-                        (item) =>
-                          isActivePath(item.href) ||
-                          (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                      )
-                      ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
-                      : "text-gray-700 hover:text-[#118DC4]"
+                    hiddenNavItems.some(
+                      (item) =>
+                        isActivePath(item.href) ||
+                        (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                    )
+                    ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
+                    : "text-gray-700 hover:text-[#118DC4]"
                     }`}
                   aria-label="More navigation items"
                 >
@@ -612,8 +632,8 @@ const Header = () => {
                               <Link
                                 to={item.href}
                                 className={`flex-1 block px-4 py-3 text-sm transition-all duration-150 hover:pl-6 ${isActivePath(item.href)
-                                    ? "bg-[#118DC4]/10 text-[#118DC4] font-medium border-l-4 border-l-[#118DC4]"
-                                    : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
+                                  ? "bg-[#118DC4]/10 text-[#118DC4] font-medium border-l-4 border-l-[#118DC4]"
+                                  : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
                                   }`}
                               >
                                 {item.name}
@@ -640,16 +660,29 @@ const Header = () => {
                               <div className="pl-6 bg-gray-50/50 border-l-2 border-gray-200 ml-4 mr-2 rounded-r-lg">
                                 <div className="py-2 space-y-1">
                                   {item.dropdown.map((subItem) => (
-                                    <Link
-                                      key={subItem.name}
-                                      to={subItem.href}
-                                      className={`block px-3 py-2 text-xs transition-all duration-150 rounded-lg hover:pl-5 ${isActivePath(subItem.href.split("#")[0])
+                                    isExternalUrl(subItem.href) ? (
+                                      <a
+                                        key={subItem.name}
+                                        href={subItem.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(event) => openExternalLink(event, subItem.href)}
+                                        className="block px-3 py-2 text-xs transition-all duration-150 rounded-lg hover:pl-5 text-gray-600 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
+                                      >
+                                        {subItem.name}
+                                      </a>
+                                    ) : (
+                                      <Link
+                                        key={subItem.name}
+                                        to={subItem.href}
+                                        className={`block px-3 py-2 text-xs transition-all duration-150 rounded-lg hover:pl-5 ${isActivePath(subItem.href.split("#")[0])
                                           ? "bg-[#118DC4]/10 text-[#118DC4] font-medium"
                                           : "text-gray-600 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
-                                        }`}
-                                    >
-                                      {subItem.name}
-                                    </Link>
+                                          }`}
+                                      >
+                                        {subItem.name}
+                                      </Link>
+                                    )
                                   ))}
                                 </div>
                               </div>
@@ -697,9 +730,9 @@ const Header = () => {
                     <Link
                       to={item.href}
                       className={`flex-1 block px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 transition-all duration-200 rounded-lg mx-2 font-medium text-sm ${isActivePath(item.href) ||
-                          (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                          ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
-                          : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
+                        (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                        ? "text-[#118DC4] bg-[#118DC4]/10 shadow-sm"
+                        : "text-gray-700 hover:bg-[#118DC4]/10 hover:text-[#118DC4]"
                         }`}
                       onClick={() => !item.dropdown && setIsMenuOpen(false)}
                     >
@@ -726,17 +759,33 @@ const Header = () => {
                   {item.dropdown && activeDropdown === item.name && (
                     <div className="pl-3 sm:pl-4 md:pl-6 space-y-1 bg-gray-50/50 mx-2 rounded-lg py-2">
                       {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          to={subItem.href}
-                          className={`block px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-sm transition-all duration-150 rounded ${isActivePath(subItem.href.split("#")[0])
+                        isExternalUrl(subItem.href) ? (
+                          <a
+                            key={subItem.name}
+                            href={subItem.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(event) => {
+                              openExternalLink(event, subItem.href);
+                              setIsMenuOpen(false);
+                            }}
+                            className="block px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-sm transition-all duration-150 rounded text-gray-600 hover:text-[#118DC4] hover:bg-[#118DC4]/10"
+                          >
+                            {subItem.name}
+                          </a>
+                        ) : (
+                          <Link
+                            key={subItem.name}
+                            to={subItem.href}
+                            className={`block px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-sm transition-all duration-150 rounded ${isActivePath(subItem.href.split("#")[0])
                               ? "text-[#118DC4] bg-[#118DC4]/10 font-medium"
                               : "text-gray-600 hover:text-[#118DC4] hover:bg-[#118DC4]/10"
-                            }`}
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {subItem.name}
-                        </Link>
+                              }`}
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {subItem.name}
+                          </Link>
+                        )
                       ))}
                     </div>
                   )}

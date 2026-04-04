@@ -123,7 +123,7 @@ const NewsCard = ({
 
 // Loading Skeleton
 const NewsSkeleton = () => (
-  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
     {[...Array(6)].map((_, i) => (
       <Card key={i} className="p-6 border-l-4 border-[#118DC4]/30 animate-pulse">
         <div className="space-y-3">
@@ -265,7 +265,7 @@ const NewsPage = () => {
               {isLoading ? (
                 <NewsSkeleton />
               ) : filteredNews.length > 0 ? (
-                <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
                   {filteredNews.map(news => (
                     <NewsCard key={news.id} news={news} onSelect={setSelectedNews} />
                   ))}

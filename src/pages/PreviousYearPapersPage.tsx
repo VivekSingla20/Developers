@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Download, FileText, Calendar, Book, Search, Filter, AlertCircle } from "lucide-react";
+import { Download, FileText, Calendar, Book, Search, Filter, AlertCircle, RotateCcw } from "lucide-react";
 import { usePreviousYearPapers } from "@/hooks/useStrapi";
 import { getStrapiImageUrl, StrapiPreviousYearPaper } from "@/lib/strapi";
 
@@ -68,7 +68,7 @@ const PaperCard = ({ paper }: { paper: StrapiPreviousYearPaper }) => {
 
 // Skeleton
 const PapersSkeleton = () => (
-  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
     {[...Array(9)].map((_, i) => (
       <Card key={i} className="animate-pulse">
         <CardContent className="p-4">
@@ -90,6 +90,7 @@ const PreviousYearPapersPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState<string>("All");
   const [selectedYear, setSelectedYear] = useState<string>("All");
+  const [selectedSemester, setSelectedSemester] = useState<string>("All");
   const { data: allPapers, isLoading, error } = usePreviousYearPapers();
 
   // Derive unique years from data
@@ -99,11 +100,18 @@ const PreviousYearPapersPage = () => {
     return ["All", ...unique];
   }, [allPapers]);
 
+  const semesters = useMemo(() => {
+    if (!allPapers) return ["All"];
+    const unique = [...new Set(allPapers.map(p => p.semester))].sort((a, b) => Number(a) - Number(b));
+    return ["All", ...unique];
+  }, [allPapers]);
+
   // Filter papers
   const filterPapers = (program: string) => {
     let items = (allPapers ?? []).filter(p => p.program === program);
     if (selectedDepartment !== "All") items = items.filter(p => p.department === selectedDepartment);
     if (selectedYear !== "All") items = items.filter(p => p.year === selectedYear);
+    if (selectedSemester !== "All") items = items.filter(p => String(p.semester) === selectedSemester);
     if (searchTerm) {
       const q = searchTerm.toLowerCase();
       items = items.filter(p =>
@@ -163,6 +171,28 @@ const PreviousYearPapersPage = () => {
               >
                 {years.map(y => <option key={y} value={y}>{y === "All" ? "All Years" : y}</option>)}
               </select>
+              {/* Semester */}
+              <select
+                value={selectedSemester}
+                onChange={e => setSelectedSemester(e.target.value)}
+                className="text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#118DC4]"
+              >
+                {semesters.map(s => <option key={s} value={s}>{s === "All" ? "All Semesters" : `Sem ${s}`}</option>)}
+              </select>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  setSearchTerm("");
+                  setSelectedDepartment("All");
+                  setSelectedYear("All");
+                  setSelectedSemester("All");
+                }}
+                className="text-sm border-gray-300 hover:border-[#118DC4] hover:text-[#118DC4]"
+              >
+                <RotateCcw className="h-4 w-4 mr-2" />
+                Reset
+              </Button>
             </div>
           </div>
         </div>
@@ -198,7 +228,7 @@ const PreviousYearPapersPage = () => {
                       <p>No papers found for the selected filters.</p>
                     </div>
                   ) : (
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                       {papers.map(paper => <PaperCard key={paper.id} paper={paper} />)}
                     </div>
                   )}

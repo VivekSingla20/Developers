@@ -12,44 +12,44 @@ import { getStrapiImageUrl } from '@/lib/strapi';
 
 // Static data (not managed with strapi)
 const placementStats = [
-  { icon: TrendingUp, label: 'Total Offers 2023-24',   value: '314'      },
+  { icon: TrendingUp, label: 'Total Offers 2023-24', value: '314' },
   { icon: DollarSign, label: 'Highest Package 2023-24', value: '₹42 LPA' },
-  { icon: Users,      label: 'Average CTC 2023-24',     value: '₹9.11 LPA'},
-  { icon: Building,   label: 'Companies Visited',        value: '50+'      },
+  { icon: Users, label: 'Average CTC 2023-24', value: '₹9.11 LPA' },
+  { icon: Building, label: 'Companies Visited', value: '50+' },
 ];
 
 const placementProcess = [
-  { step: '1', title: 'Registration',            description: 'Students register for placement process with complete profile and academic records.' },
-  { step: '2', title: 'Pre-placement Training',  description: 'Comprehensive training on aptitude, technical skills, communication, and interview preparation.' },
-  { step: '3', title: 'Company Selection',        description: 'Students apply to companies based on eligibility criteria and job profiles.' },
-  { step: '4', title: 'Assessment Rounds',        description: 'Online tests, group discussions, technical interviews, and HR interviews.' },
-  { step: '5', title: 'Final Selection',          description: 'Offer letters issued to selected candidates with joining details.' },
+  { step: '1', title: 'Registration', description: 'Students register for placement process with complete profile and academic records.' },
+  { step: '2', title: 'Pre-placement Training', description: 'Comprehensive training on aptitude, technical skills, communication, and interview preparation.' },
+  { step: '3', title: 'Company Selection', description: 'Students apply to companies based on eligibility criteria and job profiles.' },
+  { step: '4', title: 'Assessment Rounds', description: 'Online tests, group discussions, technical interviews, and HR interviews.' },
+  { step: '5', title: 'Final Selection', description: 'Offer letters issued to selected candidates with joining details.' },
 ];
 
 const tpcTeam = [
-  { name: 'Dr. Rajesh Kumar',  designation: 'Training & Placement Officer', email: 'tpo@uiet.puchd.ac.in',       phone: '+91-172-2534816' },
-  { name: 'Prof. Priya Sharma', designation: 'Assistant TPO',               email: 'atpo@uiet.puchd.ac.in',      phone: '+91-172-2534817' },
-  { name: 'Dr. Amit Singh',    designation: 'Placement Coordinator',        email: 'placement@uiet.puchd.ac.in', phone: '+91-172-2534818' },
+  { name: 'Dr. Rajesh Kumar', designation: 'Training & Placement Officer', email: 'tpo@uiet.puchd.ac.in', phone: '+91-172-2534816' },
+  { name: 'Prof. Priya Sharma', designation: 'Assistant TPO', email: 'atpo@uiet.puchd.ac.in', phone: '+91-172-2534817' },
+  { name: 'Dr. Amit Singh', designation: 'Placement Coordinator', email: 'placement@uiet.puchd.ac.in', phone: '+91-172-2534818' },
 ];
 
 const historicalStats = [
   { year: '2023-24', placed: 314, companies: 50, avgPackage: 9.11, highest: 42 },
   { year: '2022-23', placed: 382, companies: 50, avgPackage: 8.72, highest: 45 },
-  { year: '2021-22', placed: 325, companies: 45, avgPackage: 8.2,  highest: 56 },
+  { year: '2021-22', placed: 325, companies: 45, avgPackage: 8.2, highest: 56 },
 ];
 
 // Hash -> Tab map
 const hashToTab: Record<string, string> = {
   '#tpo-message': 'tpo-message',
-  '#statistics':  'statistics',
-  '#procedure':   'procedure',
-  '#portal':      'portal',
-  '#training':    'training',
+  '#statistics': 'statistics',
+  '#procedure': 'procedure',
+  '#portal': 'portal',
+  '#training': 'training',
   '#tpc-contact': 'contact',
-  '#brochure':    'brochure',
+  '#brochure': 'brochure',
 };
 
-// Recruiter SKeleton
+// Recruiter Skeleton
 const RecruiterSkeleton = () => (
   <div className="grid grid-cols-2 gap-3">
     {[...Array(8)].map((_, i) => (
@@ -91,8 +91,10 @@ const Placements = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 text-sm font-medium mb-4 rounded-full"
-            style={{ backgroundColor: '#e6f3fb', color: '#118DC4' }}>
+          <div
+            className="inline-block px-4 py-2 text-sm font-medium mb-4 rounded-full"
+            style={{ backgroundColor: '#e6f3fb', color: '#118DC4' }}
+          >
             Career Services
           </div>
           <h2 className="text-4xl font-bold text-slate-900 mb-6">Training & Placement Cell</h2>
@@ -115,16 +117,16 @@ const Placements = () => {
           ))}
         </div>
 
-        {/* Tabs */}
-        <Tabs id="placements-tabs" value={activeTab} onValueChange={handleTabChange} className="mb-16">
-          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-3 lg:grid-cols-7 mb-8 h-auto p-1">
+        {/* Tabs — FIX: restored missing <Tabs> wrapper with id, value, and onValueChange */}
+        <Tabs id="placements-tabs" value={activeTab} onValueChange={handleTabChange}>
+          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 mb-8 h-auto p-1 gap-1 flex-wrap">
             <TabsTrigger value="tpo-message" className="px-2 py-3 text-xs">TPO Message</TabsTrigger>
-            <TabsTrigger value="brochure"    className="px-2 py-3 text-xs">Brochure</TabsTrigger>
-            <TabsTrigger value="statistics"  className="px-2 py-3 text-xs">Statistics</TabsTrigger>
-            <TabsTrigger value="procedure"   className="px-2 py-3 text-xs">Procedure</TabsTrigger>
-            <TabsTrigger value="portal"      className="px-2 py-3 text-xs">Web Portal</TabsTrigger>
-            <TabsTrigger value="training"    className="px-2 py-3 text-xs">Training</TabsTrigger>
-            <TabsTrigger value="contact"     className="px-2 py-3 text-xs">TPC Team</TabsTrigger>
+            <TabsTrigger value="brochure" className="px-2 py-3 text-xs">Brochure</TabsTrigger>
+            <TabsTrigger value="statistics" className="px-2 py-3 text-xs">Statistics</TabsTrigger>
+            <TabsTrigger value="procedure" className="px-2 py-3 text-xs">Procedure</TabsTrigger>
+            <TabsTrigger value="portal" className="px-2 py-3 text-xs">Web Portal</TabsTrigger>
+            <TabsTrigger value="training" className="px-2 py-3 text-xs">Training</TabsTrigger>
+            <TabsTrigger value="contact" className="px-2 py-3 text-xs">TPC Team</TabsTrigger>
           </TabsList>
 
           {/* TPO Message */}
@@ -176,11 +178,11 @@ const Placements = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Download Resources</h4>
                     <div className="space-y-3">
-                      {['Placement Brochure 2024','Company Presentation Template','Student Database','Placement Statistics Report'].map(title => (
+                      {['Placement Brochure 2024', 'Company Presentation Template', 'Student Database', 'Placement Statistics Report'].map(title => (
                         <Button key={title} className="w-full justify-start" variant="outline">
                           <FileText className="h-4 w-4 mr-2" />{title}
                         </Button>
@@ -219,7 +221,7 @@ const Placements = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Recent Placement Statistics</h4>
                     <div className="space-y-3">
@@ -290,8 +292,10 @@ const Placements = () => {
                 <div className="space-y-6">
                   {placementProcess.map((step, index) => (
                     <div key={index} className="flex items-start space-x-4">
-                      <div className="text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0"
-                        style={{ backgroundColor: '#118DC4' }}>
+                      <div
+                        className="text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0"
+                        style={{ backgroundColor: '#118DC4' }}
+                      >
                         {step.step}
                       </div>
                       <div>
@@ -324,15 +328,18 @@ const Placements = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-lg font-semibold mb-4">For Students</h4>
                     <div className="space-y-3">
-                      <Button className="w-full justify-start hover:opacity-90" style={{ backgroundColor: '#118DC4', color: 'white' }}>
+                      <Button
+                        className="w-full justify-start hover:opacity-90"
+                        style={{ backgroundColor: '#118DC4', color: 'white' }}
+                      >
                         <Users className="h-4 w-4 mr-2" />Student Login Portal
                       </Button>
                       <div className="text-sm text-gray-600 space-y-2">
-                        {['Update your profile and resume','Apply for job openings','Track application status','View interview schedules','Access training materials'].map(item => (
+                        {['Update your profile and resume', 'Apply for job openings', 'Track application status', 'View interview schedules', 'Access training materials'].map(item => (
                           <p key={item}>• {item}</p>
                         ))}
                       </div>
@@ -341,11 +348,14 @@ const Placements = () => {
                   <div>
                     <h4 className="text-lg font-semibold mb-4">For Companies</h4>
                     <div className="space-y-3">
-                      <Button className="w-full justify-start hover:opacity-90" style={{ backgroundColor: '#118DC4', color: 'white' }}>
+                      <Button
+                        className="w-full justify-start hover:opacity-90"
+                        style={{ backgroundColor: '#118DC4', color: 'white' }}
+                      >
                         <Building className="h-4 w-4 mr-2" />Company Registration
                       </Button>
                       <div className="text-sm text-gray-600 space-y-2">
-                        {['Register your company for campus recruitment','Post job requirements and criteria','Access student database','Schedule campus visits','Download placement brochure'].map(item => (
+                        {['Register your company for campus recruitment', 'Post job requirements and criteria', 'Access student database', 'Schedule campus visits', 'Download placement brochure'].map(item => (
                           <p key={item}>• {item}</p>
                         ))}
                       </div>
@@ -372,15 +382,15 @@ const Placements = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Training Programs</h4>
                     <div className="space-y-4">
                       {[
-                        { title: 'Technical Skills Training',  desc: 'Programming, system design, latest technologies' },
-                        { title: 'Soft Skills Development',    desc: 'Communication, leadership, teamwork' },
-                        { title: 'Interview Preparation',      desc: 'Mock interviews, HR rounds, group discussions' },
-                        { title: 'Aptitude Training',          desc: 'Quantitative, logical reasoning, verbal ability' },
+                        { title: 'Technical Skills Training', desc: 'Programming, system design, latest technologies' },
+                        { title: 'Soft Skills Development', desc: 'Communication, leadership, teamwork' },
+                        { title: 'Interview Preparation', desc: 'Mock interviews, HR rounds, group discussions' },
+                        { title: 'Aptitude Training', desc: 'Quantitative, logical reasoning, verbal ability' },
                       ].map(item => (
                         <div key={item.title} className="border-l-4 pl-4" style={{ borderColor: '#118DC4' }}>
                           <h5 className="font-semibold">{item.title}</h5>
@@ -397,7 +407,7 @@ const Placements = () => {
                           <FileText className="h-4 w-4 mr-2" />Training Letter
                         </Button>
                       </a>
-                      {['Aptitude Test Papers','Interview Tips & Guidelines','Resume Building Template','Company-wise Previous Questions'].map(title => (
+                      {['Aptitude Test Papers', 'Interview Tips & Guidelines', 'Resume Building Template', 'Company-wise Previous Questions'].map(title => (
                         <Button key={title} className="w-full justify-start" variant="outline">
                           <FileText className="h-4 w-4 mr-2" />{title}
                         </Button>
@@ -419,7 +429,7 @@ const Placements = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {tpcTeam.map((member, index) => (
                     <Card key={index} className="border">
                       <CardContent className="p-6 text-center">
@@ -444,7 +454,7 @@ const Placements = () => {
                 </div>
                 <div className="mt-8 p-6 bg-gray-50 rounded-lg">
                   <h4 className="font-semibold mb-3">Office Hours & Location</h4>
-                  <div className="grid md:grid-cols-2 gap-6 text-sm">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                     <div>
                       <p className="font-medium">Office Hours:</p>
                       <p className="text-gray-600">Monday - Friday: 9:00 AM - 5:00 PM</p>
@@ -464,9 +474,11 @@ const Placements = () => {
         </Tabs>
 
         {/* CTA */}
-        <div className="text-center">
-          <div className="text-white rounded-2xl p-8 shadow-xl"
-            style={{ background: 'linear-gradient(to right, #118DC4, #0f7ab8)' }}>
+        <div className="text-center mt-16">
+          <div
+            className="text-white rounded-2xl p-8 shadow-xl"
+            style={{ background: 'linear-gradient(to right, #118DC4, #0f7ab8)' }}
+          >
             <h3 className="text-2xl font-bold mb-4">Ready to Launch Your Career?</h3>
             <p className="mb-6 max-w-2xl mx-auto" style={{ color: '#e6f3fb' }}>
               Join UIET and benefit from our strong industry connections, comprehensive training programs,
